@@ -13,22 +13,23 @@ List::~List() {
  
 };
 size_t List::count() const {
-   return 1;
+    return 1;
 };
 void List::insert(const std::string& value) {
-   return;
+    return;
 };
 const std::string& List::lookup(size_t index) const {
-  
+    std::string arbitrary = "hello";
+    return arbitrary;
 };
 void List::print(bool reverse = false) const {
- 
+    return;
 };
 std::string List::remove(size_t index) {
- 
+    return "helllo";
 };
 size_t List::remove(const std::string& value) {
-  
+    return 1;
 };
  
  
