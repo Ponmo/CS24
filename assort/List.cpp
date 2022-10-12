@@ -19,8 +19,7 @@ void List::insert(const std::string& value) {
     return;
 };
 const std::string& List::lookup(size_t index) const {
-    std::string arbitrary = "hello";
-    return arbitrary;
+    return "hello";
 };
 void List::print(bool reverse) const {
     return;
