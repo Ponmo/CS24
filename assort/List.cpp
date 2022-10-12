@@ -22,7 +22,7 @@ const std::string& List::lookup(size_t index) const {
     std::string arbitrary = "hello";
     return arbitrary;
 };
-void List::print(bool reverse = false) const {
+void List::print(bool reverse) const {
     return;
 };
 std::string List::remove(size_t index) {
