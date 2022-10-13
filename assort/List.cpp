@@ -73,6 +73,15 @@ void List::insert(const std::string& value) {
     return;
 };
 const std::string& List::lookup(size_t index) const {
+    size_t currentIndex = 0;
+    Node* curr = head;
+    while(curr!=nullptr) {
+        if (currentIndex == index) {
+            currentIndex += 1;
+        }
+        curr = curr -> next;
+    }
+    throw std::out_of_range("out of range index");
     return global;
 };
 void List::print(bool reverse) const {
@@ -106,6 +115,7 @@ void List::print(bool reverse) const {
     return;
 };
 std::string List::remove(size_t index) {
+
     return "helllo";
 };
 size_t List::remove(const std::string& value) {
