@@ -27,7 +27,14 @@ List::~List() {
     }
 };
 size_t List::count() const {
-    return 0;
+    Node* curr = head;
+    size_t count = 0;
+    // Delete every node
+    while(curr!=nullptr) {
+        count += 1;
+	    curr = curr->next;
+    }
+    return count;
 };
 void List::insert(const std::string& value) {
     Node* node = new Node;
