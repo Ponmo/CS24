@@ -145,7 +145,7 @@ std::string List::remove(size_t index) {
 };
 
 size_t List::remove(const std::string& value) {
-    // size_t numberRemoved = 0;
+    size_t numberRemoved = 0;
     // Node* curr = head;
     // Node* prevCurr = nullptr;
     // while(curr!=nullptr) {
@@ -162,7 +162,7 @@ size_t List::remove(const std::string& value) {
     //     prevCurr = curr;
     //     curr = curr -> next;
     // }
-    // return numberRemoved;
+    return numberRemoved;
 };
  
  
