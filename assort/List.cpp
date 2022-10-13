@@ -1,7 +1,7 @@
 #include "List.h"
 #include <iostream>
 
-std::string global = "hello"; // necessary for return of std::string& type
+std::string global = ""; // necessary for return of std::string& type
 
 List::List() {
    head = nullptr;
@@ -77,8 +77,9 @@ const std::string& List::lookup(size_t index) const {
     Node* curr = head;
     while(curr!=nullptr) {
         if (currentIndex == index) {
-            currentIndex += 1;
+            return curr -> data;
         }
+        currentIndex += 1;
         curr = curr -> next;
     }
     throw std::out_of_range("out of range index");
