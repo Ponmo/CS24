@@ -1,5 +1,7 @@
 #include "List.h"
- 
+
+std::string global = "hello";
+
 List::List() {
    head = nullptr;
 };
@@ -19,8 +21,7 @@ void List::insert(const std::string& value) {
     return;
 };
 const std::string& List::lookup(size_t index) const {
-    std::string& temporary = "e";
-    return temporary;
+    return global;
 };
 void List::print(bool reverse) const {
     return;
