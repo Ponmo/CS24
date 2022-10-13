@@ -23,11 +23,12 @@ void List::insert(const std::string& value) {
     node->next = nullptr;
 
     Node* curr = head;
-    Node* prevCurr = head;
+    Node* prevCurr = nullptr;
 
     while(curr!=nullptr) {
         //if value is less or equal to the current, insert it there. Then Break
 	    if(value <= curr->data) {
+
             prevCurr -> next = node;
             node -> next = curr;
             return;
