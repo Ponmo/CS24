@@ -137,7 +137,8 @@ std::string List::remove(size_t index) {
             else {
                 returnString = head -> data;
                 delete head;
-                head = curr -> next;
+                // head = curr -> next;
+                head = nullptr;
             }
             return returnString;
         }
@@ -161,7 +162,7 @@ size_t List::remove(const std::string& value) {
             else {
                 head = curr -> next;
             }
-            delete curr;
+            delete prevCurr;
             numberRemoved += 1;
         }
         prevCurr = curr;
