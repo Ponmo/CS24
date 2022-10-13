@@ -126,6 +126,7 @@ std::string List::remove(size_t index) {
     Node* prevCurr = nullptr;
     std::string returnString = "";
 
+
     while(curr!=nullptr) {
         if (currentIndex == index) {
             if(prevCurr) {
@@ -138,34 +139,34 @@ std::string List::remove(size_t index) {
                 delete head;
                 head = curr -> next;
             }
-            return curr -> data;
+            return returnString;
         }
         currentIndex += 1;
         prevCurr = curr;
         curr = curr -> next;
     }
     throw std::out_of_range("out of range remove");
-    return "";
+    return returnString;
 };
 
 size_t List::remove(const std::string& value) {
     size_t numberRemoved = 0;
-    // Node* curr = head;
-    // Node* prevCurr = nullptr;
-    // while(curr!=nullptr) {
-    //     if (value == curr -> data) {
-    //         if(prevCurr) {
-    //             prevCurr -> next = curr -> next;
-    //         }
-    //         else {
-    //             head = curr -> next;
-    //         }
-    //         delete curr;
-    //         numberRemoved += 1;
-    //     }
-    //     prevCurr = curr;
-    //     curr = curr -> next;
-    // }
+    Node* curr = head;
+    Node* prevCurr = nullptr;
+    while(curr!=nullptr) {
+        if (value == curr -> data) {
+            if(prevCurr != nullptr) {
+                prevCurr -> next = curr -> next;
+            }
+            else {
+                head = curr -> next;
+            }
+            delete curr;
+            numberRemoved += 1;
+        }
+        prevCurr = curr;
+        curr = curr -> next;
+    }
     return numberRemoved;
 };
  
