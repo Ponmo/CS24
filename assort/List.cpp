@@ -133,15 +133,28 @@ std::string List::remove(size_t index) {
     while(curr!=nullptr) {
         if(currentIndex == index) {
             if(prevCurr != nullptr) {
-                returnString = curr -> data;
-                delete prevCurr -> next;
-                prevCurr -> next = curr -> next;
+                if(curr -> next) {
+                    prevCurr -> next = curr -> next;
+                    returnString = curr -> data;
+                    delete curr;
+                }
+                else {
+                    prev -> next = nullptr;
+                    returnString = curr -> data;
+                    delete curr;
+                }
             }
             else {
-                returnString = head -> data;
-                delete head;
-                // head = curr -> next;
-                head = nullptr;
+                if(curr -> next) {
+                    head = curr -> next;
+                    returnString = curr -> data;
+                    delete curr;
+                }
+                else {
+                    returnString = head -> data;
+                    delete head;
+                    head = nullptr;
+                }
 
             }
             return returnString;

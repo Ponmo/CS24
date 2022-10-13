@@ -8,8 +8,8 @@ int main() {
   List list;
   list.insert("hi");
   list.insert("bye");
-  list.insert("seven");
-  std::cout << list.remove(0);
+  // std::cout << list.remove(0);
+  std::cout << list.lookup(0);
 
   return 0;
 }
