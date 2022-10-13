@@ -176,8 +176,11 @@ size_t List::remove(const std::string& value) {
     Node* prevCurr = nullptr;
 
     while(curr!=nullptr) {
-        if (value == curr -> data) {
-            if(prevCurr != nullptr) {
+        if(value == curr -> data) {
+            if(prevCurr != nullptr) { //if prevCurr is head, (when first one is removed)
+                if(prevCurr == head) {
+                    return 123;
+                }
                 prevCurr -> next = curr -> next;
                 delete curr;
                 curr = prevCurr;
