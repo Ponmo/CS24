@@ -128,12 +128,12 @@ std::string List::remove(size_t index) {
     while(curr!=nullptr) {
         if (currentIndex == index) {
             if(prevCurr) {
-                prevCurr -> next = curr -> next;
                 delete prevCurr -> next;
+                prevCurr -> next = curr -> next;
             }
             else {
-                head = curr -> next;
                 delete head;
+                head = curr -> next;
             }
             return curr -> data;
         }
