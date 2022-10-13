@@ -24,7 +24,7 @@ void List::insert(const std::string& value) {
     node->next = nullptr;
 
     Node* curr = head;
-    Node* prevCurr = head;
+    Node* prevCurr = nullptr;
 
     if(head==nullptr) { //first insert, just insert it at 0.
         head = node;
@@ -34,7 +34,7 @@ void List::insert(const std::string& value) {
     // Maybe needed?
     if(value <= head -> data) { //Second insert
         head = node;
-        node -> next = head;
+        node -> next = curr;
         return;
     };
 
@@ -59,9 +59,9 @@ const std::string& List::lookup(size_t index) const {
 };
 void List::print(bool reverse) const {
     // Node* curr = head;
+    // std::cout << "[";
     // if(!reverse) {
     //     while(curr!=nullptr) {
-    //         std::cout << "[";
     //         if(curr->next != nullptr) {
     //             std::cout << curr -> data + ", ";
     //         }
