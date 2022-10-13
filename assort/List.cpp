@@ -71,12 +71,12 @@ void List::print(bool reverse) const {
     std::cout << "[";
     if(!reverse) {
         while(curr!=nullptr) {
-            // if(curr->next != nullptr) {
-            //     std::cout << curr -> data + ", ";
-            // }
-            // else {
-            //     std::cout << curr -> data;
-            // }
+            if(curr->next != nullptr) {
+                std::cout << curr -> data + ", ";
+            }
+            else {
+                std::cout << curr -> data;
+            }
             curr = curr -> next;
         }
     }
