@@ -191,12 +191,12 @@ size_t List::remove(const std::string& value) {
                 }
             }
             else if (curr -> next) {
-                prev -> next = curr -> next;
+                prevCurr -> next = curr -> next;
                 delete curr;
                 curr = prev -> next;
             }
             else {
-                prev -> next = nullptr;
+                prevCurr -> next = nullptr;
                 delete curr;
                 curr = nullptr;
             }
