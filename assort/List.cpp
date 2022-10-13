@@ -55,8 +55,8 @@ void List::insert(const std::string& value) {
 
     // Maybe needed?
     if(value <= head -> data) { //Second insert edge case, just it insert it, man
-        head = node;
         node -> next = curr;
+        head = node;
         return;
     };
 
