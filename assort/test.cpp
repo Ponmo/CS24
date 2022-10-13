@@ -6,7 +6,7 @@
 
 int main() {
   List list;
-
+  list.insert("hi");
   std::cout << "This program doesn't do anything interesting yet...\n";
 
   return 0;

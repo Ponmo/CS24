@@ -18,6 +18,31 @@ size_t List::count() const {
     return 1;
 };
 void List::insert(const std::string& value) {
+    Node* node = new Node;
+    node->data = value; 
+    node->next = nullptr;
+
+    Node* curr = head;
+    Node* prevCurr = head;
+
+    while(curr!=nullptr) {
+        //if value is less or equal to the current, insert it there. Then Break
+	    if(value <= curr->data) {
+            prevCurr -> next = node;
+            node -> next = curr;
+            return;
+        }
+        prevCurr = curr;
+	    curr = curr->next;
+    }
+    if(curr==nullptr) {
+        //insert it at the end then break.
+        prevCurr -> next = node;
+        return;
+    }
+    if(head==nullptr) { //first insert, just insert it at 0.
+        head = node;
+    }
     return;
 };
 const std::string& List::lookup(size_t index) const {
