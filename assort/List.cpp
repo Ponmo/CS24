@@ -94,8 +94,8 @@ void List::print(bool reverse) const {
     else { //reverse print it out
         if(curr!=nullptr) {
             totalPrint.insert(1, curr->data);
+            curr = curr -> next;
         }
-        curr = curr -> next;
         while(curr!=nullptr) {
             if(curr->next != nullptr) {
                 // std::cout << curr -> data + ", ";
