@@ -44,13 +44,13 @@ void List::insert(const std::string& value) {
     Node* curr = head;
     Node* prevCurr = nullptr;
 
-    if(head==nullptr) { //first insert, just insert it at 0.
+    if(head==nullptr) { //first insert edge case, just insert it at 0.
         head = node;
         return;
     }
 
     // Maybe needed?
-    if(value <= head -> data) { //Second insert
+    if(value <= head -> data) { //Second insert edge case, just it insert it, man
         head = node;
         node -> next = curr;
         return;
@@ -67,7 +67,7 @@ void List::insert(const std::string& value) {
 	    curr = curr->next;
     }
     if(curr==nullptr) {
-        //insert it at the end then break.
+        //insert it at the end.
         prevCurr -> next = node;
     }
     return;
@@ -77,23 +77,33 @@ const std::string& List::lookup(size_t index) const {
 };
 void List::print(bool reverse) const {
     Node* curr = head;
-    std::cout << "[";
+    // std::cout << "[";
+    std::string totalPrint = "[";
     if(!reverse) {
         while(curr!=nullptr) {
             if(curr->next != nullptr) {
-                std::cout << curr -> data + ", ";
+                // std::cout << curr -> data + ", ";
+                totalPrint += curr -> data + ", ";
             }
             else {
-                std::cout << curr -> data;
+                totalPrint += curr -> data;
             }
             curr = curr -> next;
         }
     }
-    else {
-
+    else { //reverse print it out
+        totalPrint.insert(1, curr->data);
+        curr = curr -> next;
+        while(curr!=nullptr) {
+            if(curr->next != nullptr) {
+                // std::cout << curr -> data + ", ";
+                totalPrint.insert(1, curr->data + ", ");
+            }
+            curr = curr -> next;
+        }
     }
+    std::cout << totalPrint;
     std::cout << "]\n";
-
     return;
 };
 std::string List::remove(size_t index) {
