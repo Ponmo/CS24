@@ -15,23 +15,28 @@ List::~List() {
  
 };
 size_t List::count() const {
-    return 1;
+    return 0;
 };
 void List::insert(const std::string& value) {
     Node* node = new Node;
     node->data = value; 
     node->next = nullptr;
 
-    Node* curr = head;
-    Node* prevCurr = head;
     if(head==nullptr) { //first insert, just insert it at 0.
         head = node;
         return;
     }
+    if(value <= head -> data) { //Second insert
+        head = node;
+        node -> next = head;
+        return;
+    };
+
+    Node* curr = head;
+    Node* prevCurr = head;
     while(curr!=nullptr) {
         //if value is less or equal to the current, insert it there. Then Break
 	    if(value <= curr->data) {
-
             prevCurr -> next = node;
             node -> next = curr;
             return;
