@@ -6,13 +6,17 @@ std::string global = ""; // necessary for return of std::string& type
 List::List() {
    head = nullptr;
 };
-List::List(const List& other) {
-    // head = other.head;
-    // if (other.head -> next) {
-    //     head->next = other.head -> next;
-    // }
+List::List(const List& other) { // copy constructor
+    List list;
+    head = other.head;
+    Node* curr = head;
+    // Delete every node
+    while(curr!=nullptr) {
+        list.insert(curr->data);
+	    curr = curr->next;
+    }
 };
-List::List(List&& other) {
+List::List(List&& other) { //move constructor
 
 };
 List::~List() {
@@ -129,7 +133,6 @@ std::string List::remove(size_t index) {
         prevCurr = curr;
         curr = curr -> next;
     }
-
     throw std::out_of_range("out of range remove");
     return "";
 };
