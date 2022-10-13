@@ -116,8 +116,22 @@ void List::print(bool reverse) const {
     return;
 };
 std::string List::remove(size_t index) {
+    size_t currentIndex = 0;
+    Node* curr = head;
+    Node* prevCurr = head;
+    while(curr!=nullptr) {
+        if (currentIndex == index) {
+            prevCurr -> next = curr -> next;
+            delete prevCurr -> next;
+            return curr -> data;
+        }
+        currentIndex += 1;
+        prevCurr = curr;
+        curr = curr -> next;
+    }
 
-    return "helllo";
+    throw std::out_of_range("out of range remove");
+    return "";
 };
 size_t List::remove(const std::string& value) {
     return 1;
