@@ -124,14 +124,17 @@ std::string List::remove(size_t index) {
     size_t currentIndex = 0;
     Node* curr = head;
     Node* prevCurr = nullptr;
+    std::string returnString = "";
 
     while(curr!=nullptr) {
         if (currentIndex == index) {
             if(prevCurr) {
+                returnString = curr -> data;
                 delete prevCurr -> next;
                 prevCurr -> next = curr -> next;
             }
             else {
+                returnString = head -> data;
                 delete head;
                 head = curr -> next;
             }
