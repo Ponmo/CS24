@@ -10,7 +10,7 @@ List::List(const List& other) { // copy constructor
     List list;
     head = other.head;
     Node* curr = head;
-    // Delete every node
+    // Copy every node
     while(curr!=nullptr) {
         list.insert(curr->data);
 	    curr = curr->next;
@@ -119,10 +119,12 @@ void List::print(bool reverse) const {
     std::cout << "]\n";
     return;
 };
+
 std::string List::remove(size_t index) {
     size_t currentIndex = 0;
     Node* curr = head;
     Node* prevCurr = head;
+
     while(curr!=nullptr) {
         if (currentIndex == index) {
             prevCurr -> next = curr -> next;
@@ -136,8 +138,21 @@ std::string List::remove(size_t index) {
     throw std::out_of_range("out of range remove");
     return "";
 };
+
 size_t List::remove(const std::string& value) {
-    return 1;
+    size_t numberRemoved = 0;
+    Node* curr = head;
+    Node* prevCurr = nullptr;
+    while(curr!=nullptr) {
+        if (value == curr -> data) {
+            prevCurr -> next = curr -> next;
+            delete curr;
+            numberRemoved += 1;
+        }
+        prevCurr = curr;
+        curr = curr -> next;
+    }
+    return numberRemoved;
 };
  
  
