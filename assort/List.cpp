@@ -129,11 +129,12 @@ std::string List::remove(size_t index) {
         if (currentIndex == index) {
             if(prevCurr) {
                 prevCurr -> next = curr -> next;
+                delete prevCurr -> next;
             }
             else {
                 head = curr -> next;
+                delete head;
             }
-            delete prevCurr -> next;
             return curr -> data;
         }
         currentIndex += 1;
