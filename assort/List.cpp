@@ -58,23 +58,23 @@ const std::string& List::lookup(size_t index) const {
     return global;
 };
 void List::print(bool reverse) const {
-    // Node* curr = head;
-    // std::cout << "[";
-    // if(!reverse) {
-    //     while(curr!=nullptr) {
-    //         if(curr->next != nullptr) {
-    //             std::cout << curr -> data + ", ";
-    //         }
-    //         else {
-    //             std::cout << curr -> data;
-    //         }
-    //         curr = curr -> next;
-    //     }
-    // }
-    // else {
+    Node* curr = head;
+    std::cout << "[";
+    if(!reverse) {
+        while(curr!=nullptr) {
+            if(curr->next != nullptr) {
+                std::cout << curr -> data + ", ";
+            }
+            else {
+                std::cout << curr -> data;
+            }
+            curr = curr -> next;
+        }
+    }
+    else {
 
-    // }
-    // std::cout << "]\n";
+    }
+    std::cout << "]\n";
 
     return;
 };
