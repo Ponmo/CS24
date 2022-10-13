@@ -121,15 +121,20 @@ void List::print(bool reverse) const {
 };
 
 std::string List::remove(size_t index) {
-    size_t currentIndex = 1;
+    size_t currentIndex = 0;
     Node* curr = head;
     Node* prevCurr = nullptr;
     std::string returnString = "";
 
-
+    // if(curr==nullptr) {
+    //     throw std::out_of_range("out of range remove");
+    // }
+    // if(head->next == nullptr) {
+    //     if(currentIndex == 0)
+    // }
     while(curr!=nullptr) {
-        if (currentIndex == index) {
-            if(prevCurr) {
+        if(currentIndex == index) {
+            if(prevCurr == nullptr) {
                 returnString = curr -> data;
                 delete prevCurr -> next;
                 prevCurr -> next = curr -> next;
