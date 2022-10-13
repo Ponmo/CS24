@@ -7,14 +7,14 @@ List::List() {
    head = nullptr;
 };
 List::List(const List& other) { // copy constructor
-    List list;
-    head = other.head;
-    Node* curr = head;
-    // Copy every node
-    while(curr!=nullptr) {
-        list.insert(curr->data);
-	    curr = curr->next;
-    }
+    // List list;
+    // head = other.head;
+    // Node* curr = head;
+    // // Copy every node
+    // while(curr!=nullptr) {
+    //     list.insert(curr->data);
+	//     curr = curr->next;
+    // }
 };
 List::List(List&& other) { //move constructor
 
@@ -55,7 +55,7 @@ void List::insert(const std::string& value) {
 
     // Maybe needed?
     if(value <= head -> data) { //Second insert edge case, just it insert it, man
-        head = node;
+        // head = head -> next;
         node -> next = curr;
         return;
     };
@@ -129,12 +129,10 @@ std::string List::remove(size_t index) {
     // if(curr==nullptr) {
     //     throw std::out_of_range("out of range remove");
     // }
-    // if(head->next == nullptr) {
-    //     if(currentIndex == 0)
-    // }
+    // std::cout << head -> data;
     while(curr!=nullptr) {
         if(currentIndex == index) {
-            if(prevCurr == nullptr) {
+            if(prevCurr != nullptr) {
                 returnString = curr -> data;
                 delete prevCurr -> next;
                 prevCurr -> next = curr -> next;
@@ -144,6 +142,7 @@ std::string List::remove(size_t index) {
                 delete head;
                 // head = curr -> next;
                 head = nullptr;
+
             }
             return returnString;
         }
