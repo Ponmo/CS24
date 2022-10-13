@@ -97,10 +97,7 @@ void List::print(bool reverse) const {
             curr = curr -> next;
         }
         while(curr!=nullptr) {
-            if(curr->next != nullptr) {
-                // std::cout << curr -> data + ", ";
-                totalPrint.insert(1, curr->data + ", ");
-            }
+            totalPrint.insert(1, curr->data + ", ");
             curr = curr -> next;
         }
     }
