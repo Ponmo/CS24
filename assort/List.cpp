@@ -1,19 +1,28 @@
 #include "List.h"
 #include <iostream>
 
-std::string global = "hello";
+std::string global = "hello"; // necessary for return of std::string& type
 
 List::List() {
    head = nullptr;
 };
 List::List(const List& other) {
- 
+    // head = other.head;
+    // if (other.head -> next) {
+    //     head->next = other.head -> next;
+    // }
 };
 List::List(List&& other) {
- 
+
 };
 List::~List() {
- 
+    // delete head;
+    Node* curr = head;
+    // Delete every node
+    while(curr!=nullptr) {
+        delete curr;
+	    curr = curr->next;
+    }
 };
 size_t List::count() const {
     return 0;
