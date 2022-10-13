@@ -123,11 +123,16 @@ void List::print(bool reverse) const {
 std::string List::remove(size_t index) {
     size_t currentIndex = 0;
     Node* curr = head;
-    Node* prevCurr = head;
+    Node* prevCurr = nullptr;
 
     while(curr!=nullptr) {
         if (currentIndex == index) {
-            prevCurr -> next = curr -> next;
+            if(prevCurr) {
+                prevCurr -> next = curr -> next;
+            }
+            else {
+                head = curr -> next;
+            }
             delete prevCurr -> next;
             return curr -> data;
         }
@@ -140,24 +145,24 @@ std::string List::remove(size_t index) {
 };
 
 size_t List::remove(const std::string& value) {
-    size_t numberRemoved = 0;
-    Node* curr = head;
-    Node* prevCurr = nullptr;
-    while(curr!=nullptr) {
-        if (value == curr -> data) {
-            if(prevCurr) {
-                prevCurr -> next = curr -> next;
-            }
-            else {
-                head = curr -> next;
-            }
-            delete curr;
-            numberRemoved += 1;
-        }
-        prevCurr = curr;
-        curr = curr -> next;
-    }
-    return numberRemoved;
+    // size_t numberRemoved = 0;
+    // Node* curr = head;
+    // Node* prevCurr = nullptr;
+    // while(curr!=nullptr) {
+    //     if (value == curr -> data) {
+    //         if(prevCurr) {
+    //             prevCurr -> next = curr -> next;
+    //         }
+    //         else {
+    //             head = curr -> next;
+    //         }
+    //         delete curr;
+    //         numberRemoved += 1;
+    //     }
+    //     prevCurr = curr;
+    //     curr = curr -> next;
+    // }
+    // return numberRemoved;
 };
  
  
