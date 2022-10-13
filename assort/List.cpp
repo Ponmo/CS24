@@ -18,10 +18,12 @@ List::List(List&& other) {
 List::~List() {
     // delete head;
     Node* curr = head;
+    Node* prev = head;
     // Delete every node
     while(curr!=nullptr) {
-        delete curr;
 	    curr = curr->next;
+        delete prev;
+        prev = curr;
     }
 };
 size_t List::count() const {
