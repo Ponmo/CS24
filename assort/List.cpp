@@ -174,15 +174,17 @@ size_t List::remove(const std::string& value) {
     size_t numberRemoved = 0;
     Node* curr = head;
     Node* prevCurr = nullptr;
+
     while(curr!=nullptr) {
         if (value == curr -> data) {
             if(prevCurr != nullptr) {
                 prevCurr -> next = curr -> next;
+                delete curr;
             }
             else {
                 head = curr -> next;
+                delete curr;
             }
-            delete prevCurr;
             numberRemoved += 1;
         }
         prevCurr = curr;
