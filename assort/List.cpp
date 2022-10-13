@@ -1,4 +1,5 @@
 #include "List.h"
+#include <iostream>
 
 std::string global = "hello";
 
@@ -26,6 +27,8 @@ void List::insert(const std::string& value) {
         head = node;
         return;
     }
+
+    // Maybe needed?
     if(value <= head -> data) { //Second insert
         head = node;
         node -> next = head;
@@ -54,6 +57,17 @@ const std::string& List::lookup(size_t index) const {
     return global;
 };
 void List::print(bool reverse) const {
+    Node* curr = head;
+    if(!reverse) {
+        while(curr!=nullptr) {
+            curr = curr -> next;
+        }
+        std::cout << "Hello";
+    }
+    else {
+
+    }
+
     return;
 };
 std::string List::remove(size_t index) {
