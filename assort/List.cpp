@@ -23,8 +23,11 @@ void List::insert(const std::string& value) {
     node->next = nullptr;
 
     Node* curr = head;
-    Node* prevCurr = nullptr;
-
+    Node* prevCurr = head;
+    if(head==nullptr) { //first insert, just insert it at 0.
+        head = node;
+        return;
+    }
     while(curr!=nullptr) {
         //if value is less or equal to the current, insert it there. Then Break
 	    if(value <= curr->data) {
@@ -39,10 +42,6 @@ void List::insert(const std::string& value) {
     if(curr==nullptr) {
         //insert it at the end then break.
         prevCurr -> next = node;
-        return;
-    }
-    if(head==nullptr) { //first insert, just insert it at 0.
-        head = node;
     }
     return;
 };
