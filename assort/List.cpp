@@ -121,7 +121,7 @@ void List::print(bool reverse) const {
 };
 
 std::string List::remove(size_t index) {
-    size_t currentIndex = 0;
+    size_t currentIndex = 1;
     Node* curr = head;
     Node* prevCurr = nullptr;
     std::string returnString = "";
@@ -149,6 +149,9 @@ std::string List::remove(size_t index) {
     throw std::out_of_range("out of range remove");
     return returnString;
 };
+
+
+
 
 size_t List::remove(const std::string& value) {
     size_t numberRemoved = 0;
