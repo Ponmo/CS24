@@ -7,9 +7,11 @@
 int main() {
   List list;
   list.insert("hi");
+  list.insert("hi");
+  list.insert("hi");
   list.insert("bye");
   // std::cout << list.remove(0);
-  std::cout << list.lookup(0);
+  std::cout << list.remove("hi");
 
   return 0;
 }

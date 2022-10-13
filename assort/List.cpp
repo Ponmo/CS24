@@ -180,10 +180,12 @@ size_t List::remove(const std::string& value) {
             if(prevCurr != nullptr) {
                 prevCurr -> next = curr -> next;
                 delete curr;
+                curr = prevCurr;
             }
             else {
                 head = curr -> next;
                 delete curr;
+                curr = head;
             }
             numberRemoved += 1;
         }
