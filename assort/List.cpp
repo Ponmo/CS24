@@ -7,25 +7,31 @@ List::List() {
    head = nullptr;
 };
 List::List(const List& other) { // copy constructor
-    // List list;
     head = nullptr;
-    Node* newCurr = head;
+
+    Node* oldCurr = other.head;
+    Node* curr = head;
     Node* newPrevCurr = nullptr;
 
-    Node* curr = other.head;
-
-
-    while(curr!=nullptr) {
+    while(oldCurr!=nullptr) {
         Node* node = new Node;
-        node->data = curr->data; 
+        node->data = oldCurr->data; 
         node->next = nullptr;
         
-        if(newPrevCurr) {
-            newPrevCurr -> next = newCurr;
+        if(curr == nullptr) {
+            curr = node;
+            head = curr;
         }
+
+        if(newPrevCurr) {
+            newPrevCurr -> next = curr;
+        }
+        // else if (head == nullptr) {
+        //     head = curr;
+        // }
         newPrevCurr = node;
-        newCurr = newCurr -> next;
         curr = curr -> next;
+        oldCurr = oldCurr -> next;
     }
 
         //if prevCurr != 
