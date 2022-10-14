@@ -11,7 +11,6 @@ List::List(const List& other) { // copy constructor
 
     Node* oldCurr = other.head;
 
-    // Node* curr = other.head;
     Node* newPrevCurr = nullptr;
 
     while(oldCurr!=nullptr) {
@@ -25,11 +24,7 @@ List::List(const List& other) { // copy constructor
         else {
             head = node;
         }
-        // else if (head == nullptr) {
-        //     head = curr;
-        // }
         newPrevCurr = node;
-        // curr = oldCurr -> next;
         oldCurr = oldCurr -> next;
     }
 
@@ -82,7 +77,7 @@ List::List(const List& other) { // copy constructor
 };
 List::List(List&& other) { //move constructor
     head = other.head;
-    delete other.head;
+    other.head = nullptr;
 };
 List::~List() {
     // delete head;
