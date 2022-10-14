@@ -26,6 +26,9 @@ List::List(const List& other) { // copy constructor
         if(newPrevCurr) {
             newPrevCurr -> next = curr;
         }
+        else {
+            head = curr;
+        }
         // else if (head == nullptr) {
         //     head = curr;
         // }
