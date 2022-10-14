@@ -18,11 +18,6 @@ List::List(const List& other) { // copy constructor
         Node* node = new Node;
         node->data = oldCurr->data; 
         node->next = nullptr;
-        
-        if(curr == nullptr) {
-            // curr = node;
-            head = node;
-        }
 
         if(newPrevCurr) {
             newPrevCurr -> next = node;
