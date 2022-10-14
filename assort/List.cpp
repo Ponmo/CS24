@@ -7,14 +7,60 @@ List::List() {
    head = nullptr;
 };
 List::List(const List& other) { // copy constructor
-    List list;
-    head = other.head;
-    delete other.head;
+    // List list;
+    head = nullptr;
+    Node* newCurr = head;
+    Node* newPrevCurr = nullptr;
+
     Node* curr = other.head;
+
+
+
+
+
     while(curr!=nullptr) {
-        list.insert(curr->data);
+        Node* node = new Node;
+        node->data = curr->data; 
+        node->next = nullptr;
+        
+        //if prevCurr != 
+        if(head==nullptr) { //first insert edge case, just insert it at 0.
+            head = node;
+            continue;
+        }
+
+        if(node->data <= head->data) { //Second insert edge case, just it insert it, man
+            node -> next = newCurr;
+            head = node;
+            continue;
+        };
+
+        Node* secondCurr = other.head;
+        Node* secondNewCurr = head;
+        Node* secondPrevCurr = nullptr;
+
+        while(secondCurr!=nullptr) {
+            //if value is less or equal to the current, insert it there. Then Break
+            if(node->data <= secondCurr->data) {
+                secondPrevCurr -> next = node;
+                node -> next = secondCurr;
+                break;
+            }
+            secondPrevCurr = secondNewCurr;
+            secondCurr = secondCurr -> next;
+            secondNewCurr = secondCurr;
+        }
+
+        if(curr==nullptr) {
+            //insert it at the end.
+            newPrevCurr -> next = node;
+        }
+
+        newPrevCurr = newCurr;
+        newCurr = newCurr -> next;
         curr = curr -> next;
     };
+
     // List list;
     // head = other.head;
     // Node* curr = head;
@@ -25,7 +71,8 @@ List::List(const List& other) { // copy constructor
     // }
 };
 List::List(List&& other) { //move constructor
-
+    head = other.head;
+    delete other.head;
 };
 List::~List() {
     // delete head;
