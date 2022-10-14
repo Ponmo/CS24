@@ -7,6 +7,14 @@ List::List() {
    head = nullptr;
 };
 List::List(const List& other) { // copy constructor
+    List list;
+    head = other.head;
+    delete other.head;
+    Node* curr = other.head;
+    while(curr!=nullptr) {
+        list.insert(curr->data);
+        curr = curr -> next;
+    };
     // List list;
     // head = other.head;
     // Node* curr = head;
