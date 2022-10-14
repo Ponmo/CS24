@@ -10,7 +10,7 @@ List::List(const List& other) { // copy constructor
     head = nullptr;
 
     Node* oldCurr = other.head;
-    
+
     Node* curr = head;
     Node* newPrevCurr = nullptr;
 
@@ -25,10 +25,10 @@ List::List(const List& other) { // copy constructor
         }
 
         if(newPrevCurr) {
-            newPrevCurr -> next = curr;
+            newPrevCurr -> next = node;
         }
         else {
-            head = curr;
+            head = node;
         }
         // else if (head == nullptr) {
         //     head = curr;
