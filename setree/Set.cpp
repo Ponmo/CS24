@@ -71,7 +71,7 @@ bool Set::contains(const std::string& value) const {
 
 size_t Set::count() const {
     if (mRoot) {
-        return mRoot -> count;
+        return mRoot -> count + 1;
     }
     return 0;
 };

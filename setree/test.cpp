@@ -10,6 +10,7 @@ int main() {
   std::cout << set.insert("hello \n");
   std::cout << set.insert("hello \n");
   std::cout << set.insert("john \n");
+  std::cout << set.count();
 
   return 0;
 }
