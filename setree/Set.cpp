@@ -1,7 +1,5 @@
 #include "Set.h"
 
-
-// return type can probably be size_t.
 size_t insertRecursion(Node* curr, const std::string& value) { 
     //First, set a node to equal the current node so that you can increase its count.
     //Then check curr if its greater than or less than or nullptr or equal than. If its greater than, then set curr -> left, and continue.
@@ -72,6 +70,9 @@ bool Set::contains(const std::string& value) const {
 };
 
 size_t Set::count() const {
+    if (mRoot) {
+        return mRoot -> count;
+    }
     return 0;
 };
 
@@ -85,14 +86,30 @@ size_t Set::insert(const std::string& value) {
         Node* newNode = new Node;
         newNode -> data = value;
         mRoot = newNode;
-        mRoot -> count++;
         return 1;
     }
     //Search through the tree until you get to the address where it needs to be inserted, unless it returns nullptr, which means it is an equal value
     //you can probably return insertRecursion.
     //This either become nullptr or the address of the place you want to insert it at
     return insertRecursion(mRoot, value);
+};
 
+const std::string& Set::lookup(size_t n) const {
+    n++;
+    return global;
+};
+void Set::print() const {
+    return;
+};
+size_t Set::remove(const std::string& value) {
+    std::string a = value;
+    return 1;
+};
+
+//so recursion works until you can find the address where it needs to be inserted at. If you insert inside the function, then you probably need a prevCurr or go one Ahead, if not then you need to 
+
+
+//previous non recursion way of doing insert
     // if (returnValue != nullptr) {
     //     // Set the newNode here
     //     return 1;
@@ -130,18 +147,3 @@ size_t Set::insert(const std::string& value) {
     // // Once curr is nullptr, then insert it at that leaf. Increase the count of everything that needs count to be increased (this might need recursion to check every node before it increases count).
     
     // return 1;
-};
-
-const std::string& Set::lookup(size_t n) const {
-    n++;
-    return global;
-};
-void Set::print() const {
-    return;
-};
-size_t Set::remove(const std::string& value) {
-    std::string a = value;
-    return 1;
-};
-
-//so recursion works until you can find the address where it needs to be inserted at. If you insert inside the function, then you probably need a prevCurr or go one Ahead, if not then you need to 
