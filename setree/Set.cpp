@@ -1,9 +1,53 @@
 #include "Set.h"
 
+
+// return type can probably be size_t.
+size_t insertRecursion(Node* curr, const std::string& value) { 
+    //First, set a node to equal the current node so that you can increase its count.
+    //Then check curr if its greater than or less than or nullptr or equal than. If its greater than, then set curr -> left, and continue.
+    Node* currTwo = curr;
+
+    if (value > curr -> data) {
+        if (curr -> right == nullptr) { // Create newNode here and set curr -> right to it. Then return the address.
+            Node* newNode = new Node;
+            newNode -> data = value;
+            curr -> right = newNode;
+            return 1;
+        }
+        curr = curr -> right;
+    }
+    else if (value < curr -> data) {
+        if (curr -> left == nullptr) { // Create newNode here and set curr -> left to it
+            Node* newNode = new Node;
+            newNode -> data = value;
+            curr -> left = newNode;
+            return 1;
+        }
+        curr = curr -> left;
+    }
+    else if (value == curr -> data) {
+        return 0;
+    }
+    // else { //curr == nullptr
+    //     return prevCurr;
+    // }
+
+     //if currTwo is nullptr, then set the address of left or right to the newNode... which might mean checking one ahead of curr and adding another special case to the insert function before recursion.
+    size_t returnValue = insertRecursion(curr, value);
+    
+    if (returnValue != 0) {
+        currTwo -> count++;
+        return returnValue;
+    }
+    else {
+        return 0;
+    }
+}
+
 std::string global = "hello";
 
 Set::Set() {
-
+    mRoot = nullptr;
 };
 
 Set::Set(const Set& other) {
@@ -36,9 +80,58 @@ void Set::debug() {
 };
 
 size_t Set::insert(const std::string& value) {
-    std::string a = value;
-    return 0;
+    //if mRoot is nullptr/first insert
+    if (mRoot == nullptr) {
+        Node* newNode = new Node;
+        newNode -> data = value;
+        mRoot = newNode;
+        mRoot -> count++;
+        return 1;
+    }
+    //Search through the tree until you get to the address where it needs to be inserted, unless it returns nullptr, which means it is an equal value
+    //you can probably return insertRecursion.
+    //This either become nullptr or the address of the place you want to insert it at
+    return insertRecursion(mRoot, value);
+
+    // if (returnValue != nullptr) {
+    //     // Set the newNode here
+    //     return 1;
+    // }
+    // //else delete newNode and return 0
+    // delete newNode;
+    // return 0;
+    
+
+    // Inserting a value
+    // So loop through the tree until you reach a nullptr, then insert it there. For each interation, check greater or less than, then update the ptr to left and right
+    // Node* curr = mRoot;
+    // // prevCurr is used to 
+    // Node* prevCurr = nullptr;
+    // Node* newNode = new Node;
+    // newNode -> count = 1;
+    // if (!mRoot) { //If nothing is in the tree yet, insert at at root.
+    //     mRoot = newNode;
+    //     return 1;
+    // };
+    // while(curr) { // loop through until curr is nullptr
+    //     if (value > curr -> data) {
+    //         prevCurr = curr;
+    //         curr = curr -> right;
+    //     }
+    //     else if (value < curr -> data) {
+    //         prevCurr = curr;
+    //         curr = curr -> left;
+    //     }
+    //     else { // it equals a value so thats not good. Get it outta here.
+    //         delete newNode;
+    //         return 0;
+    //     }
+    // };
+    // // Once curr is nullptr, then insert it at that leaf. Increase the count of everything that needs count to be increased (this might need recursion to check every node before it increases count).
+    
+    // return 1;
 };
+
 const std::string& Set::lookup(size_t n) const {
     n++;
     return global;
@@ -50,3 +143,5 @@ size_t Set::remove(const std::string& value) {
     std::string a = value;
     return 1;
 };
+
+//so recursion works until you can find the address where it needs to be inserted at. If you insert inside the function, then you probably need a prevCurr or go one Ahead, if not then you need to 

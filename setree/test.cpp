@@ -7,7 +7,9 @@
 int main() {
   Set set;
 
-  std::cout << "This program doesn't do anything interesting yet...\n";
+  std::cout << set.insert("hello \n");
+  std::cout << set.insert("hello \n");
+  std::cout << set.insert("john \n");
 
   return 0;
 }

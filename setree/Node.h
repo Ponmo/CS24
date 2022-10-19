@@ -7,9 +7,9 @@
 
 struct Node {
   std::string   data;
-  Node*         left;
-  Node*         right;
-  unsigned long count;
+  Node*         left = nullptr;
+  Node*         right = nullptr;
+  unsigned long count = 1;
 };
 
 #endif
