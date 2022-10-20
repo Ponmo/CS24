@@ -133,10 +133,10 @@ const std::string& Set::lookup(size_t n) const {
 
 void Set::print() const {
     if (mRoot) {
-        std::cout << recursivePrint(mRoot);
+        std::cout << recursivePrint(mRoot) + "\n";
     }
     else {
-        std::cout << "";
+        std::cout << "-\n";
     }
     return;
 };
