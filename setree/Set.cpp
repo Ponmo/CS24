@@ -1,4 +1,5 @@
 #include "Set.h"
+#include <iostream>
 
 size_t insertRecursion(Node* curr, const std::string& value, Node* mRoot) { 
     //First, set a node to equal the current node so that you can increase its count.
@@ -60,6 +61,20 @@ void deleteRecursion(Node* curr) {
     }
     delete curr;
 };
+std::string recursivePrint(Node* curr) { // each one should return (A B C) or -
+    if(curr == nullptr) {
+        return "-";
+    }
+    if(curr->left && curr-> right) {
+        return "(" + recursivePrint(curr->left) + " " + curr->data + " " + recursivePrint(curr->right) + ")";
+    }
+    else if(curr->right) {
+        return "(- " + curr->data + " " + recursivePrint(curr->right) + ")";
+    }
+    else if(curr->left) {
+        return "(" + recursivePrint(curr->left) + " " + curr->data + " -)";
+    }
+};
 
 std::string global = "hello";
 
@@ -117,9 +132,12 @@ const std::string& Set::lookup(size_t n) const {
     n++;
     return global;
 };
+
 void Set::print() const {
+    std::cout << recursivePrint(mRoot);
     return;
 };
+
 size_t Set::remove(const std::string& value) {
     std::string a = value;
     return 1;
