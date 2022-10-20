@@ -237,6 +237,10 @@ size_t Set::remove(const std::string& value) {
     Node* curr = mRoot;
     Node* prevCurr = nullptr;
     bool leftOrRight = false;
+    //to keep track of what counts need to go up or down
+    Node* track[mRoot -> count];
+    int i = 0;
+
     // std::cout << "remove function starts\n";
     if(!mRoot) {
         // std::cout << "mRoot does not exist return 0\n";
@@ -245,6 +249,7 @@ size_t Set::remove(const std::string& value) {
     //Two things , set leftOr Right based on , and check if mRoot is the thing being removed, then set mRoot to node
     while(curr) { // loop through until curr is nullptr
         // std::cout << "One Loop 0\n";
+        track[i] = curr;
         if (value > curr -> data) {
             // std::cout << "Value Greater 0\n";
             prevCurr = curr;
@@ -287,7 +292,16 @@ size_t Set::remove(const std::string& value) {
                 else {
                     mRoot = curr -> left;
                 }
+                track[i] = nullptr;
                 delete curr;
+
+                // Loop through track until nullptr to decrease each count by one
+                int j = 0;
+                while (track[j]) {
+                    track[j]->count--;
+                    j++;
+                }
+
                 return 1;
             }
             else if(curr->right) {
@@ -303,7 +317,15 @@ size_t Set::remove(const std::string& value) {
                 else {
                     mRoot = curr -> right;
                 }
+                track[i] = nullptr;
                 delete curr;
+
+                int j = 0;
+                while (track[j]) {
+                    track[j]->count--;
+                    j++;
+                }
+
                 return 1;
             }
             else { //if it has no children
@@ -322,11 +344,20 @@ size_t Set::remove(const std::string& value) {
                     mRoot = nullptr;
                 }
                 delete curr;
+
+                track[i] = nullptr;
+                int j = 0;
+                while (track[j]) {
+                    track[j]->count--;
+                    j++;
+                }
+
                 return 1;
             }
             // std::cout << "Somehow didn't find it 0\n";
             return 0;
         }
+        i++;
     }
     // std::cout << "Not found 0\n";
     return 0;
