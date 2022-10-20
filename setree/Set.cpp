@@ -72,30 +72,30 @@ std::string recursivePrint(Node* curr) { //
     }
     return curr->data;
 };
-std::pair<Node*, size_t> recursiveMove(Node* curr, Node* mRoot) {
-    // For each node except mRoot, create a new node with the same data, pointers to other nodes (either return a pointer or nullptr), and set the count ++
-    Node* newNode = new Node;
-    newNode -> data = curr->data;
-    //mRoot needs to be set.
-    if (mRoot == nullptr) {
-        mRoot = newNode;
-    }
-    Node* a = nullptr;
-    size_t b = 0;
-    if (curr -> left != nullptr) {
-        std::tie(a, b) = recursiveMove(curr->left, mRoot);
-        b++;
-        newNode -> left = a;
-        newNode -> count += b;
-    }
-    if (curr -> right != nullptr) {
-        std::tie(a, b) = recursiveMove(curr->right, mRoot);
-        b++;
-        newNode -> right = a;
-        newNode -> count += b;
-    }
-    return std::make_pair(newNode, b);
-};
+// std::pair<Node*, size_t> recursiveMove(Node* curr, Node* mRoot) {
+//     // For each node except mRoot, create a new node with the same data, pointers to other nodes (either return a pointer or nullptr), and set the count ++
+//     Node* newNode = new Node;
+//     newNode -> data = curr->data;
+//     //mRoot needs to be set.
+//     if (mRoot == nullptr) {
+//         mRoot = newNode;
+//     }
+//     Node* a = nullptr;
+//     size_t b = 0;
+//     if (curr -> left != nullptr) {
+//         std::tie(a, b) = recursiveMove(curr->left, mRoot);
+//         b++;
+//         newNode -> left = a;
+//         newNode -> count += b;
+//     }
+//     if (curr -> right != nullptr) {
+//         std::tie(a, b) = recursiveMove(curr->right, mRoot);
+//         b++;
+//         newNode -> right = a;
+//         newNode -> count += b;
+//     }
+//     return std::make_pair(newNode, b);
+// };
 
 std::string global = "hello";
 
@@ -104,11 +104,11 @@ Set::Set() {
 };
 
 Set::Set(const Set& other) { //copy constructor
-    mRoot = nullptr;
-    Node* oldCurr = other.mRoot;
-    if (mRoot) {
-        recursiveMove(oldCurr, mRoot);
-    }
+    // mRoot = nullptr;
+    // Node* oldCurr = other.mRoot;
+    // if (mRoot) {
+    //     recursiveMove(oldCurr, mRoot);
+    // }
 };
 
 Set::Set(Set&& other) { //move constructor
@@ -173,6 +173,7 @@ size_t Set::insert(const std::string& value) {
 };
 
 Node* lookupRecursion(Node* curr, size_t n) {
+    std::cout << "An iteration of lookupRecursion\n";
     if (curr->left) {
         if(curr -> left -> count == n) {
             return curr;
@@ -188,18 +189,21 @@ Node* lookupRecursion(Node* curr, size_t n) {
             return node;
         }
     }
-    return nullptr;
+    return curr;
 };
 
 const std::string& Set::lookup(size_t n) const {
     //So recursion through every single node should check its left child's count. If it is equal then return that node's pointer;
     if (mRoot) {
+        std::cout << "Made it into Root\n";
         Node* node = lookupRecursion(mRoot, n);
         if(node) {
+            std::cout << "Made it into Node\n";
             return node -> data;
         }
     }
-    throw std::out_of_range("lookup out of range");
+    // throw std::out_of_range("lookup out of range");
+    std::cout << "somehow out of range\n";
 };
 
 void Set::print() const {
