@@ -50,7 +50,7 @@ size_t insertRecursion(Node* curr, const std::string& value, Node* mRoot) {
 }
 
 void deleteRecursion(Node* curr) { 
-    if (curr == nullptr) {
+    if (curr == nullptr) { //not needed
         return;
     }
     if (curr -> right) {
@@ -95,10 +95,20 @@ Set::~Set() {
 size_t Set::clear() {
     return 0;
 };
-
 bool Set::contains(const std::string& value) const {
-    std::string a = value;
-    return true;
+    Node* curr = mRoot;
+    while(curr!=nullptr) {
+        if(value > curr->data) {
+            curr = curr -> right;
+        }
+        else if (value < curr -> data) {
+            curr = curr -> left;
+        }
+        if (curr->data==value) {
+            return true;
+        }
+    }
+    return false;
 };
 
 size_t Set::count() const {
@@ -128,16 +138,15 @@ size_t Set::insert(const std::string& value) {
 
 const std::string& Set::lookup(size_t n) const {
     n++;
+    throw std::out_of_range("lookup out of range");
     return global;
 };
 
 void Set::print() const {
     if (mRoot) {
-        std::cout << recursivePrint(mRoot) + "\n";
+        std::cout << recursivePrint(mRoot);
     }
-    else {
-        std::cout << "-\n";
-    }
+    std::cout << "-\n";
     return;
 };
 
