@@ -96,9 +96,9 @@ size_t Set::clear() {
     if (mRoot) {
         size_t numberDeleted = mRoot -> count;
         deleteRecursion(mRoot);
+        mRoot = nullptr;
         return numberDeleted;
     }
-    mRoot = nullptr;
     return 0;
 };
 bool Set::contains(const std::string& value) const {
