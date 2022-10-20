@@ -239,6 +239,7 @@ size_t Set::remove(const std::string& value) {
     bool leftOrRight = false;
     //to keep track of what counts need to go up or down
     Node* track[mRoot -> count];
+    track[0] = nullptr;
     int i = 0;
 
     // std::cout << "remove function starts\n";
