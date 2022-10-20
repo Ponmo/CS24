@@ -182,6 +182,7 @@ Node* lookupRecursion(Node* curr, size_t n) {
     if(curr->right) {
         return lookupRecursion(curr->right, n);
     }
+    return nullptr;
 };
 
 const std::string& Set::lookup(size_t n) const {
