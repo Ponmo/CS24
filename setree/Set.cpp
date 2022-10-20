@@ -50,9 +50,6 @@ size_t insertRecursion(Node* curr, const std::string& value, Node* mRoot) {
 }
 
 void deleteRecursion(Node* curr) { 
-    if (curr == nullptr) { //not needed
-        return;
-    }
     if (curr -> right) {
         deleteRecursion(curr -> right);
     }
@@ -60,6 +57,7 @@ void deleteRecursion(Node* curr) {
         deleteRecursion(curr -> left);
     }
     delete curr;
+    return;
 };
 std::string recursivePrint(Node* curr) { // 
     if(curr->left && curr-> right) {
