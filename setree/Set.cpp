@@ -242,6 +242,7 @@ size_t Set::remove(const std::string& value) {
         std::cout << "mRoot does not exist return 0\n";
         return 0;
     }
+    //Two things , set leftOr Right based on , and check if mRoot is the thing being removed, then set mRoot to node
     while(curr) { // loop through until curr is nullptr
         std::cout << "One Loop 0\n";
         if (value > curr -> data) {
@@ -275,22 +276,32 @@ size_t Set::remove(const std::string& value) {
             }
             else if(curr->left) { //if it has one child to the left
                 std::cout << "Node Left Child 0\n";
-                if(leftOrRight) {
-                    prevCurr->left = curr -> left;
+                if (curr != mRoot) {
+                    if(leftOrRight) {
+                        prevCurr->left = curr -> left;
+                    }
+                    else {
+                        prevCurr -> left = curr -> left;
+                    }
                 }
                 else {
-                    prevCurr -> left = curr -> left;
+                    mRoot = curr -> left;
                 }
                 delete curr;
                 return 1;
             }
             else if(curr->right) {
                 std::cout << "Node Right Child 0\n";
-                if(leftOrRight) {
-                    prevCurr->right = curr -> right;
+                if (curr != mRoot) {
+                    if(leftOrRight) {
+                        prevCurr->right = curr -> right;
+                    }
+                    else {
+                        prevCurr -> left = curr -> right;
+                    }
                 }
                 else {
-                    prevCurr -> left = curr -> right;
+                    mRoot = curr -> right;
                 }
                 delete curr;
                 return 1;
