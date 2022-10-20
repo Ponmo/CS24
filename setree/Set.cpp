@@ -77,11 +77,11 @@ std::pair<Node*, size_t> recursiveMove(Node* curr, Node* mRoot) {
     Node* newNode = new Node;
     newNode -> data = curr->data;
     //mRoot needs to be set.
-    if (!mRoot) {
+    if (mRoot == nullptr) {
         mRoot = newNode;
     }
     Node* a = nullptr;
-    size_t b = 1;
+    size_t b = 0;
     if (curr -> left != nullptr) {
         std::tie(a, b) = recursiveMove(curr->left, mRoot);
         b++;
