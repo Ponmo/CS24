@@ -282,7 +282,7 @@ size_t Set::remove(const std::string& value) {
                 //TODO: currtwo may have a right child.
                 prevCurrTwo -> left = nullptr;
                 if(currTwo->right) {
-                    prevCurrTwo -> right = currTwo -> right;
+                    prevCurrTwo -> left = currTwo -> right;
                 }
 
                 delete currTwo;
