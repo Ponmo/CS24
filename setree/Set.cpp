@@ -61,7 +61,7 @@ void deleteRecursion(Node* curr) {
     }
     delete curr;
 };
-std::string recursivePrint(Node* curr) { // each one should return (A B C) or -
+std::string recursivePrint(Node* curr) { // 
     if(curr->left && curr-> right) {
         return "(" + recursivePrint(curr->left) + " " + curr->data + " " + recursivePrint(curr->right) + ")";
     }
@@ -71,7 +71,7 @@ std::string recursivePrint(Node* curr) { // each one should return (A B C) or -
     else if(curr->left) {
         return "(" + recursivePrint(curr->left) + " " + curr->data + " -)";
     }
-    return "-";
+    return curr->data;
 };
 
 std::string global = "hello";

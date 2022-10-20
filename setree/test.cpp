@@ -6,19 +6,10 @@
 
 int main() {
   Set set;
-  std::cout << set.count();
-  set.insert("hello");
-    std::cout << set.count();
-  set.insert("hello");
-    std::cout << set.count();
-  set.insert("john");
-  std::cout << set.count();
-  set.insert("a");
-    std::cout << set.count();
-  set.insert("wefs");
-    std::cout << set.count();
-  set.insert("weopcjpoew");
-  std::cout << set.count();
-
+  set.insert("D");
+    set.insert("B");
+      set.insert("A");
+        set.insert("C");
+  set.print();
   return 0;
 }
