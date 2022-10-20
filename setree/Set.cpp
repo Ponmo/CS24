@@ -278,7 +278,6 @@ size_t Set::remove(const std::string& value) {
                     currTwo = currTwo -> left;
                     i++;
                 }
-                i--;
                 track[i] = nullptr;
 
                 // std::cout << currTwo -> data;
