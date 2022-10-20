@@ -2,6 +2,8 @@
 #include <iostream>
 #include <tuple>
 
+Node* nodeGlobal = new Node;
+
 size_t insertRecursion(Node* curr, const std::string& value, Node* mRoot) { 
     //First, set a node to equal the current node so that you can increase its count.
     //Then check curr if its greater than or less than or nullptr or equal than. If its greater than, then set curr -> left, and continue.
@@ -183,6 +185,7 @@ Node* lookupRecursion(Node* curr, size_t n) {
     if (curr->left) {
         if(curr -> left -> count == n) {
             // std::cout << "Found It\n";
+            nodeGlobal = curr;
             return curr;
         }
         Node* node = lookupRecursion(curr->left, n);
@@ -215,9 +218,9 @@ const std::string& Set::lookup(size_t n) const {
 
         //get the address of the thing
         Node* node = lookupRecursion(mRoot, n);
-        if(node) {
+        if(nodeGlobal) {
             // std::cout << "Made it into Node\n";
-            return node -> data;
+            return nodeGlobal -> data;
         }
     }
     throw std::out_of_range("lookup out of range");
