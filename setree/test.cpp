@@ -15,7 +15,7 @@ int main() {
       set.insert("E");
         set.insert("H");
         set.print();
-        set.remove("A");
+        set.remove("G");
         // set.lookup(10);
   return 0;
 }

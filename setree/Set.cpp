@@ -269,23 +269,29 @@ size_t Set::remove(const std::string& value) {
         else { // it equals a value so then find if it has two or one child, then do operations. // reduce Counts
             // std::cout << "Value Equals 0\n";
             if(curr->left && curr->right) { //if it has both children
-                // std::cout << "Node Two Children 0\n";
-                Node* prevCurrTwo = curr;
-                Node* currTwo = curr->right;
-                while(currTwo -> left !=nullptr) {
-                    prevCurrTwo = currTwo;
-                    currTwo = currTwo -> left;
-                }
-                // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
-                curr -> data = currTwo -> data;
+                std::cout << "Node Two Children 0\n";
+                if (curr != mRoot) {
+                    Node* prevCurrTwo = curr;
+                    Node* currTwo = curr->right;
+                    while(currTwo -> left !=nullptr) {
+                        prevCurrTwo = currTwo;
+                        currTwo = currTwo -> left;
+                    }
+                    std::cout << currTwo -> data;
+                    std::cout << "\n";
+                    std::cout << prevCurrTwo -> data;
+                    // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
+                    curr -> data = currTwo -> data;
 
-                //TODO: currtwo may have a right child.
-                prevCurrTwo -> left = nullptr;
-                if(currTwo->right) {
-                    prevCurrTwo -> left = currTwo -> right;
+                    //TODO: currtwo may have a right child.
+                    prevCurrTwo -> left = nullptr;
+                    if(currTwo->right) {
+                        std::cout << "Had a right child\n";
+                        prevCurrTwo -> left = currTwo -> right;
+                    }
+                    std::cout << "delete statement next\n";
+                    delete currTwo;
                 }
-
-                delete currTwo;
 
                 return 1;
             }
