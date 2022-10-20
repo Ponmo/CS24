@@ -104,7 +104,7 @@ bool Set::contains(const std::string& value) const {
         else if (value < curr -> data) {
             curr = curr -> left;
         }
-        if (curr->data==value) {
+        else {
             return true;
         }
     }
@@ -146,7 +146,7 @@ void Set::print() const {
     if (mRoot) {
         std::cout << recursivePrint(mRoot);
     }
-    std::cout << "-\n";
+    std::cout << "\n";
     return;
 };
 
