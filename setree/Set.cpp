@@ -270,28 +270,35 @@ size_t Set::remove(const std::string& value) {
             // std::cout << "Value Equals 0\n";
             if(curr->left && curr->right) { //if it has both children
                 std::cout << "Node Two Children 0\n";
-                if (curr != mRoot) {
-                    Node* prevCurrTwo = curr;
-                    Node* currTwo = curr->right;
-                    while(currTwo -> left !=nullptr) {
-                        prevCurrTwo = currTwo;
-                        currTwo = currTwo -> left;
-                    }
-                    std::cout << currTwo -> data;
-                    std::cout << "\n";
-                    std::cout << prevCurrTwo -> data;
-                    // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
-                    curr -> data = currTwo -> data;
+                Node* prevCurrTwo = curr;
+                Node* currTwo = curr->right;
+                while(currTwo -> left !=nullptr) {
+                    prevCurrTwo = currTwo;
+                    currTwo = currTwo -> left;
+                }
+                std::cout << currTwo -> data;
+                std::cout << "\n";
+                std::cout << prevCurrTwo -> data;
+                // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
+                curr -> data = currTwo -> data;
 
-                    //TODO: currtwo may have a right child.
+                //TODO: currtwo may have a right child.
+                if(prevCurrTwo != curr) {
                     prevCurrTwo -> left = nullptr;
                     if(currTwo->right) {
                         std::cout << "Had a right child\n";
                         prevCurrTwo -> left = currTwo -> right;
                     }
-                    std::cout << "delete statement next\n";
-                    delete currTwo;
                 }
+                else {
+                    if(currTwo->right) {
+                        std::cout << "Had a right child\n";
+                        prevCurrTwo -> right = currTwo -> right;
+                    }
+                }
+                std::cout << "delete statement next\n";
+                delete currTwo;
+                //if mRoot is curr, then first, 
 
                 return 1;
             }
