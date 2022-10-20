@@ -1,5 +1,6 @@
 #include "Set.h"
 #include <iostream>
+#include <tuple>
 
 size_t insertRecursion(Node* curr, const std::string& value, Node* mRoot) { 
     //First, set a node to equal the current node so that you can increase its count.
@@ -104,8 +105,6 @@ Set::Set(const Set& other) { //copy constructor
     if (mRoot) {
         recursiveMove(oldCurr);
     }
-
-
 };
 
 Set::Set(Set&& other) { //move constructor
