@@ -1,6 +1,6 @@
 #include "Set.h"
 
-size_t insertRecursion(Node* curr, const std::string& value) { 
+size_t insertRecursion(Node* curr, const std::string& value, Node* mRoot) { 
     //First, set a node to equal the current node so that you can increase its count.
     //Then check curr if its greater than or less than or nullptr or equal than. If its greater than, then set curr -> left, and continue.
     Node* currTwo = curr;
@@ -10,6 +10,9 @@ size_t insertRecursion(Node* curr, const std::string& value) {
             Node* newNode = new Node;
             newNode -> data = value;
             curr -> right = newNode;
+            if(curr == mRoot) {
+                mRoot -> count++;
+            }
             return 1;
         }
         curr = curr -> right;
@@ -19,6 +22,9 @@ size_t insertRecursion(Node* curr, const std::string& value) {
             Node* newNode = new Node;
             newNode -> data = value;
             curr -> left = newNode;
+            if(curr == mRoot) {
+                mRoot -> count++;
+            }
             return 1;
         }
         curr = curr -> left;
@@ -31,7 +37,7 @@ size_t insertRecursion(Node* curr, const std::string& value) {
     // }
 
      //if currTwo is nullptr, then set the address of left or right to the newNode... which might mean checking one ahead of curr and adding another special case to the insert function before recursion.
-    size_t returnValue = insertRecursion(curr, value);
+    size_t returnValue = insertRecursion(curr, value, mRoot);
     
     if (returnValue != 0) {
         currTwo -> count++;
@@ -71,7 +77,7 @@ bool Set::contains(const std::string& value) const {
 
 size_t Set::count() const {
     if (mRoot) {
-        return mRoot -> count + 1;
+        return mRoot -> count;
     }
     return 0;
 };
@@ -91,7 +97,7 @@ size_t Set::insert(const std::string& value) {
     //Search through the tree until you get to the address where it needs to be inserted, unless it returns nullptr, which means it is an equal value
     //you can probably return insertRecursion.
     //This either become nullptr or the address of the place you want to insert it at
-    return insertRecursion(mRoot, value);
+    return insertRecursion(mRoot, value, mRoot);
 };
 
 const std::string& Set::lookup(size_t n) const {
