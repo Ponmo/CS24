@@ -10,6 +10,6 @@ int main() {
     set.insert("B");
       set.insert("A");
         set.insert("C");
-  set.print();
+        set.lookup(2);
   return 0;
 }

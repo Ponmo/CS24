@@ -177,10 +177,16 @@ Node* lookupRecursion(Node* curr, size_t n) {
         if(curr -> left -> count == n) {
             return curr;
         }
-        return lookupRecursion(curr->left, n);
+        Node* node = lookupRecursion(curr->left, n);
+        if (node) {
+            return node;
+        }
     }
     if(curr->right) {
-        return lookupRecursion(curr->right, n);
+        Node* node = lookupRecursion(curr->right, n);
+        if (node) {
+            return node;
+        }
     }
     return nullptr;
 };
