@@ -187,8 +187,10 @@ Node* lookupRecursion(Node* curr, size_t n) {
 
 const std::string& Set::lookup(size_t n) const {
     //So recursion through every single node should check its left child's count. If it is equal then return that node's pointer;
+    if (mRoot) {
+        return lookupRecursion(mRoot, n) -> data;
+    }
     throw std::out_of_range("lookup out of range");
-    return global;
 };
 
 void Set::print() const {
