@@ -253,14 +253,16 @@ size_t Set::remove(const std::string& value) {
         }
         else { // it equals a value so then find if it has two or one child, then do operations. // reduce Counts
             if(curr->left && curr->right) { //if it has both children
+                Node* prevCurrTwo = curr;
                 Node* currTwo = curr->right;
                 while(currTwo -> left !=nullptr) {
+                    prevCurrTwo = currTwo;
                     currTwo = currTwo -> left;
                 }
                 // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
-                curr -> data = currTwo -> left -> data;
-                delete currTwo -> left;
-                currTwo -> left = nullptr;
+                curr -> data = currTwo -> data;
+                delete currTwo;
+                prevCurrTwo -> left = nullptr;
 
                 return 1;
             }
