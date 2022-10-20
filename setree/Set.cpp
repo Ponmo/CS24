@@ -56,9 +56,7 @@ void deleteRecursion(Node* curr) {
     if (curr -> left) {
         deleteRecursion(curr -> left);
     }
-    if (curr!=nullptr) {
-        delete curr;
-    }
+    delete curr;
     return;
 };
 std::string recursivePrint(Node* curr) { // 
@@ -89,7 +87,9 @@ Set::Set(Set&& other) {
 };
 
 Set::~Set() {
-    deleteRecursion(mRoot);
+    if (mRoot) {
+        deleteRecursion(mRoot);
+    }
 };
 
 size_t Set::clear() {
