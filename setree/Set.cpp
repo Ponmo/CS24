@@ -307,11 +307,11 @@ size_t Set::remove(const std::string& value) {
                 // std::cout << "delete statement next\n";
                 delete currTwo;
                 //if mRoot is curr, then first, 
-                // int j = 0;
-                // while (track[j]) {
-                //     track[j]->count--;
-                //     j++;
-                // }
+                int j = 0;
+                while (track[j]) {
+                    track[j]->count--;
+                    j++;
+                }
                 return 1;
             }
             else if(curr->left) { //if it has one child to the left
