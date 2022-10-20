@@ -238,15 +238,18 @@ size_t Set::remove(const std::string& value) {
     Node* prevCurr = nullptr;
     bool leftOrRight = false;
     //to keep track of what counts need to go up or down
-    Node* track[mRoot -> count];
-    track[0] = nullptr;
-    int i = 0;
+    size_t trackLength = 0;
 
     // std::cout << "remove function starts\n";
     if(!mRoot) {
         // std::cout << "mRoot does not exist return 0\n";
         return 0;
     }
+    else {
+        trackLength = mRoot -> count;
+    }
+    Node* track[mRoot -> count];
+    int i = 0;
     //Two things , set leftOr Right based on , and check if mRoot is the thing being removed, then set mRoot to node
     while(curr) { // loop through until curr is nullptr
         // std::cout << "One Loop 0\n";
