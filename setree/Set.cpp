@@ -56,7 +56,9 @@ void deleteRecursion(Node* curr) {
     if (curr -> left) {
         deleteRecursion(curr -> left);
     }
-    delete curr;
+    if (curr!=nullptr) {
+        delete curr;
+    }
     return;
 };
 std::string recursivePrint(Node* curr) { // 
