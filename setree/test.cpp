@@ -14,8 +14,7 @@ int main() {
     set.insert("U");
       set.insert("E");
         set.insert("H");
-                set.print();
-        set.lookup(10);
+        std::cout << set.lookup(2);
         set.print();
         // set.lookup(10);
   return 0;

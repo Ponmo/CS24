@@ -182,36 +182,38 @@ Node* lookupRecursion(Node* curr, size_t n) {
     // std::cout << "An iteration of lookupRecursion\n";
     if (curr->left) {
         if(curr -> left -> count == n) {
-            std::cout << "Found It\n";
+            // std::cout << "Found It\n";
             return curr;
         }
         Node* node = lookupRecursion(curr->left, n);
         if (node) {
-            std::cout << "Found it below\n";
+            // std::cout << "Found it below\n";
             return node;
         }
     }
     if(curr->right) {
         Node* node = lookupRecursion(curr->right, n);
         if (node) {
-            std::cout << "Found it below\n";
+            // std::cout << "Found it below\n";
             return node;
         }
     }
-    std::cout << "End\n";
+    // std::cout << "End\n";
     return nullptr;
 };
 
 const std::string& Set::lookup(size_t n) const {
     //So recursion through every single node should check its left child's count. If it is equal then return that node's pointer;
-    std::cout << "An iteration" + std::to_string(mRoot -> count);
-    std::cout << "An iteration" + std::to_string(mRoot -> left -> count);
-    std::cout << "An iteration" + std::to_string(mRoot -> left -> left -> count);
-    std::cout << "An iteration" + std::to_string(mRoot -> count);
+    // std::cout << "An iteration" + std::to_string(mRoot -> count);
+    // std::cout << "An iteration" + std::to_string(mRoot -> left -> count);
+    // std::cout << "An iteration" + std::to_string(mRoot -> left -> left -> count);
+    // std::cout << "An iteration" + std::to_string(mRoot -> count);
 
 
     if (mRoot) {
         // std::cout << "Made it into Root\n";
+
+        //get the address of the thing
         Node* node = lookupRecursion(mRoot, n);
         if(node) {
             // std::cout << "Made it into Node\n";
