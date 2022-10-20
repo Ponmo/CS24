@@ -14,8 +14,15 @@ int main() {
     set.insert("U");
       set.insert("E");
         set.insert("H");
+        set.insert("D");
+      set.insert("I");
+        set.insert("J");
+        set.insert("L");
+        set.insert("M");
+        set.insert("K");
         set.print();
-        set.remove("G");
+        set.remove("L");
+        set.print();
         // set.lookup(10);
   return 0;
 }

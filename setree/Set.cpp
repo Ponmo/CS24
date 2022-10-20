@@ -269,16 +269,16 @@ size_t Set::remove(const std::string& value) {
         else { // it equals a value so then find if it has two or one child, then do operations. // reduce Counts
             // std::cout << "Value Equals 0\n";
             if(curr->left && curr->right) { //if it has both children
-                std::cout << "Node Two Children 0\n";
+                // std::cout << "Node Two Children 0\n";
                 Node* prevCurrTwo = curr;
                 Node* currTwo = curr->right;
                 while(currTwo -> left !=nullptr) {
                     prevCurrTwo = currTwo;
                     currTwo = currTwo -> left;
                 }
-                std::cout << currTwo -> data;
-                std::cout << "\n";
-                std::cout << prevCurrTwo -> data;
+                // std::cout << currTwo -> data;
+                // std::cout << "\n";
+                // std::cout << prevCurrTwo -> data;
                 // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
                 curr -> data = currTwo -> data;
 
@@ -286,17 +286,20 @@ size_t Set::remove(const std::string& value) {
                 if(prevCurrTwo != curr) {
                     prevCurrTwo -> left = nullptr;
                     if(currTwo->right) {
-                        std::cout << "Had a right child\n";
+                        // std::cout << "Had a right child\n";
                         prevCurrTwo -> left = currTwo -> right;
                     }
                 }
                 else {
                     if(currTwo->right) {
-                        std::cout << "Had a right child\n";
+                        // std::cout << "Had a right child\n";
                         prevCurrTwo -> right = currTwo -> right;
                     }
+                    else {
+                        prevCurrTwo -> right = nullptr;
+                    }
                 }
-                std::cout << "delete statement next\n";
+                // std::cout << "delete statement next\n";
                 delete currTwo;
                 //if mRoot is curr, then first, 
 
