@@ -72,20 +72,24 @@ std::string recursivePrint(Node* curr) { //
     }
     return curr->data;
 };
-std::pair<Node*, size_t> recursiveMove(Node* curr) {
+std::pair<Node*, size_t> recursiveMove(Node* curr, Node* mRoot) {
     // For each node except mRoot, create a new node with the same data, pointers to other nodes (either return a pointer or nullptr), and set the count ++
     Node* newNode = new Node;
     newNode -> data = curr->data;
+    //mRoot needs to be set.
+    if (!mRoot) {
+        mRoot = newNode;
+    }
     Node* a = nullptr;
-    size_t b = 0;
+    size_t b = 1;
     if (curr -> left != nullptr) {
-        std::tie(a, b) = recursiveMove(curr->left);
+        std::tie(a, b) = recursiveMove(curr->left, mRoot);
         b++;
         newNode -> left = a;
         newNode -> count += b;
     }
     if (curr -> right != nullptr) {
-        std::tie(a, b) = recursiveMove(curr->right);
+        std::tie(a, b) = recursiveMove(curr->right, mRoot);
         b++;
         newNode -> right = a;
         newNode -> count += b;
@@ -103,7 +107,7 @@ Set::Set(const Set& other) { //copy constructor
     mRoot = nullptr;
     Node* oldCurr = other.mRoot;
     if (mRoot) {
-        recursiveMove(oldCurr);
+        recursiveMove(oldCurr, mRoot);
     }
 };
 
