@@ -237,30 +237,30 @@ size_t Set::remove(const std::string& value) {
     Node* curr = mRoot;
     Node* prevCurr = nullptr;
     bool leftOrRight = false;
-    std::cout << "remove function starts\n";
+    // std::cout << "remove function starts\n";
     if(!mRoot) {
-        std::cout << "mRoot does not exist return 0\n";
+        // std::cout << "mRoot does not exist return 0\n";
         return 0;
     }
     //Two things , set leftOr Right based on , and check if mRoot is the thing being removed, then set mRoot to node
     while(curr) { // loop through until curr is nullptr
-        std::cout << "One Loop 0\n";
+        // std::cout << "One Loop 0\n";
         if (value > curr -> data) {
-            std::cout << "Value Greater 0\n";
+            // std::cout << "Value Greater 0\n";
             prevCurr = curr;
             curr = curr -> right;
             leftOrRight = true;
         }
         else if (value < curr -> data) {
-            std::cout << "Value Lesser 0\n";
+            // std::cout << "Value Lesser 0\n";
             prevCurr = curr;
             curr = curr -> left;
             leftOrRight = false;
         }
         else { // it equals a value so then find if it has two or one child, then do operations. // reduce Counts
-            std::cout << "Value Equals 0\n";
+            // std::cout << "Value Equals 0\n";
             if(curr->left && curr->right) { //if it has both children
-                std::cout << "Node Two Children 0\n";
+                // std::cout << "Node Two Children 0\n";
                 Node* prevCurrTwo = curr;
                 Node* currTwo = curr->right;
                 while(currTwo -> left !=nullptr) {
@@ -275,7 +275,7 @@ size_t Set::remove(const std::string& value) {
                 return 1;
             }
             else if(curr->left) { //if it has one child to the left
-                std::cout << "Node Left Child 0\n";
+                // std::cout << "Node Left Child 0\n";
                 if (curr != mRoot) {
                     if(leftOrRight) {
                         prevCurr->left = curr -> left;
@@ -291,7 +291,7 @@ size_t Set::remove(const std::string& value) {
                 return 1;
             }
             else if(curr->right) {
-                std::cout << "Node Right Child 0\n";
+                // std::cout << "Node Right Child 0\n";
                 if (curr != mRoot) {
                     if(leftOrRight) {
                         prevCurr->right = curr -> right;
@@ -307,14 +307,14 @@ size_t Set::remove(const std::string& value) {
                 return 1;
             }
             else { //if it has no children
-                std::cout << "Node no children 0\n";
+                // std::cout << "Node no children 0\n";
                 if (curr!= mRoot) {
                     if(leftOrRight) {
-                        std::cout << "Node no children left 0\n";
+                        // std::cout << "Node no children left 0\n";
                         prevCurr->right = nullptr;
                     }
                     else {
-                        std::cout << "Node no children right 0\n";
+                        // std::cout << "Node no children right 0\n";
                         prevCurr -> left = nullptr;
                     }
                 }
@@ -324,11 +324,11 @@ size_t Set::remove(const std::string& value) {
                 delete curr;
                 return 1;
             }
-            std::cout << "Somehow didn't find it 0\n";
+            // std::cout << "Somehow didn't find it 0\n";
             return 0;
         }
     }
-    std::cout << "Not found 0\n";
+    // std::cout << "Not found 0\n";
     return 0;
 };
 
