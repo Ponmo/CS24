@@ -181,28 +181,23 @@ size_t Set::insert(const std::string& value) {
 };
 
 Node* lookupRecursion(Node* curr, size_t n) {
-    // std::cout << "An iteration of lookupRecursion\n";
-    if (curr->left) {
-        if(curr -> left -> count == n) {
-            // std::cout << "Found It\n";
-            nodeGlobal = curr;
-            return curr;
-        }
-        Node* node = lookupRecursion(curr->left, n);
-        if (node) {
-            // std::cout << "Found it below\n";
-            return node;
-        }
-    }
-    if(curr->right) {
-        Node* node = lookupRecursion(curr->right, n);
-        if (node) {
-            // std::cout << "Found it below\n";
-            return node;
-        }
-    }
-    // std::cout << "End\n";
-    return nullptr;
+    // if (curr->left) {
+    //     if(curr -> left -> count == n) {
+    //         nodeGlobal = curr;
+    //         return curr;
+    //     }
+    //     Node* node = lookupRecursion(curr->left, n);
+    //     if (node) {
+    //         return node;
+    //     }
+    // }
+    // if(curr->right) {
+    //     Node* node = lookupRecursion(curr->right, n);
+    //     if (node) {
+    //         return node;
+    //     }
+    // }
+    // return nullptr;
 };
 
 const std::string& Set::lookup(size_t n) const {
@@ -213,16 +208,14 @@ const std::string& Set::lookup(size_t n) const {
     // std::cout << "An iteration" + std::to_string(mRoot -> count);
 
 
-    if (mRoot) {
-        // std::cout << "Made it into Root\n";
+    // if (mRoot) {
 
-        //get the address of the thing
-        Node* node = lookupRecursion(mRoot, n);
-        if(nodeGlobal) {
-            // std::cout << "Made it into Node\n";
-            return nodeGlobal -> data;
-        }
-    }
+    //     Node* node = lookupRecursion(mRoot, n);
+    //     if(nodeGlobal) {
+    //         return nodeGlobal -> data;
+    //     }
+    // }
+    n++;
     throw std::out_of_range("lookup out of range");
     // std::cout << "somehow out of range\n";
     // return "hi";
@@ -240,9 +233,113 @@ void Set::print() const {
 };
 
 size_t Set::remove(const std::string& value) {
-    std::string a = value;
-    return 1;
+    //Loop through the tree until you find the value, if you don't find it, do nothing and return 0. If you do, remove it either by erasing it or swapping and then return 1
+    Node* curr = mRoot;
+    Node* prevCurr = nullptr;
+    bool leftOrRight = false;
+    if(!mRoot) {
+        return 0;
+    }
+    while(curr) { // loop through until curr is nullptr
+        if (value > curr -> data) {
+            prevCurr = curr;
+            curr = curr -> right;
+            leftOrRight = true;
+        }
+        else if (value < curr -> data) {
+            prevCurr = curr;
+            curr = curr -> left;
+            leftOrRight = false;
+        }
+        else { // it equals a value so then find if it has two or one child, then do operations. // reduce Counts
+            if(curr->left && curr->right) { //if it has both children
+                Node* currTwo = curr->right;
+                while(currTwo -> left !=nullptr) {
+                    currTwo = currTwo -> left;
+                }
+                // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
+                curr -> data = currTwo -> left -> data;
+                delete currTwo -> left;
+                currTwo -> left = nullptr;
+
+                return 1;
+            }
+            else if(curr->left) { //if it has one child to the left
+                if(leftOrRight) {
+                    prevCurr->left = curr -> left;
+                }
+                else {
+                    prevCurr -> right = curr -> left;
+                }
+                delete curr;
+                return 1;
+            }
+            else if(curr->right) {
+                if(leftOrRight) {
+                    prevCurr->left = curr -> right;
+                }
+                else {
+                    prevCurr -> right = curr -> right;
+                }
+                delete curr;
+                return 1;
+            }
+            else { //if it has no children
+                if(leftOrRight) {
+                    prevCurr->left = nullptr;
+                }
+                else {
+                    prevCurr -> right = nullptr;
+                }
+                delete curr;
+                return 1;
+            }
+
+        }
+    }
+    return 0;
 };
+
+
+// `remove(value)` removes a value from the set.  If the value to remove  is on a
+//   node with less than two children,  it removes that node.  If the value is on a
+//   node with two children, it finds the next smallest value in the set, copies it
+//   over  the value to remove,  and then removes  the node it copied from.  If the
+//   value to remove is not in the set,  it does nothing.  It returns the number of
+//   values that were removed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //so recursion works until you can find the address where it needs to be inserted at. If you insert inside the function, then you probably need a prevCurr or go one Ahead, if not then you need to 
 
