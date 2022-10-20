@@ -6,10 +6,17 @@
 
 int main() {
   Set set;
-  set.insert("D");
+  set.insert("G");
     set.insert("B");
       set.insert("A");
         set.insert("C");
-        set.lookup(2);
+         set.insert("F");
+    set.insert("U");
+      set.insert("E");
+        set.insert("H");
+                set.print();
+        set.lookup(10);
+        set.print();
+        // set.lookup(10);
   return 0;
 }
