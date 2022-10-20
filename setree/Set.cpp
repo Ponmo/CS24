@@ -204,6 +204,7 @@ const std::string& Set::lookup(size_t n) const {
     }
     // throw std::out_of_range("lookup out of range");
     std::cout << "somehow out of range\n";
+    return "hi";
 };
 
 void Set::print() const {
