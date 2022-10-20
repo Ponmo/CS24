@@ -152,7 +152,10 @@ void Set::print() const {
     if (mRoot) {
         std::cout << recursivePrint(mRoot);
     }
-    std::cout << "-\n";
+    else {
+        std::cout << "-";
+    }
+    std::cout << "\n";
     return;
 };
 
