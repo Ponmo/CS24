@@ -78,12 +78,15 @@ Set::Set() {
     mRoot = nullptr;
 };
 
-Set::Set(const Set& other) {
+Set::Set(const Set& other) { //copy constructor
+    // mRoot = other.mRoot;
+    // other.mRoot = nullptr;
 
 };
 
-Set::Set(Set&& other) {
-
+Set::Set(Set&& other) { //move constructor
+    mRoot = other.mRoot;
+    other.mRoot = nullptr;
 };
 
 Set::~Set() {
