@@ -273,8 +273,18 @@ size_t Set::remove(const std::string& value) {
                 Node* prevCurrTwo = curr;
                 Node* currTwo = curr->right;
                 while(currTwo -> left !=nullptr) {
+                    track[i] = currTwo;
                     prevCurrTwo = currTwo;
                     currTwo = currTwo -> left;
+                    i++;
+                }
+                i--;
+                track[i] = nullptr;
+
+                int j = 0;
+                while (track[j]) {
+                    track[j]->count--;
+                    j++;
                 }
                 // std::cout << currTwo -> data;
                 // std::cout << "\n";
