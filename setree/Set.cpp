@@ -308,13 +308,18 @@ size_t Set::remove(const std::string& value) {
             }
             else { //if it has no children
                 std::cout << "Node no children 0\n";
-                if(leftOrRight) {
-                    std::cout << "Node no children left 0\n";
-                    prevCurr->right = nullptr;
+                if (curr!= mRoot) {
+                    if(leftOrRight) {
+                        std::cout << "Node no children left 0\n";
+                        prevCurr->right = nullptr;
+                    }
+                    else {
+                        std::cout << "Node no children right 0\n";
+                        prevCurr -> left = nullptr;
+                    }
                 }
                 else {
-                    std::cout << "Node no children right 0\n";
-                    prevCurr -> left = nullptr;
+                    mRoot = nullptr;
                 }
                 delete curr;
                 return 1;
