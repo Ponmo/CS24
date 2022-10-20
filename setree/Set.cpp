@@ -98,6 +98,7 @@ size_t Set::clear() {
         deleteRecursion(mRoot);
         return numberDeleted;
     }
+    mRoot = nullptr;
     return 0;
 };
 bool Set::contains(const std::string& value) const {
