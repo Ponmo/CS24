@@ -48,6 +48,19 @@ size_t insertRecursion(Node* curr, const std::string& value, Node* mRoot) {
     }
 }
 
+void deleteRecursion(Node* curr) { 
+    if (curr == nullptr) {
+        return;
+    }
+    if (curr -> right) {
+        deleteRecursion(curr -> right);
+    }
+    if (curr -> left) {
+        deleteRecursion(curr -> left);
+    }
+    delete curr;
+};
+
 std::string global = "hello";
 
 Set::Set() {
@@ -63,7 +76,7 @@ Set::Set(Set&& other) {
 };
 
 Set::~Set() {
-
+    deleteRecursion(mRoot);
 };
 
 size_t Set::clear() {
