@@ -172,8 +172,21 @@ size_t Set::insert(const std::string& value) {
     return insertRecursion(mRoot, value, mRoot);
 };
 
+Node* lookupRecursion(Node* curr, size_t n) {
+    if (curr->left) {
+        if(curr -> left -> count == n) {
+            return curr;
+        }
+        lookupRecursion(curr->left, n);
+    }
+    if(curr->right) {
+        lookupRecursion(curr->right, n);
+    }
+    throw std::out_of_range("lookup out of range");
+}
+
 const std::string& Set::lookup(size_t n) const {
-    n++;
+    //So recursion through every single node should check its left child's count. If it is equal then return that node's pointer;
     throw std::out_of_range("lookup out of range");
     return global;
 };
@@ -197,7 +210,7 @@ size_t Set::remove(const std::string& value) {
 //so recursion works until you can find the address where it needs to be inserted at. If you insert inside the function, then you probably need a prevCurr or go one Ahead, if not then you need to 
 
 
-//previous non recursion way of doing insert
+//previous non recursion way of doing insert, but couldn't keep track of count very well. recursion is still slower though
     // if (returnValue != nullptr) {
     //     // Set the newNode here
     //     return 1;
