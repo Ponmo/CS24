@@ -248,7 +248,7 @@ size_t Set::remove(const std::string& value) {
     else {
         trackLength = mRoot -> count;
     }
-    Node* track[mRoot -> count];
+    Node* track[trackLength];
     int i = 0;
     //Two things , set leftOr Right based on , and check if mRoot is the thing being removed, then set mRoot to node
     while(curr) { // loop through until curr is nullptr
