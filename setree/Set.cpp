@@ -180,7 +180,7 @@ size_t Set::insert(const std::string& value) {
     return insertRecursion(mRoot, value, mRoot);
 };
 
-Node* lookupRecursion(Node* curr, size_t n) {
+// Node* lookupRecursion(Node* curr, size_t n) {
     // if (curr->left) {
     //     if(curr -> left -> count == n) {
     //         nodeGlobal = curr;
@@ -198,7 +198,7 @@ Node* lookupRecursion(Node* curr, size_t n) {
     //     }
     // }
     // return nullptr;
-};
+// };
 
 const std::string& Set::lookup(size_t n) const {
     //So recursion through every single node should check its left child's count. If it is equal then return that node's pointer;
