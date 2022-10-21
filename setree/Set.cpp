@@ -377,7 +377,6 @@ size_t Set::remove(const std::string& value) {
                     track[j]->count--;
                     j++;
                 }
-
                 return 1;
             }
             // std::cout << "Somehow didn't find it 0\n";
