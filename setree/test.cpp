@@ -20,9 +20,7 @@ int main() {
         set.insert("L");
         set.insert("M");
         set.insert("K");
-        set.print();
-        set.remove("L");
-        set.print();
+        set.remove("G");
         // set.lookup(10);
   return 0;
 }

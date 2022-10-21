@@ -277,16 +277,16 @@ size_t Set::remove(const std::string& value) {
 
                 while(currTwo -> right != nullptr) {
                     track[i] = currTwo;
+                    std::cout << mRoot;
+                    std::cout << "\n";
+                    std::cout << track[i];
+                    std::cout << "\n";
                     prevCurrTwo = currTwo;
                     currTwo = currTwo -> right;
                     i++;
                 }
-                if (track[i] != mRoot) {
-                    track[i] = nullptr;
-                }
-                else {
-                    track[i+1] = nullptr;
-                }
+                
+                track[i] = nullptr;
 
                 // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
                 curr -> data = currTwo -> data;
@@ -311,11 +311,18 @@ size_t Set::remove(const std::string& value) {
                 // std::cout << "delete statement next\n";
                 delete currTwo;
                 //if mRoot is curr, then first, 
+                std::cout << mRoot;
+                    std::cout << "\n";
+                    std::cout << track[0];
+                    std::cout << "\n";
+
                 int j = 0;
                 while (track[j]) {
                     track[j]->count--;
                     j++;
                 }
+                std::cout << mRoot->count;
+                    std::cout << "\n";
                 return 1;
             }
             else if(curr->left) { //if it has one child to the left
