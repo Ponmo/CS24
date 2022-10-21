@@ -266,63 +266,39 @@ size_t Set::remove(const std::string& value) {
             curr = curr -> left;
             leftOrRight = false;
         }
-        else { // it equals a value so then find if it has two or one child, then do operations. // reduce Counts
-            // std::cout << "Value Equals 0\n";
+        else { 
             if(curr->left && curr->right) { //if it has both children
-                // std::cout << "Node Two Children 0\n";
-
-                // VARIABLES TO LOOP ON
                 Node* prevCurrTwo = curr;
                 Node* currTwo = curr->left;
-
                 while(currTwo -> right != nullptr) {
                     track[i] = currTwo;
-                    std::cout << mRoot;
-                    std::cout << "\n";
-                    std::cout << track[i];
-                    std::cout << "\n";
                     prevCurrTwo = currTwo;
                     currTwo = currTwo -> right;
                     i++;
                 }
-                
                 track[i] = nullptr;
-
-                // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
                 curr -> data = currTwo -> data;
-
-                //Currtwo may have a left child;
                 if(prevCurrTwo != curr) {
                     prevCurrTwo -> right = nullptr;
                     if(currTwo->left) {
-                        // std::cout << "Had a left child\n";
                         prevCurrTwo -> right = currTwo -> left;
                     }
                 }
                 else {
                     if(currTwo->left) {
-                        // std::cout << "Had a right child\n";
                         prevCurrTwo -> left = currTwo -> left;
                     }
                     else {
                         prevCurrTwo -> left = nullptr;
                     }
                 }
-                // std::cout << "delete statement next\n";
                 delete currTwo;
-                //if mRoot is curr, then first, 
-                std::cout << mRoot;
-                    std::cout << "\n";
-                    std::cout << track[0];
-                    std::cout << "\n";
 
                 int j = 0;
                 while (track[j]) {
                     track[j]->count--;
                     j++;
                 }
-                std::cout << mRoot->count;
-                    std::cout << "\n";
                 return 1;
             }
             else if(curr->left) { //if it has one child to the left
@@ -405,6 +381,7 @@ size_t Set::remove(const std::string& value) {
         }
         i++;
     }
+    
     // std::cout << "Not found 0\n";
     return 0;
 };
