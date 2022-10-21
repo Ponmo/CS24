@@ -281,7 +281,9 @@ size_t Set::remove(const std::string& value) {
                     currTwo = currTwo -> right;
                     i++;
                 }
-                track[i] = nullptr;
+                if (track[i] == mRoot) {
+                    track[i] = nullptr;
+                }
 
                 // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
                 curr -> data = currTwo -> data;
