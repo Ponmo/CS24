@@ -274,12 +274,6 @@ size_t Set::remove(const std::string& value) {
                 // VARIABLES TO LOOP ON
                 Node* prevCurrTwo = curr;
                 Node* currTwo = curr->left;
-                
-                // CHECK FOR CLOSEST NODE POSSIBLE
-                // if (curr->right->left == nullptr) { 
-                //     curr -> data = curr -> left -> data;
-                //     curr -> left = curr -> left -> left;
-                // }
 
                 while(currTwo -> right != nullptr) {
                     track[i] = currTwo;
