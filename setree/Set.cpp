@@ -281,7 +281,7 @@ size_t Set::remove(const std::string& value) {
                     currTwo = currTwo -> right;
                     i++;
                 }
-                if (track[0] == mRoot) {
+                if (track[i-1] != mRoot) {
                     track[i] = nullptr;
                 }
 
