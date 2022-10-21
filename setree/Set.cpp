@@ -111,13 +111,13 @@ std::string global = "hello";
 Set::Set() {
     mRoot = nullptr;
 };
-void copySub(Set& set, Node* curr) {
+void moveRecursion(Set& set, Node* curr) {
     set.insert(curr->data);
     if(curr->left) {
-        copySub(set, curr -> left);
+        moveRecursion(set, curr -> left);
     }
     if(curr->right) {
-        copySub(set, curr -> right);
+        moveRecursion(set, curr -> right);
     }
     return;
 }
@@ -126,7 +126,7 @@ Set::Set(const Set& other) { //copy constructor
     mRoot = nullptr;
     Node* oldCurr = other.mRoot;
     if (oldCurr) {
-        recursiveMove(*this, oldCurr);
+        moveRecursion(*this, oldCurr);
     }
 };
 
