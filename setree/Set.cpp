@@ -181,25 +181,21 @@ size_t Set::insert(const std::string& value) {
     return insertRecursion(mRoot, value, mRoot);
 };
 
-// Node* lookupRecursion(Node* curr, size_t n) {
-    // if (curr->left) {
-    //     if(curr -> left -> count == n) {
-    //         nodeGlobal = curr;
-    //         return curr;
-    //     }
-    //     Node* node = lookupRecursion(curr->left, n);
-    //     if (node) {
-    //         return node;
-    //     }
-    // }
-    // if(curr->right) {
-    //     Node* node = lookupRecursion(curr->right, n);
-    //     if (node) {
-    //         return node;
-    //     }
-    // }
-    // return nullptr;
-// };
+int lookupRecursion(Node* listAll[], Node* curr, int i) {
+    if (curr-> left != nullptr) {
+        i = lookupRecursion(listAll, curr -> left, i);
+    }
+
+
+    listAll[i] = curr;
+    i = i+1;
+
+    if (curr-> right != nullptr) {
+        i = lookupRecursion(listAll, curr -> right, i);
+
+    }
+    return i;
+};
 
 const std::string& Set::lookup(size_t n) const {
     //So recursion through every single node should check its left child's count. If it is equal then return that node's pointer;
@@ -209,17 +205,17 @@ const std::string& Set::lookup(size_t n) const {
     // std::cout << "An iteration" + std::to_string(mRoot -> count);
 
 
-    // if (mRoot) {
-
-    //     Node* node = lookupRecursion(mRoot, n);
-    //     if(nodeGlobal) {
-    //         return nodeGlobal -> data;
-    //     }
-    // }
-    n++;
+    if (mRoot || n < mRoot -> count) {
+        Node* listAll[mRoot->count];
+        Node* curr = mRoot;
+        lookupRecursion(listAll, curr, 0);
+        return listAll[n] -> data;
+        // Node* node = lookupRecursion(mRoot, n);
+        // if(nodeGlobal) {
+        //     return nodeGlobal -> data;
+        // }
+    }
     throw std::out_of_range("lookup out of range");
-    // std::cout << "somehow out of range\n";
-    // return "hi";
 };
 
 void Set::print() const {
