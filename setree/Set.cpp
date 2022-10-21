@@ -273,18 +273,18 @@ size_t Set::remove(const std::string& value) {
 
                 // VARIABLES TO LOOP ON
                 Node* prevCurrTwo = curr;
-                Node* currTwo = curr->right;
+                Node* currTwo = curr->left;
                 
                 // CHECK FOR CLOSEST NODE POSSIBLE
                 // if (curr->right->left == nullptr) { 
                 //     curr -> data = curr -> left -> data;
                 //     curr -> left = curr -> left -> left;
                 // }
-                
-                while(currTwo -> left !=nullptr) {
+
+                while(currTwo -> right != nullptr) {
                     track[i] = currTwo;
                     prevCurrTwo = currTwo;
-                    currTwo = currTwo -> left;
+                    currTwo = currTwo -> right;
                     i++;
                 }
                 i--;
@@ -293,21 +293,21 @@ size_t Set::remove(const std::string& value) {
                 // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
                 curr -> data = currTwo -> data;
 
-                //Currtwo may have a right child;
+                //Currtwo may have a left child;
                 if(prevCurrTwo != curr) {
-                    prevCurrTwo -> left = nullptr;
-                    if(currTwo->right) {
-                        // std::cout << "Had a right child\n";
-                        prevCurrTwo -> left = currTwo -> right;
+                    prevCurrTwo -> right = nullptr;
+                    if(currTwo->left) {
+                        // std::cout << "Had a left child\n";
+                        prevCurrTwo -> right = currTwo -> left;
                     }
                 }
                 else {
-                    if(currTwo->right) {
+                    if(currTwo->left) {
                         // std::cout << "Had a right child\n";
-                        prevCurrTwo -> right = currTwo -> right;
+                        prevCurrTwo -> left = currTwo -> left;
                     }
                     else {
-                        prevCurrTwo -> right = nullptr;
+                        prevCurrTwo -> left = nullptr;
                     }
                 }
                 // std::cout << "delete statement next\n";
@@ -321,7 +321,7 @@ size_t Set::remove(const std::string& value) {
                 return 1;
             }
             else if(curr->left) { //if it has one child to the left
-                // std::cout << "Node Left Child 0\n";
+                // std::cout << "Node Låeft Child 0\n";
                 if (curr != mRoot) {
                     if(leftOrRight) {
                         prevCurr->left = curr -> left;
