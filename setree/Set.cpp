@@ -280,17 +280,19 @@ size_t Set::remove(const std::string& value) {
                     curr -> data = curr -> left -> data;
                     curr -> left = curr -> left -> left;
                 }
-                while(currTwo -> left !=nullptr) {
-                    track[i] = currTwo;
-                    prevCurrTwo = currTwo;
-                    currTwo = currTwo -> left;
-                    i++;
-                }
-                i--;
-                track[i] = nullptr;
+                else {
+                    while(currTwo -> left !=nullptr) {
+                        track[i] = currTwo;
+                        prevCurrTwo = currTwo;
+                        currTwo = currTwo -> left;
+                        i++;
+                    }
+                    i--;
+                    track[i] = nullptr;
 
-                // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
-                curr -> data = currTwo -> data;
+                    // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
+                    curr -> data = currTwo -> data;
+                }
 
                 //Currtwo may have a right child;
                 if(prevCurrTwo != curr) {
