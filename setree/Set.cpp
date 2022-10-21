@@ -270,14 +270,15 @@ size_t Set::remove(const std::string& value) {
             if(curr->left && curr->right) { //if it has both children
                 Node* prevCurrTwo = curr;
                 Node* currTwo = curr->left;
+                if (track[i] == mRoot) {
+                    i++;
+                }
                 while(currTwo -> right != nullptr) {
                     track[i] = currTwo;
                     prevCurrTwo = currTwo;
                     currTwo = currTwo -> right;
                     i++;
                 }
-                std::cout<<track[i];
-                std::cout<<mRoot;
                 track[i] = nullptr;
                 curr -> data = currTwo -> data;
                 if(prevCurrTwo != curr) {
