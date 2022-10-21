@@ -270,8 +270,16 @@ size_t Set::remove(const std::string& value) {
             // std::cout << "Value Equals 0\n";
             if(curr->left && curr->right) { //if it has both children
                 // std::cout << "Node Two Children 0\n";
+
+                // VARIABLES TO LOOP ON
                 Node* prevCurrTwo = curr;
                 Node* currTwo = curr->right;
+                
+                // CHECK FOR CLOSEST NODE POSSIBLE
+                if (curr->right->left == nullptr) { 
+                    curr -> data = curr -> left -> data;
+                    curr -> left = curr -> left -> left;
+                }
                 while(currTwo -> left !=nullptr) {
                     track[i] = currTwo;
                     prevCurrTwo = currTwo;
@@ -281,13 +289,10 @@ size_t Set::remove(const std::string& value) {
                 i--;
                 track[i] = nullptr;
 
-                // std::cout << currTwo -> data;
-                // std::cout << "\n";
-                // std::cout << prevCurrTwo -> data;
                 // Found the pointer to next smallest node. Transfer its data to curr. Delete that node. make its parent node point to null.
                 curr -> data = currTwo -> data;
 
-                //TODO: currtwo may have a right child.
+                //Currtwo may have a right child;
                 if(prevCurrTwo != curr) {
                     prevCurrTwo -> left = nullptr;
                     if(currTwo->right) {
