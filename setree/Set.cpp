@@ -312,7 +312,7 @@ size_t Set::remove(const std::string& value) {
                         prevCurr->left = curr -> left;
                     }
                     else {
-                        prevCurr -> right = curr -> left;
+                        prevCurr -> left = curr -> left;
                     }
                 }
                 else {
