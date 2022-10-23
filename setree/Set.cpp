@@ -219,14 +219,20 @@ const std::string& Set::lookup(size_t n) const {
 
 
     if (mRoot && (n < mRoot -> count)) {
-        // Node* listAll[mRoot->count];
-        // Node* curr = mRoot;
-        // lookupRecursion(listAll, curr, 0);
+        Node* listAll[mRoot->count];
+        Node* curr = mRoot;
+        lookupRecursion(listAll, curr, 0);
         // for (int i = 0; i < sizeof(listAll)/sizeof(listAll[0]); i++) {
         //     std::cout << listAll[i] -> data;
         // }
         // std::cout << "\n";
-        // return listAll[n] -> data;
+            // Node* curr2 = mRoot;
+            // while(curr2!=nullptr) {
+            //     std::cout << curr2 -> count;
+            //     curr2 = curr2 -> left;
+            //     std::cout << "\n";
+            // }
+        return listAll[n] -> data;
     }
     throw std::out_of_range("lookup out of range");
 };

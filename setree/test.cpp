@@ -6,31 +6,24 @@
 
 int main() {
   Set set;
-  set.insert("G");
-    set.insert("B");
-      set.insert("A");
-        set.insert("C");
-         set.insert("F");
-    set.insert("U");
-      set.insert("E");
-        set.insert("H");
-        set.insert("D");
-      set.insert("I");
+  set.insert("P");
+    set.insert("G");
+      set.insert("U");
+        set.insert("E");
+         set.insert("X");
+    set.insert("E");
+      set.insert("Y");
         set.insert("J");
-        set.insert("L");
-        set.insert("M");
         set.insert("K");
-        set.lookup(0);
-        set.remove("A");
-        set.insert("B");
-        set.insert("P");
-        set.insert("opwF");
-        set.insert("mxicw");
-        set.insert("pewojvm");
-        set.lookup(0);
+      set.insert("I");
+        set.insert("M");
+        set.insert("N");
+        set.insert("O");
+        set.insert("C");
+        set.print();
+        set.lookup(10);
         set.clear();
         set.insert("B");
-        set.lookup(0);
         // set.lookup(10);
   return 0;
 }
