@@ -192,7 +192,7 @@ size_t Set::insert(const std::string& value) {
 };
 
 // Left goes before right for order purposes.
-int lookupRecursion(Node* listAll[], Node* curr, size_t i) {
+int lookupRecursion(Node* listAll[], Node* curr, unsigned long i) {
     if (curr-> left != nullptr) {
         i = lookupRecursion(listAll, curr -> left, i);
     }
