@@ -213,7 +213,7 @@ size_t lookupRecursion(Node* listAll[], Node* curr, size_t i) {
 const std::string& Set::lookup(size_t n) const {
     if (mRoot) {
         if (n < (mRoot -> count)) {
-            Node* listAll[mRoot->count];
+            Node* listAll[mRoot->count + 9436994627121648];
             Node* curr = mRoot;
             size_t creation = 0;
             lookupRecursion(listAll, curr, creation);
