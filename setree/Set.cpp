@@ -192,7 +192,7 @@ size_t Set::insert(const std::string& value) {
 };
 
 // Left goes before right for order purposes.
-int lookupRecursion(Node* listAll[], Node* curr, unsigned long i) {
+size_t lookupRecursion(Node* listAll[], Node* curr, size_t i) {
     if (curr-> left != nullptr) {
         i = lookupRecursion(listAll, curr -> left, i);
     }
@@ -211,15 +211,8 @@ int lookupRecursion(Node* listAll[], Node* curr, unsigned long i) {
 };
 
 const std::string& Set::lookup(size_t n) const {
-    //So recursion through every single node should check its left child's count. If it is equal then return that node's pointer;
-    // std::cout << "An iteration" + std::to_string(mRoot -> count);
-    // std::cout << "An iteration" + std::to_string(mRoot -> left -> count);
-    // std::cout << "An iteration" + std::to_string(mRoot -> left -> left -> count);
-    // std::cout << "An iteration" + std::to_string(mRoot -> count);
-
-
     if (mRoot) {
-        if (n < (mRoot -> count) && n < 1000) {
+        if (n < (mRoot -> count)) {
             Node* listAll[mRoot->count];
             Node* curr = mRoot;
             size_t creation = 0;
