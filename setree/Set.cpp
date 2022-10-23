@@ -227,7 +227,9 @@ const std::string& Set::lookup(size_t n) const {
                 //     curr2 = curr2 -> left;
                 //     std::cout << "\n";
                 // }
-            return listAll[n] -> data;
+            if (listAll[n]) {
+                return listAll[n] -> data;
+            }
         }
     }
     throw std::out_of_range("lookup out of range");
