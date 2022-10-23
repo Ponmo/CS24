@@ -222,7 +222,7 @@ const std::string& Set::lookup(size_t n) const {
         Node* listAll[mRoot->count];
         Node* curr = mRoot;
         lookupRecursion(listAll, curr, 0);
-        return listAll[n] -> data;
+        return listAll[n - 1] -> data;
         // Node* node = lookupRecursion(mRoot, n);
         // if(nodeGlobal) {
         //     return nodeGlobal -> data;
