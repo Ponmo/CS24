@@ -20,8 +20,12 @@ int main() {
         set.insert("N");
         set.insert("O");
         set.insert("C");
+        set.remove("P");
+        set.remove("E");
+        set.contains("J");
+
         set.print();
-        set.lookup(10);
+        set.lookup(93956055067936);
         set.clear();
         set.insert("B");
         // set.lookup(10);
