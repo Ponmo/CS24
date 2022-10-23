@@ -218,7 +218,7 @@ const std::string& Set::lookup(size_t n) const {
     // std::cout << "An iteration" + std::to_string(mRoot -> count);
 
 
-    if (mRoot || n < mRoot -> count) {
+    if (mRoot && (n < mRoot -> count)) {
         Node* listAll[mRoot->count];
         Node* curr = mRoot;
         lookupRecursion(listAll, curr, 0);
