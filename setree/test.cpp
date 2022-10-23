@@ -23,9 +23,12 @@ int main() {
         set.remove("P");
         set.remove("E");
         set.contains("J");
+        // for (int i = 0; i < 12040; i++) {
+        //   set.insert("N" + std::to_string(i));
+        // }
 
         set.print();
-        set.lookup(93956055067936);
+        std::cout << set.lookup(9436994627121648);
         set.clear();
         set.insert("B");
         // set.lookup(10);
