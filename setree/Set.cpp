@@ -216,6 +216,7 @@ const std::string& Set::lookup(size_t n) const {
             Node* listAll[mRoot->count];
             Node* curr = mRoot;
             size_t creation = 0;
+            int i = (int) n;
             lookupRecursion(listAll, curr, creation);
             // for (int i = 0; i < sizeof(listAll)/sizeof(listAll[0]); i++) {
             //     std::cout << listAll[i] -> data;
@@ -227,8 +228,8 @@ const std::string& Set::lookup(size_t n) const {
                 //     curr2 = curr2 -> left;
                 //     std::cout << "\n";
                 // }
-            if (listAll[n]) {
-                return listAll[n] -> data;
+            if (listAll[i]) {
+                return listAll[i] -> data;
             }
         }
     }
