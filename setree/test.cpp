@@ -20,7 +20,17 @@ int main() {
         set.insert("L");
         set.insert("M");
         set.insert("K");
-        set.remove("G");
+        set.lookup(0);
+        set.remove("A");
+        set.insert("B");
+        set.insert("P");
+        set.insert("opwF");
+        set.insert("mxicw");
+        set.insert("pewojvm");
+        set.lookup(0);
+        set.clear();
+        set.insert("B");
+        set.lookup(0);
         // set.lookup(10);
   return 0;
 }

@@ -80,31 +80,31 @@ std::string recursivePrint(Node* curr) { //
     }
     return curr->data;
 };
-std::pair<Node*, size_t> recursiveMove(Node* curr, Node* mRoot) {
-    // For each node except mRoot, create a new node with the same data, pointers to other nodes (either return a pointer or nullptr), and set the count ++
+// std::pair<Node*, size_t> recursiveMove(Node* curr, Node* mRoot) {
+//     // For each node except mRoot, create a new node with the same data, pointers to other nodes (either return a pointer or nullptr), and set the count ++
     
-    Node* newNode = new Node;
-    newNode -> data = curr->data;
-    //mRoot needs to be set.
-    if (mRoot == nullptr) {
-        mRoot = newNode;
-    }
-    Node* a = nullptr;
-    size_t b = 0;
-    if (curr -> left != nullptr) {
-        std::tie(a, b) = recursiveMove(curr->left, mRoot);
-        b++;
-        newNode -> left = a;
-        newNode -> count += b;
-    }
-    if (curr -> right != nullptr) {
-        std::tie(a, b) = recursiveMove(curr->right, mRoot);
-        b++;
-        newNode -> right = a;
-        newNode -> count += b;
-    }
-    return std::make_pair(newNode, b);
-};
+//     Node* newNode = new Node;
+//     newNode -> data = curr->data;
+//     //mRoot needs to be set.
+//     if (mRoot == nullptr) {
+//         mRoot = newNode;
+//     }
+//     Node* a = nullptr;
+//     size_t b = 0;
+//     if (curr -> left != nullptr) {
+//         std::tie(a, b) = recursiveMove(curr->left, mRoot);
+//         b++;
+//         newNode -> left = a;
+//         newNode -> count += b;
+//     }
+//     if (curr -> right != nullptr) {
+//         std::tie(a, b) = recursiveMove(curr->right, mRoot);
+//         b++;
+//         newNode -> right = a;
+//         newNode -> count += b;
+//     }
+//     return std::make_pair(newNode, b);
+// };
 
 std::string global = "hello";
 
@@ -219,14 +219,14 @@ const std::string& Set::lookup(size_t n) const {
 
 
     if (mRoot && (n < mRoot -> count)) {
-        Node* listAll[mRoot->count];
-        Node* curr = mRoot;
-        lookupRecursion(listAll, curr, 0);
-        return listAll[n] -> data;
-        // Node* node = lookupRecursion(mRoot, n);
-        // if(nodeGlobal) {
-        //     return nodeGlobal -> data;
+        // Node* listAll[mRoot->count];
+        // Node* curr = mRoot;
+        // lookupRecursion(listAll, curr, 0);
+        // for (int i = 0; i < sizeof(listAll)/sizeof(listAll[0]); i++) {
+        //     std::cout << listAll[i] -> data;
         // }
+        // std::cout << "\n";
+        // return listAll[n] -> data;
     }
     throw std::out_of_range("lookup out of range");
 };
