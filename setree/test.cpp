@@ -6,10 +6,36 @@
 
 int main() {
   Set set;
-        for (int i = 0; i < 12040; i++) {
-          set.insert("N" + std::to_string(i));
-        }
+        
+       set.insert("1000");
+        set.insert("500");
+         set.insert("1500");
+          set.insert("225");
+           set.insert("725");
+            set.insert("1250");
+             set.insert("1750");
+              set.insert("125");
+               set.insert("625");
+                set.insert("825");
+                 set.insert("1790");
+                  set.insert("1720");
+                   set.insert("1400");
+                    set.insert("2000");
+                     set.insert("1001");
+                      set.insert("10002");
+
+
         set.print();
+        std::cout << "\n";
+
+        set.remove("825");
+        
+        set.print();
+                std::cout << "\n";
+         set.remove("1001");
+         set.print();
+                 std::cout << "\n";
+          set.remove("725");
         // set.lookup(10);
   return 0;
 }
