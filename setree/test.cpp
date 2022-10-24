@@ -6,31 +6,10 @@
 
 int main() {
   Set set;
-  set.insert("P");
-    set.insert("G");
-      set.insert("U");
-        set.insert("E");
-         set.insert("X");
-    set.insert("E");
-      set.insert("Y");
-        set.insert("J");
-        set.insert("K");
-      set.insert("I");
-        set.insert("M");
-        set.insert("N");
-        set.insert("O");
-        set.insert("C");
-        set.remove("P");
-        set.remove("E");
-        set.contains("J");
-        // for (int i = 0; i < 12040; i++) {
-        //   set.insert("N" + std::to_string(i));
-        // }
-
+        for (int i = 0; i < 12040; i++) {
+          set.insert("N" + std::to_string(i));
+        }
         set.print();
-        std::cout << set.lookup(9436994627121648);
-        set.clear();
-        set.insert("B");
         // set.lookup(10);
   return 0;
 }
