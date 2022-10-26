@@ -6,7 +6,13 @@
 // Implement its member functions in Stack.cpp.
 
 struct Stack {
-    AST* array[3];
+    // TODO: Probably want to implement a resize instead of a set length like either through a vector, or a linked list but that's a lot of work.
+    AST* array[100];
+    unsigned long counter = 0;
+
+    AST* pop();
+    void push(AST*);
+
 };
 
 #endif

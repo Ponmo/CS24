@@ -2,6 +2,15 @@
 
 // Implement your Stack member functions here.
 
-//Member functions include insert, remove, delete, print (which calls on the AST nodes), etc. 
+//Member functions include constructor, push, pop , deconstructor.
 
-
+AST* Stack::pop() {
+    AST* child = array[counter - 1];
+    counter--;
+    return child;
+}
+void Stack::push(AST* curr) {
+    array[counter] = curr;
+    counter++;
+    return;
+}
