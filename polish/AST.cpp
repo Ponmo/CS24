@@ -7,6 +7,8 @@
 #include <sstream>
 #include <iostream>
 
+
+
 //Implement Parse Function, which searches through the stack (and its subtrees).
 
 AST* AST::parse(const std::string& expression) { 
@@ -15,7 +17,11 @@ AST* AST::parse(const std::string& expression) {
     Stack Stack;
     double num;
     while (expr >> temp) { //Loop through each token in expression
-        if (!(sscanf(temp.c_str(), "%lf", &num) != 1) && strtod(temp.c_str(), nullptr)) { // It's a double, so just insert stack
+        auto result = double();
+        auto i = std::istringstream(temp);
+        i >> result;   
+
+        if (!(sscanf(temp.c_str(), "%lf", &num) != 1) && !i.fail() && i.eof()) { // It's a double, so just insert stack
             Double* a = new Double;
             a->number = num;
             Stack.push(a);
