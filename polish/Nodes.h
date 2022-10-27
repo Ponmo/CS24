@@ -23,7 +23,7 @@ class Addition: public AST { //only left and right for operands
         AST* right;
 
     public:
-        ~Addition() {}
+        ~Addition();
         std::string prefix()  const;
         std::string postfix() const;
         double      value()   const;
