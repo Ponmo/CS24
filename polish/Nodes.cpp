@@ -55,7 +55,7 @@ Addition::~Addition () {
 }
 std::string Addition::prefix()  const {
     if(!top) {
-        return "+" + left -> prefix() + right -> prefix() + " ";
+        return "+ " + left -> prefix() + right -> prefix();
     }
     return "+ " + left -> prefix() + right -> prefix();
     // return left -> postfix() + right -> postfix() + "+";
@@ -76,7 +76,7 @@ Subtraction::~Subtraction () {
 }
 std::string Subtraction::prefix()  const {
     if(!top) {
-        return "-" + left -> prefix() + right -> prefix() + " ";
+        return "- " + left -> prefix() + right -> prefix();
     }
     return "- " + left -> prefix() + right -> prefix();
     // return reverse(left -> postfix() + right -> postfix() + "-");
@@ -96,7 +96,7 @@ Multiplication::~Multiplication () {
 }
 std::string Multiplication::prefix()  const {
     if(!top) {
-        return "*" + left -> prefix() + right -> prefix() + " ";
+        return "* " + left -> prefix() + right -> prefix();
     }
     return "* " + left -> prefix() + right -> prefix();
     // return reverse(left -> postfix() + right -> postfix() + "*");
@@ -116,7 +116,7 @@ Division::~Division () {
 }
 std::string Division::prefix()  const {
     if(!top) {
-        return "/" + left -> prefix() + right -> prefix() + " ";
+        return " /" + left -> prefix() + right -> prefix();
     }
     return "/ " + left -> prefix() + right -> prefix();
     // return reverse(left -> postfix() + right -> postfix() + "/");
@@ -139,7 +139,7 @@ Modulo::~Modulo () {
 }
 std::string Modulo::prefix()  const {
     if(!top) {
-        return "%" + left -> prefix() + right -> prefix() + " ";
+        return "% " + left -> prefix() + right -> prefix();
     }
     return "% " + left -> prefix() + right -> prefix();
     // return reverse(left -> postfix() + right -> postfix() + "%");
@@ -161,7 +161,7 @@ Negate::~Negate () {
 }
 std::string Negate::prefix()  const {
     if(!top) {
-        return "/" + reverseAlignment->prefix() + " ";
+        return "/ " + reverseAlignment->prefix();
     }
     return "/ " + reverseAlignment->prefix();
     // return reverse(reverseAlignment -> postfix() + "~");
