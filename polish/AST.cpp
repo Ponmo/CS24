@@ -22,42 +22,42 @@ AST* AST::parse(const std::string& expression) {
         }
         else if (temp == "+") { //You call the function to add the previous two numbers, and then add that to the stack.
             Addition* a = new Addition;
-            if(!(a -> right = Stack.pop()) || !(a -> left = Stack.pop())) {
+            if((a -> right = Stack.pop()) && !(a -> left = Stack.pop())) {
                 // throw std::runtime_error("Not enough operands");
             }
             Stack.push(a);
         }
         else if (temp == "-") {
             Subtraction* a = new Subtraction;
-            if(!(a -> right = Stack.pop()) || !(a -> left = Stack.pop())) {
+            if((a -> right = Stack.pop()) && !(a -> left = Stack.pop())) {
                 // throw std::runtime_error("Not enough operands");
             }
             Stack.push(a);
         }
         else if (temp == "*") {
             Multiplication* a = new Multiplication;
-            if(!(a -> right = Stack.pop()) || !(a -> left = Stack.pop())) {
+            if((a -> right = Stack.pop()) && !(a -> left = Stack.pop())) {
                 // throw std::runtime_error("Not enough operands");
             }
             Stack.push(a);
         }
         else if (temp == "/") {
             Division* a = new Division;
-            if(!(a -> right = Stack.pop()) || !(a -> left = Stack.pop())) {
+            if((a -> right = Stack.pop()) && !(a -> left = Stack.pop())) {
                 // throw std::runtime_error("Not enough operands");
             }
             Stack.push(a);
         }
         else if (temp == "%") {
             Modulo* a = new Modulo;
-            if(!(a -> right = Stack.pop()) || !(a -> left = Stack.pop())) {
+            if((a -> right = Stack.pop()) && !(a -> left = Stack.pop())) {
                 // throw std::runtime_error("Not enough operands");
             }
             Stack.push(a);
         }
         else if (temp == "~") {
             Negate* a = new Negate;
-            if(!(a -> reverseAlignment = Stack.pop())) {
+            if((a -> reverseAlignment = Stack.pop())) {
                 // throw std::runtime_error("Not enough operands");
             }
             Stack.push(a);
@@ -77,5 +77,5 @@ AST* AST::parse(const std::string& expression) {
     // - If there are multiple nodes on the stack at the end of parsing, say `Too many operands.`
     // - If there aren't enough operands for an operator, say `Not enough operands.`
     // - If you encounter an invalid token, say `Invalid token: XXX`, where `XXX` is the invalid token.
-    return Stack.array[0];
+    return Stack.pop();
 }
