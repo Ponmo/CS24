@@ -15,15 +15,14 @@ AST* AST::parse(const std::string& expression) {
     std::istringstream expr(expression);
     std::string temp; 
     Stack Stack;
-    double num;
     while (expr >> temp) { //Loop through each token in expression
         auto result = double();
         auto i = std::istringstream(temp);
         i >> result;   
-
-        if (!(sscanf(temp.c_str(), "%lf", &num) != 1) && !i.fail() && i.eof()) { // It's a double, so just insert stack
+        //!(sscanf(temp.c_str(), "%lf",s &num) != 1) && 
+        if (!i.fail() && i.eof()) { // It's a double, so just insert stack
             Double* a = new Double;
-            a->number = num;
+            a->number = result;
             Stack.push(a);
         }
         else if (temp == "+") { //You call the function to add the previous two numbers, and then add that to the stack.
