@@ -22,56 +22,50 @@ AST* AST::parse(const std::string& expression) {
         }
         else if (temp == "+") { //You call the function to add the previous two numbers, and then add that to the stack.
             Addition* a = new Addition;
-            if((a -> right = Stack.pop()) && !(a -> left = Stack.pop())) {
-                // throw std::runtime_error("Not enough operands");
-            }
+            a -> right = Stack.pop();
+            a -> left = Stack.pop();
+                // throw std::runtime_error("Not enough operands")
             Stack.push(a);
         }
         else if (temp == "-") {
             Subtraction* a = new Subtraction;
-            if((a -> right = Stack.pop()) && !(a -> left = Stack.pop())) {
-                // throw std::runtime_error("Not enough operands");
-            }
+            a -> right = Stack.pop();
+            a -> left = Stack.pop();
             Stack.push(a);
         }
         else if (temp == "*") {
             Multiplication* a = new Multiplication;
-            if((a -> right = Stack.pop()) && !(a -> left = Stack.pop())) {
-                // throw std::runtime_error("Not enough operands");
-            }
+            a -> right = Stack.pop();
+            a -> left = Stack.pop();
             Stack.push(a);
         }
         else if (temp == "/") {
             Division* a = new Division;
-            if((a -> right = Stack.pop()) && !(a -> left = Stack.pop())) {
-                // throw std::runtime_error("Not enough operands");
-            }
+            a -> right = Stack.pop();
+            a -> left = Stack.pop();
             Stack.push(a);
         }
         else if (temp == "%") {
             Modulo* a = new Modulo;
-            if((a -> right = Stack.pop()) && !(a -> left = Stack.pop())) {
-                // throw std::runtime_error("Not enough operands");
-            }
+            a -> right = Stack.pop();
+            a -> left = Stack.pop();
             Stack.push(a);
         }
         else if (temp == "~") {
             Negate* a = new Negate;
-            if((a -> reverseAlignment = Stack.pop())) {
-                // throw std::runtime_error("Not enough operands");
-            }
+            a -> reverseAlignment = Stack.pop();
             Stack.push(a);
         }
         else {
-            throw std::runtime_error("Invalid token: " + temp);
+            // throw std::runtime_error("Invalid token: " + temp);
         }
     }
-    if (!Stack.array[0]) { //Are operands numberes and operators +-*/?
-        throw std::runtime_error("No input.");
-    }
-    else if (Stack.array[1]) {
-        throw std::runtime_error("Too many operands.");
-    }
+    // if (!Stack.array[0]) { //Are operands numberes and operators +-*/?
+    //     throw std::runtime_error("No input.");
+    // }
+    // else if (Stack.array[1]) {
+    //     throw std::runtime_error("Too many operands.");
+    // }
 
     // - If there is nothing on the stack at the end of parsing, say `No input.`
     // - If there are multiple nodes on the stack at the end of parsing, say `Too many operands.`
