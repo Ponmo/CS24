@@ -60,12 +60,12 @@ AST* AST::parse(const std::string& expression) {
             throw std::runtime_error("Invalid token: " + temp);
         }
     }
-    // if (!Stack.array[0]) { //Are operands numberes and operators +-*/?
-    //     throw std::runtime_error("No input.");
-    // }
-    // else if (Stack.array[1]) {
-    //     throw std::runtime_error("Too many operands.");
-    // }
+    if (Stack.counter == 0) { 
+        throw std::runtime_error("No input.");
+    }
+    else if (Stack.counter > 1) {
+        throw std::runtime_error("Too many operands.");
+    }
 
     // - If there is nothing on the stack at the end of parsing, say `No input.`
     // - If there are multiple nodes on the stack at the end of parsing, say `Too many operands.`
