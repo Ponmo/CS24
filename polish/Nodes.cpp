@@ -38,6 +38,11 @@ double Addition::value() const {
     return left->value() + right->value();
 }
 
+Subtraction::~Subtraction () {
+    delete left;
+    delete right;
+}
+
 std::string Subtraction::prefix()  const {
     return global;
 }
@@ -48,6 +53,10 @@ double Subtraction::value() const {
     return left->value() - right->value();
 }
 
+Multiplication::~Multiplication () {
+    delete left;
+    delete right;
+}
 std::string Multiplication::prefix()  const {
     return global;
 }
@@ -57,7 +66,10 @@ std::string Multiplication::postfix() const {
 double Multiplication::value() const {
     return left->value() * right->value();
 }
-
+Division::~Divison () {
+    delete left;
+    delete right;
+}
 std::string Division::prefix()  const {
     return global;
 }
@@ -68,6 +80,10 @@ double Division::value() const {
     return left->value() / right->value();
 }
 
+Modulo::~Modulo () {
+    delete left;
+    delete right;
+}
 std::string Modulo::prefix()  const {
     return global;
 }
@@ -77,7 +93,9 @@ std::string Modulo::postfix() const {
 double Modulo::value() const {
     return std::fmod(left->value(), right->value());
 }
-
+Negate::~Negate () {
+    delete reverseAlignment;
+}
 std::string Negate::prefix()  const {
     return global;
 }

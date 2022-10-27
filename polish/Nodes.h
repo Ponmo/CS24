@@ -35,7 +35,7 @@ class Subtraction: public AST {
         AST* right;
 
     public:
-        ~Subtraction() {}
+        ~Subtraction();
         std::string prefix()  const;
         std::string postfix() const;
         double value() const;
@@ -47,7 +47,7 @@ class Multiplication: public AST {
         AST* right;
 
     public:
-        ~Multiplication() {}
+        ~Multiplication();
         std::string prefix()  const;
         std::string postfix() const;
         double      value()   const;
@@ -59,7 +59,7 @@ class Division: public AST {
         AST* right;
 
     public:
-        ~Division() {}
+        ~Division();
         std::string prefix()  const;
         std::string postfix() const;
         double      value()   const;
@@ -71,7 +71,7 @@ class Modulo: public AST {
         AST* right;
 
     public:
-        ~Modulo() {}
+        ~Modulo();
         std::string prefix()  const;
         std::string postfix() const;
         double      value()   const;
@@ -82,7 +82,7 @@ class Negate: public AST {
         AST* reverseAlignment;
 
     public:
-        ~Negate() {}
+        ~Negate();
         std::string prefix()  const;
         std::string postfix() const;
         double      value()   const;
