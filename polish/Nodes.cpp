@@ -54,10 +54,14 @@ Addition::~Addition () {
     delete right;
 }
 std::string Addition::prefix()  const {
+    std::string curr = "+ " + left -> prefix() + right -> prefix();
     if(!top) {
-        return "+ " + left -> prefix() + right -> prefix();
+        return curr;
     }
-    return "+ " + left -> prefix() + right -> prefix();
+    if (!curr.empty()) {
+        curr.resize(curr.size() - 1);
+    }
+    return curr;
     // return left -> postfix() + right -> postfix() + "+";
 }
 std::string Addition::postfix() const {
@@ -75,10 +79,14 @@ Subtraction::~Subtraction () {
     delete right;
 }
 std::string Subtraction::prefix()  const {
+    std::string curr = "- " + left -> prefix() + right -> prefix();
     if(!top) {
-        return "- " + left -> prefix() + right -> prefix();
+        return curr;
     }
-    return "- " + left -> prefix() + right -> prefix();
+    if (!curr.empty()) {
+        curr.resize(curr.size() - 1);
+    }
+    return curr;
     // return reverse(left -> postfix() + right -> postfix() + "-");
 }
 std::string Subtraction::postfix() const {
@@ -95,10 +103,14 @@ Multiplication::~Multiplication () {
     delete right;
 }
 std::string Multiplication::prefix()  const {
+    std::string curr = "* " + left -> prefix() + right -> prefix();
     if(!top) {
-        return "* " + left -> prefix() + right -> prefix();
+        return curr;
     }
-    return "* " + left -> prefix() + right -> prefix();
+    if (!curr.empty()) {
+        curr.resize(curr.size() - 1);
+    }
+    return curr;
     // return reverse(left -> postfix() + right -> postfix() + "*");
 }
 std::string Multiplication::postfix() const {
@@ -115,10 +127,14 @@ Division::~Division () {
     delete right;
 }
 std::string Division::prefix()  const {
+    std::string curr = "/ " + left -> prefix() + right -> prefix();
     if(!top) {
-        return " /" + left -> prefix() + right -> prefix();
+        return curr;
     }
-    return "/ " + left -> prefix() + right -> prefix();
+    if (!curr.empty()) {
+        curr.resize(curr.size() - 1);
+    }
+    return curr;
     // return reverse(left -> postfix() + right -> postfix() + "/");
 }
 std::string Division::postfix() const {
@@ -138,10 +154,14 @@ Modulo::~Modulo () {
     delete right;
 }
 std::string Modulo::prefix()  const {
+    std::string curr = "+ " + left -> prefix() + right -> prefix();
     if(!top) {
-        return "% " + left -> prefix() + right -> prefix();
+        return curr;
     }
-    return "% " + left -> prefix() + right -> prefix();
+    if (!curr.empty()) {
+        curr.resize(curr.size() - 1);
+    }
+    return curr;
     // return reverse(left -> postfix() + right -> postfix() + "%");
 }
 std::string Modulo::postfix() const {
@@ -160,10 +180,14 @@ Negate::~Negate () {
     delete reverseAlignment;
 }
 std::string Negate::prefix()  const {
+    std::string curr = "~ " + reverseAlignment->prefix();
     if(!top) {
-        return "/ " + reverseAlignment->prefix();
+        return curr;
     }
-    return "/ " + reverseAlignment->prefix();
+    if (!curr.empty()) {
+        curr.resize(curr.size() - 1);
+    }
+    return curr;
     // return reverse(reverseAlignment -> postfix() + "~");
 }
 std::string Negate::postfix() const {
