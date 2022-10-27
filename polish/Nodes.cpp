@@ -23,9 +23,9 @@ std::string Double::postfix() const {
     str.erase ( str.find_last_not_of('.') + 1, std::string::npos ); 
     if(printStart) {
         printStart = false;
-        return str + " "; 
+        return str;
     }
-    return str;
+    return str + " ";
 }
 
 double Double::value() const {
