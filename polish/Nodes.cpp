@@ -19,7 +19,7 @@ std::string Double::prefix() const {
     std::string str = std::to_string (number);
     str.erase ( str.find_last_not_of('0') + 1, std::string::npos );
     str.erase ( str.find_last_not_of('.') + 1, std::string::npos ); 
-    return str + " ";
+    return " " + str;
 }
 
 std::string Double::postfix() const {
@@ -41,7 +41,7 @@ Addition::~Addition () {
     delete right;
 }
 std::string Addition::prefix()  const {
-    return "+ " + left -> prefix() + right -> prefix() + " ";
+    return " + " + left -> prefix() + right -> prefix();
 }
 std::string Addition::postfix() const {
     if(!top) {
@@ -58,7 +58,7 @@ Subtraction::~Subtraction () {
     delete right;
 }
 std::string Subtraction::prefix()  const {
-    return "- " + left -> prefix() + right -> prefix() + " ";
+    return " - " + left -> prefix() + right -> prefix();
 }
 std::string Subtraction::postfix() const {
     if(!top) {
@@ -74,7 +74,7 @@ Multiplication::~Multiplication () {
     delete right;
 }
 std::string Multiplication::prefix()  const {
-    return "* " + left -> prefix() + right -> prefix() + " ";
+    return " * " + left -> prefix() + right -> prefix();
 }
 std::string Multiplication::postfix() const {
     if(!top) {
@@ -90,7 +90,7 @@ Division::~Division () {
     delete right;
 }
 std::string Division::prefix()  const {
-    return "/ " + left -> prefix() + right -> prefix() + " ";
+    return " / " + left -> prefix() + right -> prefix();
 }
 std::string Division::postfix() const {
     if(!top) {
@@ -109,7 +109,7 @@ Modulo::~Modulo () {
     delete right;
 }
 std::string Modulo::prefix()  const {
-    return "% " + left -> prefix() + right -> prefix() + " ";
+    return " % " + left -> prefix() + right -> prefix();
 }
 std::string Modulo::postfix() const {
     if(!top) {
@@ -127,7 +127,7 @@ Negate::~Negate () {
     delete reverseAlignment;
 }
 std::string Negate::prefix()  const {
-    return "~ " + reverseAlignment -> prefix() + " ";
+    return " ~ " + reverseAlignment -> prefix();
 }
 std::string Negate::postfix() const {
     if(!top) {
