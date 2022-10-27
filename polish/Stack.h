@@ -6,7 +6,7 @@
 // Implement its member functions in Stack.cpp.
 
 struct Stack {
-    // TODO: Probably want to implement a resize instead of a set length like either through a vector, or a linked list but that's a lot of work.
+    // TODO: Probably want to implement a resizable vector instead of a set length or a linked list but that's a lot of work (+ even my TI-84 calculator can't take in pseudo-infinite numbers (like 40 in total)
     AST* array[100];
     unsigned long counter = 0;
 
