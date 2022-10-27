@@ -10,7 +10,7 @@ struct Stack {
     AST* array[100];
     unsigned long counter = 0;
 
-    // ~Stack();
+    ~Stack();
     AST* pop();
     void push(AST*);
 

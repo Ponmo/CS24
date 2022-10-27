@@ -4,9 +4,9 @@
 
 //Member functions include constructor, push, pop , deconstructor.
 
-// Stack::~Stack () {
+Stack::~Stack () {
 
-// }
+}
 AST* Stack::pop() {
     AST* child = array[counter - 1];
     counter--;
