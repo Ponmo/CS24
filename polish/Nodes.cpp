@@ -18,7 +18,10 @@ std::string Double::prefix() const {
 }
 
 std::string Double::postfix() const {
-    return std::to_string(number) + " "; 
+    std::string str = std::to_string (number);
+    str.erase ( str.find_last_not_of('0') + 1, std::string::npos );
+    str.erase ( str.find_last_not_of('.') + 1, std::string::npos ); 
+    return str + " "; 
 }
 
 double Double::value() const {
