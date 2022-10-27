@@ -57,7 +57,7 @@ AST* AST::parse(const std::string& expression) {
             Stack.push(a);
         }
         else {
-            // throw std::runtime_error("Invalid token: " + temp);
+            throw std::runtime_error("Invalid token: " + temp);
         }
     }
     // if (!Stack.array[0]) { //Are operands numberes and operators +-*/?
