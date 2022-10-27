@@ -23,6 +23,10 @@ double Double::value() const {
     return number;
 }
 
+Addition::~Addition () {
+    delete left;
+    delete right;
+}
 
 std::string Addition::prefix()  const {
     return global;
@@ -81,6 +85,6 @@ std::string Negate::postfix() const {
     return global;
 }
 double Negate::value() const {
-    return 0 - reverseAlignment->value();
+    return -reverseAlignment->value();
 }
 // DIvision by 0: std::runtime_error` with the message `Division by zero.`

@@ -10,7 +10,6 @@ Stack::~Stack () {
 AST* Stack::pop() {
     AST* child = array[counter - 1];
     counter--;
-    array[counter] = NULL;
     return child;
 }
 void Stack::push(AST* curr) {
