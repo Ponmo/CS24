@@ -18,7 +18,7 @@ std::string Double::prefix() const {
 }
 
 std::string Double::postfix() const {
-    return std::to_string(number); 
+    return std::to_string(number) + " "; 
 }
 
 double Double::value() const {
@@ -36,9 +36,9 @@ std::string Addition::prefix()  const {
 std::string Addition::postfix() const {
     if (printStart) {
         printStart = false;
-        return left -> postfix() + " " + right -> postfix() + " +";
+        return left -> postfix() + right -> postfix() + "+";
     }
-    return left -> postfix() + " " + right -> postfix() + " + ";
+    return left -> postfix() + right -> postfix() + "+ ";
 }
 double Addition::value() const {
     return left->value() + right->value();
@@ -55,9 +55,9 @@ std::string Subtraction::prefix()  const {
 std::string Subtraction::postfix() const {
     if (printStart) {
         printStart = false;
-        return left -> postfix() + " " + right -> postfix() + " -";
+        return left -> postfix() + right -> postfix() + "-";
     }
-    return left -> postfix() + " " + right -> postfix() + " - ";
+    return left -> postfix() + right -> postfix() + "- ";
 }
 double Subtraction::value() const {
     return left->value() - right->value();
@@ -73,9 +73,9 @@ std::string Multiplication::prefix()  const {
 std::string Multiplication::postfix() const {
     if (printStart) {
         printStart = false;
-        return left -> postfix() + " " + right -> postfix() + " *";
+        return left -> postfix() + right -> postfix() + "*";
     }
-    return left -> postfix() + " " + right -> postfix() + " * ";
+    return left -> postfix() + right -> postfix() + "* ";
 }
 double Multiplication::value() const {
     return left->value() * right->value();
@@ -90,9 +90,9 @@ std::string Division::prefix()  const {
 std::string Division::postfix() const {
     if (printStart) {
         printStart = false;
-        return left -> postfix() + " " + right -> postfix() + " /";
+        return left -> postfix() + right -> postfix() + "/";
     }
-    return left -> postfix() + " " + right -> postfix() + " / ";
+    return left -> postfix() + right -> postfix() + "/ ";
 }
 double Division::value() const {
     if(right->value() != 0) {
@@ -109,12 +109,11 @@ std::string Modulo::prefix()  const {
     return global;
 }
 std::string Modulo::postfix() const {
-    return left -> postfix() + " " + right -> postfix() + " % ";
     if (printStart) {
         printStart = false;
-        return left -> postfix() + " " + right -> postfix() + " %";
+        return left -> postfix() + right -> postfix() + "%";
     }
-    return left -> postfix() + " " + right -> postfix() + " % ";
+    return left -> postfix() + right -> postfix() + "% ";
 }
 double Modulo::value() const {
     if(right->value() != 0) {
@@ -129,12 +128,11 @@ std::string Negate::prefix()  const {
     return global;
 }
 std::string Negate::postfix() const {
-    return reverseAlignment -> postfix() + " ~ ";
     if (printStart) {
         printStart = false;
-        return reverseAlignment -> postfix() + " ~";
+        return reverseAlignment -> postfix() + "~";
     }
-    return reverseAlignment -> postfix() + " ~ ";
+    return reverseAlignment -> postfix() + "~ ";
 }
 double Negate::value() const {
     return -reverseAlignment->value();
