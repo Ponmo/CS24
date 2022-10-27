@@ -27,39 +27,74 @@ AST* AST::parse(const std::string& expression) {
         }
         else if (temp == "+") { //You call the function to add the previous two numbers, and then add that to the stack.
             Addition* a = new Addition;
-            a -> right = Stack.pop();
-            a -> left = Stack.pop();
-                // throw std::runtime_error("Not enough operands")
-            Stack.push(a);
+            if (Stack.counter < 2) {
+                delete a;
+                throw std::runtime_error("Not enough operands.");
+            }
+            else {
+                a -> right = Stack.pop();
+                a -> left = Stack.pop();
+                Stack.push(a);
+            }
         }
         else if (temp == "-") {
             Subtraction* a = new Subtraction;
-            a -> right = Stack.pop();
-            a -> left = Stack.pop();
-            Stack.push(a);
+            if (Stack.counter < 2) {
+                delete a;
+                throw std::runtime_error("Not enough operands.");
+            }
+            else {
+                a -> right = Stack.pop();
+                a -> left = Stack.pop();
+                Stack.push(a);
+            }
         }
         else if (temp == "*") {
             Multiplication* a = new Multiplication;
-            a -> right = Stack.pop();
-            a -> left = Stack.pop();
-            Stack.push(a);
+            if (Stack.counter < 2) {
+                delete a;
+                throw std::runtime_error("Not enough operands.");
+            }
+            else {
+                a -> right = Stack.pop();
+                a -> left = Stack.pop();
+                Stack.push(a);
+            }
         }
         else if (temp == "/") {
             Division* a = new Division;
-            a -> right = Stack.pop();
-            a -> left = Stack.pop();
-            Stack.push(a);
+            if (Stack.counter < 2) {
+                delete a;
+                throw std::runtime_error("Not enough operands.");
+            }
+            else {
+                a -> right = Stack.pop();
+                a -> left = Stack.pop();
+                Stack.push(a);
+            }
         }
         else if (temp == "%") {
             Modulo* a = new Modulo;
-            a -> right = Stack.pop();
-            a -> left = Stack.pop();
-            Stack.push(a);
+            if (Stack.counter < 2) {
+                delete a;
+                throw std::runtime_error("Not enough operands.");
+            }
+            else {
+                a -> right = Stack.pop();
+                a -> left = Stack.pop();
+                Stack.push(a);
+            }
         }
         else if (temp == "~") {
             Negate* a = new Negate;
-            a -> reverseAlignment = Stack.pop();
-            Stack.push(a);
+            if (Stack.counter < 1) {
+                delete a;
+                throw std::runtime_error("Not enough operands.");
+            }
+            else {
+                a -> reverseAlignment = Stack.pop();
+                Stack.push(a);
+            }
         }
         else {
             throw std::runtime_error("Invalid token: " + temp);
