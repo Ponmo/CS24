@@ -154,7 +154,7 @@ Modulo::~Modulo () {
     delete right;
 }
 std::string Modulo::prefix()  const {
-    std::string curr = "+ " + left -> prefix() + right -> prefix();
+    std::string curr = "% " + left -> prefix() + right -> prefix();
     if(!top) {
         return curr;
     }
