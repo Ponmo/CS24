@@ -158,7 +158,7 @@ AST* AST::parse(const std::string& expression) {
         }
         throw std::runtime_error("Too many operands.");
     }
-
+    
 
     //set top true for the top node
 
@@ -167,5 +167,5 @@ AST* AST::parse(const std::string& expression) {
     // - If there aren't enough operands for an operator, say `Not enough operands.`
     // - If you encounter an invalid token, say `Invalid token: XXX`, where `XXX` is the invalid token.
 
-    return Stack.pop();
+    return Stack.pop();;
 }

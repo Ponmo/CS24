@@ -10,6 +10,7 @@ class Double: public AST {
     public:
         double number;
         bool top = false;
+        bool bottom = false;
 
     public:
         ~Double() {}
@@ -23,6 +24,7 @@ class Addition: public AST { //only left and right for operands
         AST* left;
         AST* right;
         bool top = false;
+        bool bottom = false;
 
     public:
         ~Addition();
@@ -36,6 +38,7 @@ class Subtraction: public AST {
         AST* left;
         AST* right;
         bool top = false;
+        bool bottom = false;
 
     public:
         ~Subtraction();
@@ -49,6 +52,7 @@ class Multiplication: public AST {
         AST* left;
         AST* right;
         bool top = false;
+        bool bottom = false;
 
     public:
         ~Multiplication();
@@ -62,6 +66,7 @@ class Division: public AST {
         AST* left;
         AST* right;
         bool top = false;
+        bool bottom = false;
 
     public:
         ~Division();
@@ -75,6 +80,7 @@ class Modulo: public AST {
         AST* left;
         AST* right;
         bool top = false;
+        bool bottom = false;
 
     public:
         ~Modulo();
@@ -87,6 +93,7 @@ class Negate: public AST {
     public:
         AST* reverseAlignment;
         bool top = false;
+        bool bottom = false;
 
     public:
         ~Negate();
