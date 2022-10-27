@@ -11,13 +11,14 @@
 //   return stream.str();
 
 std::string global = "M";
+bool printStart = true;
 
 std::string Double::prefix() const {
     return global;
 }
 
 std::string Double::postfix() const {
-    return global;
+    return std::to_string(number); 
 }
 
 double Double::value() const {
@@ -33,7 +34,11 @@ std::string Addition::prefix()  const {
     return global;
 }
 std::string Addition::postfix() const {
-    return global;
+    if (printStart) {
+        printStart = false;
+        return left -> postfix() + " " + right -> postfix() + " +";
+    }
+    return left -> postfix() + " " + right -> postfix() + " + ";
 }
 double Addition::value() const {
     return left->value() + right->value();
@@ -48,7 +53,11 @@ std::string Subtraction::prefix()  const {
     return global;
 }
 std::string Subtraction::postfix() const {
-    return global;
+    if (printStart) {
+        printStart = false;
+        return left -> postfix() + " " + right -> postfix() + " -";
+    }
+    return left -> postfix() + " " + right -> postfix() + " - ";
 }
 double Subtraction::value() const {
     return left->value() - right->value();
@@ -62,7 +71,11 @@ std::string Multiplication::prefix()  const {
     return global;
 }
 std::string Multiplication::postfix() const {
-    return global;
+    if (printStart) {
+        printStart = false;
+        return left -> postfix() + " " + right -> postfix() + " *";
+    }
+    return left -> postfix() + " " + right -> postfix() + " * ";
 }
 double Multiplication::value() const {
     return left->value() * right->value();
@@ -75,7 +88,11 @@ std::string Division::prefix()  const {
     return global;
 }
 std::string Division::postfix() const {
-    return global;
+    if (printStart) {
+        printStart = false;
+        return left -> postfix() + " " + right -> postfix() + " /";
+    }
+    return left -> postfix() + " " + right -> postfix() + " / ";
 }
 double Division::value() const {
     if(right->value() != 0) {
@@ -92,7 +109,12 @@ std::string Modulo::prefix()  const {
     return global;
 }
 std::string Modulo::postfix() const {
-    return global;
+    return left -> postfix() + " " + right -> postfix() + " % ";
+    if (printStart) {
+        printStart = false;
+        return left -> postfix() + " " + right -> postfix() + " %";
+    }
+    return left -> postfix() + " " + right -> postfix() + " % ";
 }
 double Modulo::value() const {
     if(right->value() != 0) {
@@ -107,7 +129,12 @@ std::string Negate::prefix()  const {
     return global;
 }
 std::string Negate::postfix() const {
-    return global;
+    return reverseAlignment -> postfix() + " ~ ";
+    if (printStart) {
+        printStart = false;
+        return reverseAlignment -> postfix() + " ~";
+    }
+    return reverseAlignment -> postfix() + " ~ ";
 }
 double Negate::value() const {
     return -reverseAlignment->value();
