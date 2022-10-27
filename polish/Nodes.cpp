@@ -21,7 +21,11 @@ std::string Double::postfix() const {
     std::string str = std::to_string (number);
     str.erase ( str.find_last_not_of('0') + 1, std::string::npos );
     str.erase ( str.find_last_not_of('.') + 1, std::string::npos ); 
-    return str + " "; 
+    if(printStart) {
+        printStart = false;
+        return str + " "; 
+    }
+    return str;
 }
 
 double Double::value() const {
