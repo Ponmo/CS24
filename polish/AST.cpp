@@ -97,7 +97,9 @@ AST* AST::parse(const std::string& expression) {
         }
         else if (temp == "~") {
             if (Stack.counter < 1) {
-                delete Stack.pop();
+                while(Stack.counter) {
+                    delete Stack.pop();
+                }
                 throw std::runtime_error("Not enough operands.");
             }
             else {
@@ -107,7 +109,7 @@ AST* AST::parse(const std::string& expression) {
             }
         }
         else {
-            while(Stack.counter) {
+            while(Stack.counter) { s
                 delete Stack.pop();
             }
             throw std::runtime_error("Invalid token: " + temp);
