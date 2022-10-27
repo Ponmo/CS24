@@ -1,6 +1,7 @@
 #include "Nodes.h"
 #include <cmath>
 #include <string>
+#include <stdexcept>
 // Implement your AST subclasses' member functions here.
 
 
@@ -80,7 +81,7 @@ double Division::value() const {
     if(right->value() != 0) {
         return left->value() / right->value();
     }
-    throw runtime_error("Division by zero.");
+    throw std::runtime_error("Division by zero.");
 }
 
 Modulo::~Modulo () {
@@ -97,7 +98,7 @@ double Modulo::value() const {
     if(right->value() != 0) {
         return std::fmod(left->value(), right->value());
     }
-    throw runtime_error("Division by zero.");
+    throw std::runtime_error("Division by zero.");
 }
 Negate::~Negate () {
     delete reverseAlignment;
