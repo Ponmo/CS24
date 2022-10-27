@@ -109,7 +109,7 @@ AST* AST::parse(const std::string& expression) {
             }
         }
         else {
-            while(Stack.counter) { s
+            while(Stack.counter) {
                 delete Stack.pop();
             }
             throw std::runtime_error("Invalid token: " + temp);
