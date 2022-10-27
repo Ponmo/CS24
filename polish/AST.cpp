@@ -15,7 +15,7 @@ AST* AST::parse(const std::string& expression) {
     Stack Stack;
     double num;
     while (expr >> temp) { //Loop through each token in expression
-        if (!(sscanf(temp.c_str(), "%lf", &num) != 1)) { // It's a double, so just insert stack
+        if (!(sscanf(temp.c_str(), "%lf", &num) != 1) && strtod(temp.c_str(), nullptr)) { // It's a double, so just insert stack
             Double* a = new Double;
             a->number = num;
             Stack.push(a);
