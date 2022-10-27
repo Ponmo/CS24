@@ -66,7 +66,7 @@ std::string Multiplication::postfix() const {
 double Multiplication::value() const {
     return left->value() * right->value();
 }
-Division::~Divison () {
+Division::~Division () {
     delete left;
     delete right;
 }
