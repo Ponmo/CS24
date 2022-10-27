@@ -2,6 +2,9 @@
 #include <cmath>
 #include <string>
 #include <stdexcept>
+#include <stdlib.h>
+
+
 // Implement your AST subclasses' member functions here.
 
 
@@ -11,21 +14,22 @@
 //   return stream.str();
 
 std::string global = "M";
-bool printStart = true;
 
 std::string Double::prefix() const {
-    return global;
+    std::string str = std::to_string (number);
+    str.erase ( str.find_last_not_of('0') + 1, std::string::npos );
+    str.erase ( str.find_last_not_of('.') + 1, std::string::npos ); 
+    return str + " ";
 }
 
 std::string Double::postfix() const {
     std::string str = std::to_string (number);
     str.erase ( str.find_last_not_of('0') + 1, std::string::npos );
     str.erase ( str.find_last_not_of('.') + 1, std::string::npos ); 
-    if(printStart) {
-        printStart = false;
-        return str;
+    if(!top) {
+        return str + " ";
     }
-    return str + " ";
+    return str;
 }
 
 double Double::value() const {
@@ -36,16 +40,14 @@ Addition::~Addition () {
     delete left;
     delete right;
 }
-
 std::string Addition::prefix()  const {
-    return global;
+    return "+ " + left -> prefix() + right -> prefix() + " ";
 }
 std::string Addition::postfix() const {
-    if (printStart) {
-        printStart = false;
-        return left -> postfix() + right -> postfix() + "+";
+    if(!top) {
+        return left -> postfix() + right -> postfix() + "+ ";
     }
-    return left -> postfix() + right -> postfix() + "+ ";
+    return left -> postfix() + right -> postfix() + "+";
 }
 double Addition::value() const {
     return left->value() + right->value();
@@ -55,34 +57,30 @@ Subtraction::~Subtraction () {
     delete left;
     delete right;
 }
-
 std::string Subtraction::prefix()  const {
-    return global;
+    return "- " + left -> prefix() + right -> prefix() + " ";
 }
 std::string Subtraction::postfix() const {
-    if (printStart) {
-        printStart = false;
-        return left -> postfix() + right -> postfix() + "-";
+    if(!top) {
+        return left -> postfix() + right -> postfix() + "- ";
     }
-    return left -> postfix() + right -> postfix() + "- ";
+    return left -> postfix() + right -> postfix() + "-";
 }
 double Subtraction::value() const {
     return left->value() - right->value();
 }
-
 Multiplication::~Multiplication () {
     delete left;
     delete right;
 }
 std::string Multiplication::prefix()  const {
-    return global;
+    return "* " + left -> prefix() + right -> prefix() + " ";
 }
 std::string Multiplication::postfix() const {
-    if (printStart) {
-        printStart = false;
-        return left -> postfix() + right -> postfix() + "*";
+    if(!top) {
+        return left -> postfix() + right -> postfix() + "* ";
     }
-    return left -> postfix() + right -> postfix() + "* ";
+    return left -> postfix() + right -> postfix() + "*";
 }
 double Multiplication::value() const {
     return left->value() * right->value();
@@ -92,14 +90,13 @@ Division::~Division () {
     delete right;
 }
 std::string Division::prefix()  const {
-    return global;
+    return "/ " + left -> prefix() + right -> prefix() + " ";
 }
 std::string Division::postfix() const {
-    if (printStart) {
-        printStart = false;
-        return left -> postfix() + right -> postfix() + "/";
+    if(!top) {
+        return left -> postfix() + right -> postfix() + "/ ";
     }
-    return left -> postfix() + right -> postfix() + "/ ";
+    return left -> postfix() + right -> postfix() + "/";
 }
 double Division::value() const {
     if(right->value() != 0) {
@@ -107,20 +104,18 @@ double Division::value() const {
     }
     throw std::runtime_error("Division by zero.");
 }
-
 Modulo::~Modulo () {
     delete left;
     delete right;
 }
 std::string Modulo::prefix()  const {
-    return global;
+    return "% " + left -> prefix() + right -> prefix() + " ";
 }
 std::string Modulo::postfix() const {
-    if (printStart) {
-        printStart = false;
-        return left -> postfix() + right -> postfix() + "%";
+    if(!top) {
+        return left -> postfix() + right -> postfix() + "% ";
     }
-    return left -> postfix() + right -> postfix() + "% ";
+    return left -> postfix() + right -> postfix() + "%";
 }
 double Modulo::value() const {
     if(right->value() != 0) {
@@ -132,14 +127,13 @@ Negate::~Negate () {
     delete reverseAlignment;
 }
 std::string Negate::prefix()  const {
-    return global;
+    return "~ " + reverseAlignment -> prefix() + " ";
 }
 std::string Negate::postfix() const {
-    if (printStart) {
-        printStart = false;
-        return reverseAlignment -> postfix() + "~";
+    if(!top) {
+        return reverseAlignment -> postfix() + "~ ";
     }
-    return reverseAlignment -> postfix() + "~ ";
+    return reverseAlignment -> postfix() + "~";
 }
 double Negate::value() const {
     return -reverseAlignment->value();

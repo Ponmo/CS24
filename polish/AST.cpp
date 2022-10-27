@@ -14,8 +14,17 @@
 AST* AST::parse(const std::string& expression) { 
     std::istringstream expr(expression);
     std::string temp; 
+    size_t count = 0;
     Stack Stack;
+
+    std::string john = expression;
+    std::istringstream expr2(john);
+    size_t count2 = 0;
+    std::string line;
+    while (std::getline(expr2, line, ' ' ) ) ++count2;
+
     while (expr >> temp) { //Loop through each token in expression
+        count++;
         auto result = double();
         auto i = std::istringstream(temp);
         i >> result;   
@@ -24,6 +33,9 @@ AST* AST::parse(const std::string& expression) {
             Double* a = new Double;
             a->number = result;
             Stack.push(a);
+            if(count == count2) {
+                a->top = true;
+            }
         }
         else if (temp == "+") { //You call the function to add the previous two numbers, and then add that to the stack.
             if (Stack.counter < 2) {
@@ -37,6 +49,9 @@ AST* AST::parse(const std::string& expression) {
                 a -> right = Stack.pop();
                 a -> left = Stack.pop();
                 Stack.push(a);
+                if(count == count2) {
+                    a->top = true;
+                }
             }
         }
         else if (temp == "-") {
@@ -51,6 +66,9 @@ AST* AST::parse(const std::string& expression) {
                 a -> right = Stack.pop();
                 a -> left = Stack.pop();
                 Stack.push(a);
+                if(count == count2) {
+                    a->top = true;
+                }
             }
         }
         else if (temp == "*") {
@@ -65,6 +83,9 @@ AST* AST::parse(const std::string& expression) {
                 a -> right = Stack.pop();
                 a -> left = Stack.pop();
                 Stack.push(a);
+                if(count == count2) {
+                    a->top = true;
+                }
             }
         }
         else if (temp == "/") {
@@ -79,6 +100,9 @@ AST* AST::parse(const std::string& expression) {
                 a -> right = Stack.pop();
                 a -> left = Stack.pop();
                 Stack.push(a);
+                if(count == count2) {
+                    a->top = true;
+                }
             }
         }
         else if (temp == "%") {
@@ -93,6 +117,9 @@ AST* AST::parse(const std::string& expression) {
                 a -> right = Stack.pop();
                 a -> left = Stack.pop();
                 Stack.push(a);
+                if(count == count2) {
+                    a->top = true;
+                }
             }
         }
         else if (temp == "~") {
@@ -106,6 +133,9 @@ AST* AST::parse(const std::string& expression) {
                 Negate* a = new Negate;
                 a -> reverseAlignment = Stack.pop();
                 Stack.push(a);
+                if(count == count2) {
+                    a->top = true;
+                }
             }
         }
         else {
@@ -125,9 +155,13 @@ AST* AST::parse(const std::string& expression) {
         throw std::runtime_error("Too many operands.");
     }
 
+
+    //set top true for the top node
+
     // - If there is nothing on the stack at the end of parsing, say `No input.`
     // - If there are multiple nodes on the stack at the end of parsing, say `Too many operands.`
     // - If there aren't enough operands for an operator, say `Not enough operands.`
     // - If you encounter an invalid token, say `Invalid token: XXX`, where `XXX` is the invalid token.
+
     return Stack.pop();
 }
