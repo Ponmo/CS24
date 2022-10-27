@@ -20,8 +20,12 @@ AST* AST::parse(const std::string& expression) {
     std::string john = expression;
     std::istringstream expr2(john);
     size_t count2 = 0;
-    std::string line;
-    while (std::getline(expr2, line, ' ' ) ) ++count2;
+    std::string temp2;
+    // std::string line;
+    // while (std::getline(expr2, line, ' ' ) ) ++count2;
+    while (expr2 >> temp2) {
+        count2++;
+    }
 
     while (expr >> temp) { //Loop through each token in expression
         count++;
