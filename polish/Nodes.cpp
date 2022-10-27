@@ -77,7 +77,10 @@ std::string Division::postfix() const {
     return global;
 }
 double Division::value() const {
-    return left->value() / right->value();
+    if(right->value() != 0) {
+        return left->value() / right->value();
+    }
+    throw std::runtime_error("Division by zero.")
 }
 
 Modulo::~Modulo () {
@@ -91,7 +94,10 @@ std::string Modulo::postfix() const {
     return global;
 }
 double Modulo::value() const {
-    return std::fmod(left->value(), right->value());
+    if(right->value() != 0) {
+        return std::fmod(left->value(), right->value());
+    }
+    throw std::runtime_error("Division by zero.")
 }
 Negate::~Negate () {
     delete reverseAlignment;
