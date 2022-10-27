@@ -14,14 +14,14 @@
 
 std::string global = "M";
 
-std::string reverse(std::string str)
-{
-    std::string reversedString;
-    for (int i = str.length() - 1; i >= 0; i--) {
-        reversedString.push_back(str[i]);
-    }
-    return reversedString;
-}
+// std::string reverse(std::string str)
+// {
+//     std::string reversedString;
+//     for (int i = str.length() - 1; i >= 0; i--) {
+//         reversedString.push_back(str[i]);
+//     }
+//     return reversedString;
+// }
  
 
 
@@ -29,9 +29,9 @@ std::string Double::prefix() const {
     std::string str = std::to_string (number);
     str.erase ( str.find_last_not_of('0') + 1, std::string::npos );
     str.erase ( str.find_last_not_of('.') + 1, std::string::npos ); 
-    // if(!top) {
-    //     return str + " ";
-    // }
+    if(!top) {
+        return str + " ";
+    }
     return str;
 }
 
@@ -54,11 +54,11 @@ Addition::~Addition () {
     delete right;
 }
 std::string Addition::prefix()  const {
-    // if(!top) {
-    //     return "+" + left -> prefix() + right -> prefix() + " ";
-    // }
-    // return "+ " + left -> prefix() + right -> prefix();
-    return reverse(left -> postfix() + right -> postfix() + "+");
+    if(!top) {
+        return "+" + left -> prefix() + right -> prefix() + " ";
+    }
+    return "+ " + left -> prefix() + right -> prefix();
+    // return left -> postfix() + right -> postfix() + "+";
 }
 std::string Addition::postfix() const {
     if(!top) {
@@ -75,10 +75,11 @@ Subtraction::~Subtraction () {
     delete right;
 }
 std::string Subtraction::prefix()  const {
-    // if(!top) {
-    //     return "-" + left -> postfix() + right -> postfix() + " ";
-    // }
-    return reverse(left -> postfix() + right -> postfix() + "-");
+    if(!top) {
+        return "-" + left -> prefix() + right -> prefix() + " ";
+    }
+    return "- " + left -> prefix() + right -> prefix();
+    // return reverse(left -> postfix() + right -> postfix() + "-");
 }
 std::string Subtraction::postfix() const {
     if(!top) {
@@ -94,11 +95,11 @@ Multiplication::~Multiplication () {
     delete right;
 }
 std::string Multiplication::prefix()  const {
-    // if(!top) {
-    //     return "*" + left -> prefix() + right -> prefix() + " ";
-    // }
-    // return "* " + left -> prefix() + right -> prefix();
-    return reverse(left -> postfix() + right -> postfix() + "*");
+    if(!top) {
+        return "*" + left -> prefix() + right -> prefix() + " ";
+    }
+    return "* " + left -> prefix() + right -> prefix();
+    // return reverse(left -> postfix() + right -> postfix() + "*");
 }
 std::string Multiplication::postfix() const {
     if(!top) {
@@ -114,10 +115,11 @@ Division::~Division () {
     delete right;
 }
 std::string Division::prefix()  const {
-    // if(!top) {
-    //     return "/" + left -> prefix() + right -> prefix() + " ";
-    // }
-    return reverse(left -> postfix() + right -> postfix() + "/");
+    if(!top) {
+        return "/" + left -> prefix() + right -> prefix() + " ";
+    }
+    return "/ " + left -> prefix() + right -> prefix();
+    // return reverse(left -> postfix() + right -> postfix() + "/");
 }
 std::string Division::postfix() const {
     if(!top) {
@@ -136,10 +138,11 @@ Modulo::~Modulo () {
     delete right;
 }
 std::string Modulo::prefix()  const {
-    // if(!top) {
-    //     return "%" + left -> prefix() + right -> prefix() + " ";
-    // }
-    return reverse(left -> postfix() + right -> postfix() + "%");
+    if(!top) {
+        return "%" + left -> prefix() + right -> prefix() + " ";
+    }
+    return "% " + left -> prefix() + right -> prefix();
+    // return reverse(left -> postfix() + right -> postfix() + "%");
 }
 std::string Modulo::postfix() const {
     if(!top) {
@@ -157,10 +160,11 @@ Negate::~Negate () {
     delete reverseAlignment;
 }
 std::string Negate::prefix()  const {
-    // if (!top) {
-    //     return "~" + reverseAlignment -> prefix();
-    // }
-    return reverse(reverseAlignment -> postfix() + "~");
+    if(!top) {
+        return "/" + reverseAlignment->prefix() + " ";
+    }
+    return "/ " + reverseAlignment->prefix();
+    // return reverse(reverseAlignment -> postfix() + "~");
 }
 std::string Negate::postfix() const {
     if(!top) {
