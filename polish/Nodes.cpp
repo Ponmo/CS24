@@ -20,7 +20,7 @@ std::string Double::prefix() const {
     str.erase ( str.find_last_not_of('0') + 1, std::string::npos );
     str.erase ( str.find_last_not_of('.') + 1, std::string::npos ); 
     if(!top) {
-        return " " + str;
+        return str + " ";
     }
     return str;
 }
@@ -45,7 +45,7 @@ Addition::~Addition () {
 }
 std::string Addition::prefix()  const {
     if(!top) {
-        return "+ " + left -> prefix() + right -> prefix();
+        return "+" + left -> prefix() + right -> prefix() + " ";
     }
     return "+ " + left -> prefix() + right -> prefix();
 }
@@ -65,7 +65,7 @@ Subtraction::~Subtraction () {
 }
 std::string Subtraction::prefix()  const {
     if(!top) {
-        return "- " + left -> prefix() + right -> prefix();
+        return "-" + left -> prefix() + right -> prefix() + " ";
     }
     return "- " + left -> prefix() + right -> prefix();
 }
@@ -84,7 +84,7 @@ Multiplication::~Multiplication () {
 }
 std::string Multiplication::prefix()  const {
     if(!top) {
-        return "* " + left -> prefix() + right -> prefix();
+        return "*" + left -> prefix() + right -> prefix() + " ";
     }
     return "* " + left -> prefix() + right -> prefix();
 }
@@ -103,7 +103,7 @@ Division::~Division () {
 }
 std::string Division::prefix()  const {
     if(!top) {
-        return "/ " + left -> prefix() + right -> prefix();
+        return "/" + left -> prefix() + right -> prefix() + " ";
     }
     return "/ " + left -> prefix() + right -> prefix();
 }
@@ -125,7 +125,7 @@ Modulo::~Modulo () {
 }
 std::string Modulo::prefix()  const {
     if(!top) {
-        return "% " + left -> prefix() + right -> prefix();
+        return "%" + left -> prefix() + right -> prefix() + " ";
     }
     return "% " + left -> prefix() + right -> prefix();
 }
@@ -146,7 +146,7 @@ Negate::~Negate () {
 }
 std::string Negate::prefix()  const {
     if (!top) {
-        return "~ " + reverseAlignment -> prefix();
+        return "~" + reverseAlignment -> prefix();
     }
     return "~ " + reverseAlignment -> prefix();
 }
