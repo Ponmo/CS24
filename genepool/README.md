@@ -1,5 +1,8 @@
 # Gene Pool
 
+So first, it takes in a TSV file, then it creates a graph map based on that data. Then you can call a node's functions to find its relative and return a query.
+
+
 In this assignment,  you'll build a database program that stores a collection of
 people and  their biological relatives.  You can then search this database based
 on the relationships between the people it contains.

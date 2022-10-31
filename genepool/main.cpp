@@ -26,14 +26,14 @@ struct Compare {
 
 
 int main(int argc, char** argv) {
-  if(argc != 2) {
+  if(argc != 2) { //If it does not have two arguments, repeat (needs a dataset)
     std::cerr << "USAGE: ./genepool [datafile.tsv]\n";
     std::exit(1);
   }
 
   GenePool* pool = nullptr;
 
-  try {
+  try { 
     // Read the database file:
     std::ifstream stream(argv[1]);
     pool = new GenePool(stream);
@@ -43,6 +43,7 @@ int main(int argc, char** argv) {
     std::exit(1);
   }
 
+  // This then tells the user to input a query that they want to use to search the database.
   std::string line;
   std::cout << "> ";
   while(std::getline(std::cin, line)) {
