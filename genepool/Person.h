@@ -5,6 +5,7 @@
 
 #include <set>
 #include <string>
+#include <vector>
 
 // This is the Person class you need to implement.
 // It has many member functions that perform relationship queries.
@@ -18,6 +19,7 @@ class Person {
       Gender genderV;
       Person* motherV;
       Person* fatherV;
+      std::vector<Person*> children;
     // std::string children[];
 
     // Helper Functions

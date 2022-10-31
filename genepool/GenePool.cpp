@@ -13,48 +13,85 @@ Person* GenePool::find(const std::string& name) const {
 
 //This function takes in a tsv file in the form of a istream and is suppose to store it. Like parse in previous lab.
 GenePool::GenePool(std::istream& stream) {
-    std::cout << "Reached Here";
 
     // Loop through each line in the file.
     std::string line;
     while (std::getline(stream, line))
     {
+        // std::cout << line;
+        // std::cout << "\n";
+        // continue;
         // If the line starts with # or is empty, then go to next line.
         if(line == "" || line[0] == '#') {
-            break;
+            continue;
         }
         Person* newNode = new Person;
         //Loop through each token seperated by a tab character.
         std::stringstream nLine(line);
-        std::string currentToken;
-        std::string tempName;
+        // std::string currentToken;
+        // std::string tempName;
         size_t count = 0;
-        while(std::getline(nLine, currentToken, '\t')) {
-            if (count == 0) { //set nameV
-                newNode->nameV = currentToken;
-            }
-            else if (count == 2) { //set mother name... needs to look up mother in the map and set the pointer to them. feck?
-                if(currentToken == "???") {
-                    newNode->motherV = nullptr;
-                }
-                else {
-                    newNode->motherV = GeneMap.find(currentToken)->second;
-                }
-            }
-            else if (currentToken == "male") {
-                // Gender ge;
-                // newNode->genderV = Gender MALE;
-            }
-            else if(currentToken == "female") {
-                // newNode->genderV = FEMALE;
-            }
-            else { //set father name
+        //should be a way other than getLine to 
 
-            }
-            count++;
+        std::string theirName, theirGender, theirMother, theirFather;
+        if (!(nLine >> theirName >> theirGender >> theirMother >> theirFather)) { break; } // error
+        newNode->nameV = theirName; //Set Name
+        if(theirFather == "???") { //Set Father Pointer, and set Father's children pointer to this node
+            newNode->fatherV = nullptr;
         }
-        GeneMap.insert({tempName, newNode});
+        else {
+            newNode->fatherV = GeneMap.find(theirFather)->second;
+            newNode->fatherV->children.push_back(newNode);
+        }
+        if(theirMother == "???") { //Set Mother Pointer, and set Mother's children pointer to this node
+            newNode->motherV = nullptr;
+        }
+        else {
+            newNode->motherV = GeneMap.find(theirMother)->second;
+            newNode->motherV->children.push_back(newNode);
+        }
+        if(theirGender == "male") { //set gender
+            newNode->genderV = Gender::MALE;
+        }
+        else {
+            newNode->genderV = Gender::FEMALE;
+        }
+        GeneMap.insert({theirName, newNode});
 
+
+        // while(std::getline(nLine, currentToken, '\t')) {
+            // std::cout << currentToken;
+            // std::cout << "\n";
+            // continue;
+        //     if (count == 0) { //set nameV
+        //         newNode->nameV = currentToken;
+        //     }
+        //     else if (count == 2) { //set mother name... needs to look up mother in the map and set the pointer to them. feck?
+        //         if(currentToken == "???") {
+        //             newNode->motherV = nullptr;
+        //         }
+        //         else {
+        //             newNode->motherV = GeneMap.find(currentToken)->second;
+        //         }
+        //     }
+        //     else if (currentToken == "male") {
+        //         // Gender ge;
+        //         // newNode->genderV = Gender MALE;
+        //     }
+        //     else if(currentToken == "female") {
+        //         // newNode->genderV = FEMALE;
+        //     }
+        //     else { //set father name
+        //         if(currentToken == "???") {
+        //             newNode->fatherV = nullptr;
+        //         }
+        //         else {
+        //             newNode->fatherV = GeneMap.find(currentToken)->second;
+        //         }
+        //     }
+        //     count++;
+        // }
+        // GeneMap.insert({tempName, newNode});
     }
 };
 
