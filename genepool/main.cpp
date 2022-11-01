@@ -37,6 +37,7 @@ int main(int argc, char** argv) {
     // Read the database file:
     std::ifstream stream(argv[1]);
     pool = new GenePool(stream);
+
   }
   catch(const std::exception& e) {
     std::cerr << "Error reading database: " << e.what() << "\n";
@@ -50,7 +51,7 @@ int main(int argc, char** argv) {
     try {
       // Parse and run the query:
       Query query(line);
-      std::set<Person*> result = query.run(*pool);
+      std::set<Person*> result = query.run(*pool); //Calls our person functions in the Query.cpp
 
       // Sort the people by name for consistent output:
       std::vector<Person*> people(result.begin(), result.end());

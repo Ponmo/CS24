@@ -5,12 +5,11 @@ Person* a;
 std::set<Person*> ba;
 std::string apple = "apple";
 
-
-//Constructor?
+//Constructor? Not needed.
 Person::Person () {
 
 };
-//Desconstructor?
+//Desconstructor? Not needed.
 Person::~Person() {
 
 };
