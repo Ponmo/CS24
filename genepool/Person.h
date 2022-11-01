@@ -19,7 +19,7 @@ class Person {
       Gender genderV;
       Person* motherV;
       Person* fatherV;
-      std::vector<Person*> children;
+      std::vector<Person*> theChildren;
     // std::string children[];
 
     // Helper Functions
