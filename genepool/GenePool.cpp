@@ -37,14 +37,14 @@ GenePool::GenePool(std::istream& stream) {
         }
         else {
             newNode->fatherV = GeneMap.find(theirFather)->second;
-            newNode->fatherV->children.push_back(newNode);
+            newNode->fatherV->theChildren.push_back(newNode);
         }
         if(theirMother == "???") { //Set Mother Pointer, and set Mother's children pointer to this node
             newNode->motherV = nullptr;
         }
         else {
             newNode->motherV = GeneMap.find(theirMother)->second;
-            newNode->motherV->children.push_back(newNode);
+            newNode->motherV->theChildren.push_back(newNode);
         }
         if(theirGender == "male") { //set gender
             newNode->genderV = Gender::MALE;
