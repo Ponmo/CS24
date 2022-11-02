@@ -22,10 +22,16 @@ Gender Person::gender() const {
     return genderV;
 }
 Person* Person::mother() {
-    return motherV;
+    if(motherV) {
+        return motherV;
+    }
+    return nullptr;
 }
 Person* Person::father() {
-    return fatherV;
+    if(fatherV) {
+        return fatherV;
+    }
+    return nullptr;
 }
 
 
@@ -44,12 +50,11 @@ std::set<Person*> Person::brothers(PMod pmod, SMod smod) {
 }
 std::set<Person*> Person::children() { //Return a set of children
     std::set<Person*> result;
-    if(!theChildren.empty()) {
+    // if(!theChildren.empty()) {
         for(Person* i : theChildren) {
             result.insert(i);
         }
-    }
-
+    // }
     return result;
 }
 std::set<Person*> Person::cousins(PMod pmodY, SMod smodY) {
@@ -57,8 +62,15 @@ ba.insert(a);
     return ba;
 }
 std::set<Person*> Person::daughters() {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result;
+    // if(!theChildren.empty()) {
+        for(Person* i : theChildren) {
+            if (i->genderV == Gender::FEMALE) {
+                result.insert(i);
+            }
+        }
+    // }
+    return result;
 }
 std::set<Person*> Person::descendants() {
 ba.insert(a);
@@ -97,7 +109,13 @@ ba.insert(a);
     return ba;
 }
 std::set<Person*> Person::parents(PMod pmod) {
-ba.insert(a);
+    if (pmod == PMod::MATERNAL) {
+        return mother();
+    }
+    else if (pmod == PMod::PATERNAL) {
+        return father();
+    }
+    ba.insert(a);
     return ba;
 }
 std::set<Person*> Person::siblings(PMod pmod, SMod smod) {
