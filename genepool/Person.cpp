@@ -168,13 +168,16 @@ std::set<Person*> Person::grandmothers(PMod pmod) {
 std::set<Person*> Person::grandparents(PMod pmod) { // Maternal Grandparents Return Your Mothers Parents. Paternal Grandparents return your father's parent. All should return both.
     std::set<Person*> result;
     if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
-        std::set<Person*> resultOne = grandmothers(PMod::ANY);
+        std::set<Person*> resultOne = grandmothers(pmod);
         result.insert(resultOne.begin(), resultOne.end());
-    }
-    if(pmod == PMod::PATERNAL || pmod == PMod::ANY) {
-        std::set<Person*> resultOne = grandfathers(PMod::ANY);
+        resultOne = grandfathers(pmod);
         result.insert(resultOne.begin(), resultOne.end());
+        return result;
     }
+    std::set<Person*> resultOne = grandfathers(pmod);
+    result.insert(resultOne.begin(), resultOne.end());
+    resultOne = grandmothers(pmod);
+    result.insert(resultOne.begin(), resultOne.end());
     return result;
 }
 std::set<Person*> Person::grandsons() {
