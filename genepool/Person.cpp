@@ -63,13 +63,11 @@ ba.insert(a);
 }
 std::set<Person*> Person::daughters() {
     std::set<Person*> result;
-    // if(!theChildren.empty()) {
-        for(Person* i : theChildren) {
-            if (i->genderV == Gender::FEMALE) {
-                result.insert(i);
-            }
+    for(Person* i : theChildren) {
+        if (i->genderV == Gender::FEMALE) {
+            result.insert(i);
         }
-    // }
+    }
     return result;
 }
 std::set<Person*> Person::descendants() {
@@ -127,8 +125,13 @@ ba.insert(a);
     return ba;
 }
 std::set<Person*> Person::sons() {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result;
+    for(Person* i : theChildren) {
+        if (i->genderV == Gender::MALE) {
+            result.insert(i);
+        }
+    }
+    return result;
 }
 std::set<Person*> Person::uncles(PMod pmod, SMod smod) {
 ba.insert(a);
