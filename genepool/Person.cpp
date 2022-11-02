@@ -13,7 +13,6 @@ Person::Person () {
 Person::~Person() {
 
 };
-
 // basic get functions because class variables are private.
 const std::string& Person::name() const {
     return nameV;
@@ -37,8 +36,21 @@ Person* Person::father() {
 
 //Relationship Functions:
 std::set<Person*> Person::ancestors(PMod pmod) {
-    ba.insert(a);
-    return ba;
+    std::set<Person*> result;
+    if(pmod == PMod::PATERNAL) {
+        std::set<Person*> resultOne = fatherV->ancestors(PMod::ANY);
+        result.insert(resultOne.begin(), resultOne.end());
+    }
+    if(pmod == PMod::MATERNAL) {
+        std::set<Person*> resultOne = motherV->ancestors(PMod::ANY);
+        result.insert(resultOne.begin(), resultOne.end());
+    }
+    if(pmod == PMod::ANY) {
+        std::set<Person*> resultOne = this->ancestors(PMod::PATERNAL);
+        this->ancestors(PMod::MATERNAL);
+
+    }
+    return result;
 }
 std::set<Person*> Person::aunts(PMod pmod, SMod smod) {
     ba.insert(a);
@@ -93,16 +105,36 @@ std::set<Person*> Person::granddaughters() {
     return result;
 }
 std::set<Person*> Person::grandfathers(PMod pmod) {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result;
+    if(pmod == PMod::MATERNAL || pmod== PMod::ANY) {
+        if(Person* i = motherV->motherV) {
+            result.insert(i);
+        }
+        if(Person* i = motherV->fatherV) {
+            result.insert(motherV->father());
+        }
+    }
+    if(pmod == PMod::PATERNAL || pmod== PMod::ANY) {
+        if(Person* i = fatherV->motherV) {
+            result.insert(i);
+        }
+        if(Person* i = fatherV->fatherV) {
+            result.insert(motherV->father());
+        }
+    }
+    return result;
 }
 std::set<Person*> Person::grandmothers(PMod pmod) {
 ba.insert(a);
     return ba;
 }
 std::set<Person*> Person::grandparents(PMod pmod) {
-ba.insert(a);
-    return ba;
+    if(pmod == PMod::MATERNAL) {
+        return grandmothers();
+    }
+    if(pmod == PMod::PATERNAL) {
+        return grandfathers();
+    }
 }
 std::set<Person*> Person::grandsons() {
     std::set<Person*> result;
