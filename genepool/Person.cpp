@@ -111,7 +111,7 @@ std::set<Person*> Person::parents(PMod pmod) {
     if ((pmod == PMod::ANY || pmod == PMod::MATERNAL) && mother()) {
         result.insert(mother());
     }
-    else if ((pmod == PMod::ANY || pmod == PMod::PATERNAL) && father()) {
+    if ((pmod == PMod::ANY || pmod == PMod::PATERNAL) && father()) {
         result.insert(father());
     }
     return result;
