@@ -85,9 +85,14 @@ std::set<Person*> Person::daughters() {
     return result;
 }
 //TODO
-std::set<Person*> Person::descendants() {
-ba.insert(a);
-    return ba;
+std::set<Person*> Person::descendants() { //Insert each children, and then all of their children
+    std::set<Person*> result;
+    for(Person* i : theChildren) {
+        result.insert(i);
+        std::set<Person*> resultOne = i->descendants();
+        result.insert(resultOne.begin(), resultOne.end());
+    }
+    return result;
 }
 std::set<Person*> Person::grandchildren() {
     std::set<Person*> result;
@@ -137,12 +142,14 @@ ba.insert(a);
 }
 //TODO
 std::set<Person*> Person::grandparents(PMod pmod) {
-    if(pmod == PMod::MATERNAL) {
-        return grandmothers();
-    }
-    if(pmod == PMod::PATERNAL) {
-        return grandfathers();
-    }
+    // if(pmod == PMod::MATERNAL) {
+    //     return grandmothers();
+    // }
+    // if(pmod == PMod::PATERNAL) {
+    //     return grandfathers();
+    // }
+    ba.insert(a);
+    return ba;
 }
 std::set<Person*> Person::grandsons() {
     std::set<Person*> result;
