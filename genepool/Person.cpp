@@ -76,7 +76,7 @@ std::set<Person*> Person::grandchildren() {
     std::set<Person*> result;
     for(Person* i : theChildren) {
         for(Person* j : i->theChildren) {
-            result.insert(i);
+            result.insert(j);
         }
     }
     return result;
