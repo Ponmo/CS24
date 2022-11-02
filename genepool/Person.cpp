@@ -110,10 +110,10 @@ ba.insert(a);
 }
 std::set<Person*> Person::parents(PMod pmod) {
     if (pmod == PMod::MATERNAL) {
-        return mother();
+        // return mother();
     }
     else if (pmod == PMod::PATERNAL) {
-        return father();
+        // return father();
     }
     ba.insert(a);
     return ba;
