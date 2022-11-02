@@ -50,11 +50,9 @@ std::set<Person*> Person::brothers(PMod pmod, SMod smod) {
 }
 std::set<Person*> Person::children() { //Return a set of children
     std::set<Person*> result;
-    // if(!theChildren.empty()) {
-        for(Person* i : theChildren) {
-            result.insert(i);
-        }
-    // }
+    for(Person* i : theChildren) {
+        result.insert(i);
+    }
     return result;
 }
 std::set<Person*> Person::cousins(PMod pmodY, SMod smodY) {
@@ -75,12 +73,24 @@ ba.insert(a);
     return ba;
 }
 std::set<Person*> Person::grandchildren() {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result;
+    for(Person* i : theChildren) {
+        for(Person* j : i->theChildren) {
+            result.insert(i);
+        }
+    }
+    return result;
 }
 std::set<Person*> Person::granddaughters() {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result;
+    for(Person* i : theChildren) {
+        for(Person* j : i->theChildren) {
+            if(j->genderV == Gender::FEMALE) {
+                result.insert(i);
+            }
+        }
+    }
+    return result;
 }
 std::set<Person*> Person::grandfathers(PMod pmod) {
 ba.insert(a);
@@ -95,8 +105,15 @@ ba.insert(a);
     return ba;
 }
 std::set<Person*> Person::grandsons() {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result;
+    for(Person* i : theChildren) {
+        for(Person* j : i->theChildren) {
+            if(j->genderV == Gender::MALE) {
+                result.insert(i);
+            }
+        }
+    }
+    return result;
 }
 std::set<Person*> Person::nephews(PMod pmod, SMod smod) {
 ba.insert(a);
