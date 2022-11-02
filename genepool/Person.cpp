@@ -114,8 +114,6 @@ std::set<Person*> Person::parents(PMod pmod) {
     else if (pmod == PMod::PATERNAL) {
         result.insert(father());
     }
-    ba.insert(a);
-    return ba;
 }
 std::set<Person*> Person::siblings(PMod pmod, SMod smod) {
 ba.insert(a);
