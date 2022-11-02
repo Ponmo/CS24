@@ -130,19 +130,23 @@ std::set<Person*> Person::granddaughters() {
 std::set<Person*> Person::grandfathers(PMod pmod) { //return father of father, mother of mother, father of mother, etc.
     std::set<Person*> result;
     if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
-        if(Person* i = motherV->motherV) {
-            result.insert(i);
-        }
-        if(Person* i = motherV->fatherV) {
-            result.insert(i);
+        if(motherV) {
+            if(Person* i = motherV->motherV) {
+                result.insert(i);
+            }
+            if(Person* i = motherV->fatherV) {
+                result.insert(i);
+            }
         }
     }
-    if(pmod == PMod::PATERNAL || pmod== PMod::ANY) {
-        if(Person* i = fatherV->motherV) {
-            result.insert(i);
-        }
-        if(Person* i = fatherV->fatherV) {
-            result.insert(i);
+    if(pmod == PMod::PATERNAL || pmod == PMod::ANY) {
+        if(fatherV) {
+            if(Person* i = fatherV->motherV) {
+                result.insert(i);
+            }
+            if(Person* i = fatherV->fatherV) {
+                result.insert(i);
+            }
         }
     }
     return result;
