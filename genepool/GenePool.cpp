@@ -21,9 +21,7 @@ GenePool::GenePool(std::istream& stream) {
         if(line == "" || line[0] == '#') {
             continue;
         }
-
         Person* newNode = new Person;
-
         //Get each token seperated by a tab character.
         std::stringstream nLine(line);
         std::string currentToken;
@@ -62,6 +60,23 @@ GenePool::GenePool(std::istream& stream) {
             }
             count++;
         }
+        GeneMap.insert({tempName, newNode});
+    }
+};
+
+//Destructor. Should destruct all Person nodes inside it as well.
+GenePool::~GenePool() {
+    //loop through the map to delete all nodes in it!
+    for (auto const& x : GeneMap)
+    {
+        delete x.second;
+    }
+}
+
+// make
+// ./genepool data/Olympians.tsv
+// make clean
+
 
         // std::string theirName, theirGender, theirMother, theirFather;
         // if (!(nLine >> theirName >> theirGender >> theirMother >> theirFather)) { break; } // error (may not be needed if already checked in main)
@@ -86,25 +101,6 @@ GenePool::GenePool(std::istream& stream) {
         // else {
         //     newNode->genderV = Gender::FEMALE;
         // }
-        GeneMap.insert({tempName, newNode});
-    }
-};
-
-//Destructor. Should destruct all Person nodes inside it as well.
-GenePool::~GenePool() {
-    //loop through the map to delete all nodes in it!
-    for (auto const& x : GeneMap)
-    {
-        delete x.second;
-    }
-}
-
-// make
-// ./genepool data/Olympians.tsv
-// make clean
-
-
-
 // std::stringstream nLine(line);
 //         std::string currentToken;
 //         std::string tempName;
