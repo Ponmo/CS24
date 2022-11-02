@@ -35,7 +35,6 @@ Person* Person::father() {
 
 
 //Relationship Functions:
-//TODO
 std::set<Person*> Person::ancestors(PMod pmod) { //return parent(s), and then the parents of their parent(s)
     std::set<Person*> result;
     if(pmod == PMod::PATERNAL) {
@@ -128,24 +127,24 @@ std::set<Person*> Person::granddaughters() {
     return result;
 }
 //TODO
-std::set<Person*> Person::grandfathers(PMod pmod) {
+std::set<Person*> Person::grandfathers(PMod pmod) { //return father of father, mother of mother, father of mother, etc.
     std::set<Person*> result;
-    // if(pmod == PMod::MATERNAL || pmod== PMod::ANY) {
-    //     if(Person* i = motherV->motherV) {
-    //         result.insert(i);
-    //     }
-    //     if(Person* i = motherV->fatherV) {
-    //         result.insert(motherV->father());
-    //     }
-    // }
-    // if(pmod == PMod::PATERNAL || pmod== PMod::ANY) {
-    //     if(Person* i = fatherV->motherV) {
-    //         result.insert(i);
-    //     }
-    //     if(Person* i = fatherV->fatherV) {
-    //         result.insert(motherV->father());
-    //     }
-    // }
+    if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
+        if(Person* i = motherV->motherV) {
+            result.insert(i);
+        }
+        if(Person* i = motherV->fatherV) {
+            result.insert(i);
+        }
+    }
+    if(pmod == PMod::PATERNAL || pmod== PMod::ANY) {
+        if(Person* i = fatherV->motherV) {
+            result.insert(i);
+        }
+        if(Person* i = fatherV->fatherV) {
+            result.insert(i);
+        }
+    }
     return result;
 }
 //TODO
