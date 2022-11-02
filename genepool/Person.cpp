@@ -86,7 +86,7 @@ std::set<Person*> Person::granddaughters() {
     for(Person* i : theChildren) {
         for(Person* j : i->theChildren) {
             if(j->genderV == Gender::FEMALE) {
-                result.insert(i);
+                result.insert(j);
             }
         }
     }
@@ -109,7 +109,7 @@ std::set<Person*> Person::grandsons() {
     for(Person* i : theChildren) {
         for(Person* j : i->theChildren) {
             if(j->genderV == Gender::MALE) {
-                result.insert(i);
+                result.insert(j);
             }
         }
     }
