@@ -72,7 +72,7 @@ std::set<Person*> Person::aunts(PMod pmod, SMod smod) {
 }
 //TODO
 std::set<Person*> Person::brothers(PMod pmod, SMod smod) {
-    
+
     ba.insert(a);
     return ba;
 }
@@ -126,7 +126,6 @@ std::set<Person*> Person::granddaughters() {
     }
     return result;
 }
-//TODO
 std::set<Person*> Person::grandfathers(PMod pmod) { //return father of father, father of mother, father of mother, etc.
     std::set<Person*> result;
     if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
@@ -145,7 +144,6 @@ std::set<Person*> Person::grandfathers(PMod pmod) { //return father of father, f
     }
     return result;
 }
-//TODO
 std::set<Person*> Person::grandmothers(PMod pmod) {
     std::set<Person*> result;
     if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
@@ -164,7 +162,6 @@ std::set<Person*> Person::grandmothers(PMod pmod) {
     }
     return result;
 }
-//TODO
 std::set<Person*> Person::grandparents(PMod pmod) { // Maternal Grandparents Return Your Mothers Parents. Paternal Grandparents return your father's parent. All should return both.
     std::set<Person*> result;
     std::set<Person*> resultOne = grandmothers(pmod);
@@ -206,8 +203,41 @@ std::set<Person*> Person::parents(PMod pmod) {
 }
 //TODO
 std::set<Person*> Person::siblings(PMod pmod, SMod smod) {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result;
+    if(pmod == PMod::PATERNAL || pmod == PMod::ANY) {
+        if(smod == SMod::FULL || smod == SMod::ANY) {
+            for(Person* i : fatherV->theChildren) {
+                if (i->motherV == this->motherV) {
+                    result.insert(i);
+                }
+            }
+        }
+        if(smod == SMod::HALF || smod == SMod::ANY) {
+            for(Person* i : fatherV->theChildren) {
+                if (i->motherV != this->motherV) {
+                    result.insert(i);
+                }
+            }
+        }
+    }
+    if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
+        if(smod == SMod::FULL || smod == SMod::ANY) {
+            for(Person* i : motherV->theChildren) {
+                if (i->fatherV == this->fatherV) {
+                    result.insert(i);
+                }
+            }
+        }
+        if(smod == SMod::HALF || smod == SMod::ANY) {
+            for(Person* i : motherV->theChildren) {
+                if (i->fatherV != this->fatherV) {
+                    result.insert(i);
+                }
+            }
+        }
+    }
+    result.erase(this);
+    return result;
 }
 //TODO
 std::set<Person*> Person::sisters(PMod pmod, SMod smod) {
