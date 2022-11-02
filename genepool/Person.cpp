@@ -168,7 +168,7 @@ std::set<Person*> Person::grandmothers(PMod pmod) {
 std::set<Person*> Person::grandparents(PMod pmod) {
     std::set<Person*> result;
     if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
-        std::set<Person*> resultOne = grandfathers(pmod);
+        std::set<Person*> resultOne = grandmothers(pmod);
         result.insert(resultOne.begin(), resultOne.end());
     }
     if(pmod == PMod::PATERNAL || pmod == PMod::ANY) {
