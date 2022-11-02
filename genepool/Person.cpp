@@ -108,10 +108,10 @@ ba.insert(a);
 }
 std::set<Person*> Person::parents(PMod pmod) {
     std::set<Person*> result;
-    if (pmod == PMod::MATERNAL) {
+    if (pmod == PMod::ANY || pmod == PMod::MATERNAL) {
         result.insert(mother());
     }
-    else if (pmod == PMod::PATERNAL) {
+    else if (pmod == PMod::ANY || pmod == PMod::PATERNAL) {
         result.insert(father());
     }
     return result;
