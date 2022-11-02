@@ -35,27 +35,30 @@ Person* Person::father() {
 
 
 //Relationship Functions:
+//TODO
 std::set<Person*> Person::ancestors(PMod pmod) {
     std::set<Person*> result;
-    if(pmod == PMod::PATERNAL) {
-        std::set<Person*> resultOne = fatherV->ancestors(PMod::ANY);
-        result.insert(resultOne.begin(), resultOne.end());
-    }
-    if(pmod == PMod::MATERNAL) {
-        std::set<Person*> resultOne = motherV->ancestors(PMod::ANY);
-        result.insert(resultOne.begin(), resultOne.end());
-    }
-    if(pmod == PMod::ANY) {
-        std::set<Person*> resultOne = this->ancestors(PMod::PATERNAL);
-        this->ancestors(PMod::MATERNAL);
+    // if(pmod == PMod::PATERNAL) {
+    //     std::set<Person*> resultOne = fatherV->ancestors(PMod::ANY);
+    //     result.insert(resultOne.begin(), resultOne.end());
+    // }
+    // if(pmod == PMod::MATERNAL) {
+    //     std::set<Person*> resultOne = motherV->ancestors(PMod::ANY);
+    //     result.insert(resultOne.begin(), resultOne.end());
+    // }
+    // if(pmod == PMod::ANY) {
+    //     std::set<Person*> resultOne = this->ancestors(PMod::PATERNAL);
+    //     this->ancestors(PMod::MATERNAL);
 
-    }
+    // }
     return result;
 }
+//TODO
 std::set<Person*> Person::aunts(PMod pmod, SMod smod) {
     ba.insert(a);
     return ba;
 }
+//TODO
 std::set<Person*> Person::brothers(PMod pmod, SMod smod) {
     ba.insert(a);
     return ba;
@@ -67,6 +70,7 @@ std::set<Person*> Person::children() { //Return a set of children
     }
     return result;
 }
+//TODO
 std::set<Person*> Person::cousins(PMod pmodY, SMod smodY) {
 ba.insert(a);
     return ba;
@@ -80,6 +84,7 @@ std::set<Person*> Person::daughters() {
     }
     return result;
 }
+//TODO
 std::set<Person*> Person::descendants() {
 ba.insert(a);
     return ba;
@@ -104,30 +109,33 @@ std::set<Person*> Person::granddaughters() {
     }
     return result;
 }
+//TODO
 std::set<Person*> Person::grandfathers(PMod pmod) {
     std::set<Person*> result;
-    if(pmod == PMod::MATERNAL || pmod== PMod::ANY) {
-        if(Person* i = motherV->motherV) {
-            result.insert(i);
-        }
-        if(Person* i = motherV->fatherV) {
-            result.insert(motherV->father());
-        }
-    }
-    if(pmod == PMod::PATERNAL || pmod== PMod::ANY) {
-        if(Person* i = fatherV->motherV) {
-            result.insert(i);
-        }
-        if(Person* i = fatherV->fatherV) {
-            result.insert(motherV->father());
-        }
-    }
+    // if(pmod == PMod::MATERNAL || pmod== PMod::ANY) {
+    //     if(Person* i = motherV->motherV) {
+    //         result.insert(i);
+    //     }
+    //     if(Person* i = motherV->fatherV) {
+    //         result.insert(motherV->father());
+    //     }
+    // }
+    // if(pmod == PMod::PATERNAL || pmod== PMod::ANY) {
+    //     if(Person* i = fatherV->motherV) {
+    //         result.insert(i);
+    //     }
+    //     if(Person* i = fatherV->fatherV) {
+    //         result.insert(motherV->father());
+    //     }
+    // }
     return result;
 }
+//TODO
 std::set<Person*> Person::grandmothers(PMod pmod) {
 ba.insert(a);
     return ba;
 }
+//TODO
 std::set<Person*> Person::grandparents(PMod pmod) {
     if(pmod == PMod::MATERNAL) {
         return grandmothers();
@@ -147,10 +155,12 @@ std::set<Person*> Person::grandsons() {
     }
     return result;
 }
+//TODO
 std::set<Person*> Person::nephews(PMod pmod, SMod smod) {
 ba.insert(a);
     return ba;
 }
+//TODO
 std::set<Person*> Person::nieces(PMod pmod, SMod smod) {
 ba.insert(a);
     return ba;
@@ -165,10 +175,12 @@ std::set<Person*> Person::parents(PMod pmod) {
     }
     return result;
 }
+//TODO
 std::set<Person*> Person::siblings(PMod pmod, SMod smod) {
 ba.insert(a);
     return ba;
 }
+//TODO
 std::set<Person*> Person::sisters(PMod pmod, SMod smod) {
 ba.insert(a);
     return ba;
@@ -182,6 +194,7 @@ std::set<Person*> Person::sons() {
     }
     return result;
 }
+//TODO
 std::set<Person*> Person::uncles(PMod pmod, SMod smod) {
 ba.insert(a);
     return ba;
