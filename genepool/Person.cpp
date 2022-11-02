@@ -107,11 +107,12 @@ ba.insert(a);
     return ba;
 }
 std::set<Person*> Person::parents(PMod pmod) {
+    std::set<Person*> result;
     if (pmod == PMod::MATERNAL) {
-        // return mother();
+        result.insert(mother());
     }
     else if (pmod == PMod::PATERNAL) {
-        // return father();
+        result.insert(father());
     }
     ba.insert(a);
     return ba;
