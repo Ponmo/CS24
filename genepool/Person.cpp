@@ -39,22 +39,30 @@ Person* Person::father() {
 std::set<Person*> Person::ancestors(PMod pmod) { //return parent(s), and then the parents of their parent(s)
     std::set<Person*> result;
     if(pmod == PMod::PATERNAL) {
-        result.insert(fatherV);
-        std::set<Person*> resultOne = fatherV->ancestors(PMod::ANY);
-        result.insert(resultOne.begin(), resultOne.end());
+        if(fatherV) {
+            result.insert(fatherV);
+            std::set<Person*> resultOne = fatherV->ancestors(PMod::ANY);
+            result.insert(resultOne.begin(), resultOne.end());
+        }
     }
     if(pmod == PMod::MATERNAL) {
-        result.insert(motherV);
-        std::set<Person*> resultOne = motherV->ancestors(PMod::ANY);
-        result.insert(resultOne.begin(), resultOne.end());
+        if(motherV) {
+            result.insert(motherV);
+            std::set<Person*> resultOne = motherV->ancestors(PMod::ANY);
+            result.insert(resultOne.begin(), resultOne.end());
+        }
     }
     if(pmod == PMod::ANY) {
-        result.insert(motherV);
-        result.insert(fatherV);
-        std::set<Person*> resultOne = motherV->ancestors(PMod::ANY);
-        result.insert(resultOne.begin(), resultOne.end());
-        resultOne = fatherV->ancestors(PMod::ANY);
-        result.insert(resultOne.begin(), resultOne.end());
+        if(motherV) {
+            result.insert(motherV);
+            std::set<Person*> resultOne = motherV->ancestors(PMod::ANY);
+            result.insert(resultOne.begin(), resultOne.end());
+        }
+        if(fatherV) {
+            result.insert(fatherV);
+            std::set<Person*> resultOne = fatherV->ancestors(PMod::ANY);
+            result.insert(resultOne.begin(), resultOne.end());
+        }
     }
     return result;
 }
