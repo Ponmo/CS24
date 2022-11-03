@@ -223,7 +223,7 @@ std::set<Person*> Person::nieces(PMod pmod, SMod smod) { //daughters of your sib
     std::set<Person*> resultIterator = siblings(pmod, smod);
     for (auto itr : resultIterator)
     {
-        std::set<Person*> nieces = itr -> sons();
+        std::set<Person*> nieces = itr -> daughters();
         result.insert(nieces.begin(), nieces.end());
     } 
     return result;
