@@ -71,7 +71,8 @@ std::set<Person*> Person::aunts(PMod pmod, SMod smod) {
 //TODO
 std::set<Person*> Person::brothers(PMod pmod, SMod smod) {
     std::set<Person*> result = siblings(pmod, smod);
-    for (auto itr : result)
+    std::set<Person*> resultIterator = result;
+    for (auto itr : resultIterator)
     {
         if(itr->genderV == Gender::FEMALE) {
             result.erase(itr);
@@ -248,10 +249,11 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod) { //OK lets pretend I'm
 //TODO
 std::set<Person*> Person::sisters(PMod pmod, SMod smod) {
     std::set<Person*> result = siblings(pmod, smod);
-    for (auto itr : result)
+    std::set<Person*> resultIterator = result;
+    for (auto itr : resultIterator)
     {
         if(itr->genderV == Gender::MALE) {
-            // result.erase(itr);
+            result.erase(itr);
         }
     } 
     return result;
