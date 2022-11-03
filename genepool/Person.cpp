@@ -202,19 +202,19 @@ std::set<Person*> Person::parents(PMod pmod) {
     return result;
 }
 //TODO
-std::set<Person*> Person::siblings(PMod pmod, SMod smod) {
+std::set<Person*> Person::siblings(PMod pmod, SMod smod) { //OK lets pretend I'm looking for maternal half siblings.
     std::set<Person*> result;
     if(pmod == PMod::PATERNAL || pmod == PMod::ANY) {
         if(smod == SMod::FULL || smod == SMod::ANY) {
             for(Person* i : fatherV->theChildren) {
-                if (i->motherV == this->motherV) {
+                if (i->motherV == motherV) {
                     result.insert(i);
                 }
             }
         }
         if(smod == SMod::HALF || smod == SMod::ANY) {
             for(Person* i : fatherV->theChildren) {
-                if (i->motherV != this->motherV) {
+                if (i->motherV != motherV) {
                     result.insert(i);
                 }
             }
@@ -223,14 +223,14 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod) {
     if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
         if(smod == SMod::FULL || smod == SMod::ANY) {
             for(Person* i : motherV->theChildren) {
-                if (i->fatherV == this->fatherV) {
+                if (i->fatherV == fatherV) {
                     result.insert(i);
                 }
             }
         }
         if(smod == SMod::HALF || smod == SMod::ANY) {
             for(Person* i : motherV->theChildren) {
-                if (i->fatherV != this->fatherV) {
+                if (i->fatherV != fatherV) {
                     result.insert(i);
                 }
             }
