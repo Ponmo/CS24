@@ -32,8 +32,6 @@ Person* Person::father() {
     }
     return nullptr;
 }
-
-
 //Relationship Functions:
 std::set<Person*> Person::ancestors(PMod pmod) { //return parent(s), and then the parents of their parent(s)
     std::set<Person*> result;
@@ -72,9 +70,14 @@ std::set<Person*> Person::aunts(PMod pmod, SMod smod) {
 }
 //TODO
 std::set<Person*> Person::brothers(PMod pmod, SMod smod) {
-
-    ba.insert(a);
-    return ba;
+    std::set<Person*> result = siblings(pmod, smod);
+    for (auto itr : result)
+    {
+        if(itr->genderV == Gender::FEMALE) {
+            result.erase(itr);
+        }
+    } 
+    return result;
 }
 std::set<Person*> Person::children() { //Return a set of children
     std::set<Person*> result;
@@ -201,7 +204,6 @@ std::set<Person*> Person::parents(PMod pmod) {
     }
     return result;
 }
-//TODO
 std::set<Person*> Person::siblings(PMod pmod, SMod smod) { //OK lets pretend I'm looking for maternal half siblings.
     std::set<Person*> result;
     if(pmod == PMod::PATERNAL || pmod == PMod::ANY) {
@@ -245,8 +247,14 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod) { //OK lets pretend I'm
 }
 //TODO
 std::set<Person*> Person::sisters(PMod pmod, SMod smod) {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result = siblings(pmod, smod);
+    for (auto itr : result)
+    {
+        if(itr->genderV == Gender::MALE) {
+            result.erase(itr);
+        }
+    } 
+    return result;
 }
 std::set<Person*> Person::sons() {
     std::set<Person*> result;
