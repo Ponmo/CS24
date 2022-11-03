@@ -112,19 +112,6 @@ std::set<Person*> Person::cousins(PMod pmod, SMod smod) { //pmodY smodY???? Uncl
         result.insert(resultItr.begin(), resultItr.end());
     }
     return result;
-    // if(pmod == PMod::PATERNAL || pmod == PMod::ANY) { //Father's siblings
-    //     if(fatherV) {
-    //         std::set<Person*> resultOne = aunts(pmod, smod); //Returns your aunts on your father's side, who are either 
-    //         result.insert(resultOne.begin(), resultOne.end());
-    //     }
-    // }
-    // if(pmod == PMod::MATERNAL || pmod == PMod::ANY) { //Mother's Siblings
-    //     if(motherV){ 
-    //         std::set<Person*> resultOne = motherV->sisters(PMod::ANY, smod);
-    //         result.insert(resultOne.begin(), resultOne.end());
-    //     }
-    // }
-    // return result;
 }
 std::set<Person*> Person::daughters() {
     std::set<Person*> result;
@@ -220,26 +207,24 @@ std::set<Person*> Person::grandsons() {
     return result;
 }
 //TODO
-std::set<Person*> Person::nephews(PMod pmod, SMod smod) {
-    std::set<Person*> result = cousins(pmod, smod);
-    std::set<Person*> resultIterator = result;
+std::set<Person*> Person::nephews(PMod pmod, SMod smod) { //sons of your siblings (half or full) and (mother only or father only)
+    std::set<Person*> result;
+    std::set<Person*> resultIterator = siblings(pmod, smod);
     for (auto itr : resultIterator)
     {
-        if(itr->genderV == Gender::FEMALE) {
-            result.erase(itr);
-        }
+        std::set<Person*> nephews = itr -> sons();
+        result.insert(nephews.begin(), nephews.end());
     } 
     return result;
 }
 //TODO
-std::set<Person*> Person::nieces(PMod pmod, SMod smod) {
-    std::set<Person*> result = cousins(pmod, smod);
-    std::set<Person*> resultIterator = result;
+std::set<Person*> Person::nieces(PMod pmod, SMod smod) { //daughters of your siblings
+    std::set<Person*> result;
+    std::set<Person*> resultIterator = siblings(pmod, smod);
     for (auto itr : resultIterator)
     {
-        if(itr->genderV == Gender::MALE) {
-            result.erase(itr);
-        }
+        std::set<Person*> nieces = itr -> sons();
+        result.insert(nieces.begin(), nieces.end());
     } 
     return result;
 }
