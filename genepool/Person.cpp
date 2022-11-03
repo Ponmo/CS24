@@ -226,7 +226,7 @@ std::set<Person*> Person::nephews(PMod pmod, SMod smod) {
     for (auto itr : resultIterator)
     {
         if(itr->genderV == Gender::FEMALE) {
-            result.erase(itr);
+            // result.erase(itr);
         }
     } 
     return result;
@@ -238,7 +238,7 @@ std::set<Person*> Person::nieces(PMod pmod, SMod smod) {
     for (auto itr : resultIterator)
     {
         if(itr->genderV == Gender::MALE) {
-            result.erase(itr);
+            // result.erase(itr);
         }
     } 
     return result;
