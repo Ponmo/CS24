@@ -99,9 +99,32 @@ std::set<Person*> Person::children() { //Return a set of children
     return result;
 }
 //TODO
-std::set<Person*> Person::cousins(PMod pmodY, SMod smodY) {
-ba.insert(a);
-    return ba;
+std::set<Person*> Person::cousins(PMod pmod, SMod smod) { //pmodY smodY???? Uncles and Aunts children
+    std::set<Person*> result;
+    std::set<Person*> resultOne = aunts(pmod, smod); 
+    for(auto itr : resultOne) {
+        std::set<Person*> resultItr = itr->children();
+        result.insert(resultItr.begin(), resultItr.end());
+    }
+    resultOne = uncles(pmod, smod); 
+    for(auto itr : resultOne) {
+        std::set<Person*> resultItr = itr->children();
+        result.insert(resultItr.begin(), resultItr.end());
+    }
+    return result;
+    // if(pmod == PMod::PATERNAL || pmod == PMod::ANY) { //Father's siblings
+    //     if(fatherV) {
+    //         std::set<Person*> resultOne = aunts(pmod, smod); //Returns your aunts on your father's side, who are either 
+    //         result.insert(resultOne.begin(), resultOne.end());
+    //     }
+    // }
+    // if(pmod == PMod::MATERNAL || pmod == PMod::ANY) { //Mother's Siblings
+    //     if(motherV){ 
+    //         std::set<Person*> resultOne = motherV->sisters(PMod::ANY, smod);
+    //         result.insert(resultOne.begin(), resultOne.end());
+    //     }
+    // }
+    // return result;
 }
 std::set<Person*> Person::daughters() {
     std::set<Person*> result;
