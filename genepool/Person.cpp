@@ -205,32 +205,34 @@ std::set<Person*> Person::parents(PMod pmod) {
 std::set<Person*> Person::siblings(PMod pmod, SMod smod) { //OK lets pretend I'm looking for maternal half siblings.
     std::set<Person*> result;
     if(pmod == PMod::PATERNAL || pmod == PMod::ANY) {
-        if(smod == SMod::FULL || smod == SMod::ANY) {
-            for(Person* i : fatherV->theChildren) {
-                if (i->motherV == motherV) {
-                    result.insert(i);
+        if(fatherV) {
+            if(smod == SMod::FULL || smod == SMod::ANY) {
+                for(Person* i : fatherV->theChildren) { //Paternal Full
+                    if (motherV && i->motherV && i->motherV == motherV) {
+                        result.insert(i);
+                    }
                 }
             }
-        }
-        if(smod == SMod::HALF || smod == SMod::ANY) {
-            for(Person* i : fatherV->theChildren) {
-                if (i->motherV != motherV) {
-                    result.insert(i);
+            if(smod == SMod::HALF || smod == SMod::ANY) {
+                for(Person* i : fatherV->theChildren) { //Paternal Half
+                    if (!motherV || i->motherV != motherV) {
+                        result.insert(i);
+                    }
                 }
             }
         }
     }
     if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
         if(smod == SMod::FULL || smod == SMod::ANY) {
-            for(Person* i : motherV->theChildren) {
-                if (i->fatherV == fatherV) {
+            for(Person* i : motherV->theChildren) { //Maternal Full
+                if (fatherV && i->fatherV && i->fatherV == fatherV) {
                     result.insert(i);
                 }
             }
         }
         if(smod == SMod::HALF || smod == SMod::ANY) {
-            for(Person* i : motherV->theChildren) {
-                if (i->fatherV != fatherV) {
+            for(Person* i : motherV->theChildren) { //MAternal Half
+                if (!fatherV || i->fatherV != fatherV) {
                     result.insert(i);
                 }
             }
