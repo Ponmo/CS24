@@ -221,13 +221,27 @@ std::set<Person*> Person::grandsons() {
 }
 //TODO
 std::set<Person*> Person::nephews(PMod pmod, SMod smod) {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result = cousins(pmod, smod);
+    std::set<Person*> resultIterator = result;
+    for (auto itr : resultIterator)
+    {
+        if(itr->genderV == Gender::FEMALE) {
+            result.erase(itr);
+        }
+    } 
+    return result;
 }
 //TODO
 std::set<Person*> Person::nieces(PMod pmod, SMod smod) {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result = cousins(pmod, smod);
+    std::set<Person*> resultIterator = result;
+    for (auto itr : resultIterator)
+    {
+        if(itr->genderV == Gender::MALE) {
+            result.erase(itr);
+        }
+    } 
+    return result;
 }
 std::set<Person*> Person::parents(PMod pmod) {
     std::set<Person*> result;
