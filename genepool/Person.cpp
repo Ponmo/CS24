@@ -64,11 +64,22 @@ std::set<Person*> Person::ancestors(PMod pmod) { //return parent(s), and then th
     return result;
 }
 //TODO
-std::set<Person*> Person::aunts(PMod pmod, SMod smod) {
-    ba.insert(a);
-    return ba;
+std::set<Person*> Person::aunts(PMod pmod, SMod smod) { //First, get pointers to your parents (pmod). Then, their brothers or sisters!
+    std::set<Person*> result;
+    if(pmod == PMod::PATERNAL || pmod == PMod::ANY) {
+        if(fatherV){ 
+            std::set<Person*> resultOne = fatherV->sisters(PMod::ANY, smod);
+            result.insert(resultOne.begin(), resultOne.end());
+        }
+    }
+    if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
+        if(motherV){ 
+            std::set<Person*> resultOne = motherV->sisters(PMod::ANY, smod);
+            result.insert(resultOne.begin(), resultOne.end());
+        }
+    }
+    return result;
 }
-//TODO
 std::set<Person*> Person::brothers(PMod pmod, SMod smod) {
     std::set<Person*> result = siblings(pmod, smod);
     std::set<Person*> resultIterator = result;
@@ -246,7 +257,6 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod) { //OK lets pretend I'm
     result.erase(this);
     return result;
 }
-//TODO
 std::set<Person*> Person::sisters(PMod pmod, SMod smod) {
     std::set<Person*> result = siblings(pmod, smod);
     std::set<Person*> resultIterator = result;
@@ -269,6 +279,18 @@ std::set<Person*> Person::sons() {
 }
 //TODO
 std::set<Person*> Person::uncles(PMod pmod, SMod smod) {
-ba.insert(a);
-    return ba;
+    std::set<Person*> result;
+    if(pmod == PMod::PATERNAL || pmod == PMod::ANY) {
+        if(fatherV){ 
+            std::set<Person*> resultOne = fatherV->brothers(PMod::ANY, smod);
+            result.insert(resultOne.begin(), resultOne.end());
+        }
+    }
+    if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
+        if(motherV){ 
+            std::set<Person*> resultOne = motherV->brothers(PMod::ANY, smod);
+            result.insert(resultOne.begin(), resultOne.end());
+        }
+    }
+    return result;  
 }
