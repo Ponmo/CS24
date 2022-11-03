@@ -251,7 +251,7 @@ std::set<Person*> Person::sisters(PMod pmod, SMod smod) {
     for (auto itr : result)
     {
         if(itr->genderV == Gender::MALE) {
-            result.erase(itr);
+            // result.erase(itr);
         }
     } 
     return result;
