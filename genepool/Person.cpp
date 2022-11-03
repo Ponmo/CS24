@@ -223,17 +223,19 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod) { //OK lets pretend I'm
         }
     }
     if(pmod == PMod::MATERNAL || pmod == PMod::ANY) {
-        if(smod == SMod::FULL || smod == SMod::ANY) {
-            for(Person* i : motherV->theChildren) { //Maternal Full
-                if (fatherV && i->fatherV && i->fatherV == fatherV) {
-                    result.insert(i);
+        if(motherV) {
+            if(smod == SMod::FULL || smod == SMod::ANY) {
+                for(Person* i : motherV->theChildren) { //Maternal Full
+                    if (fatherV && i->fatherV && i->fatherV == fatherV) {
+                        result.insert(i);
+                    }
                 }
             }
-        }
-        if(smod == SMod::HALF || smod == SMod::ANY) {
-            for(Person* i : motherV->theChildren) { //MAternal Half
-                if (!fatherV || i->fatherV != fatherV) {
-                    result.insert(i);
+            if(smod == SMod::HALF || smod == SMod::ANY) {
+                for(Person* i : motherV->theChildren) { //MAternal Half
+                    if (!fatherV || i->fatherV != fatherV) {
+                        result.insert(i);
+                    }
                 }
             }
         }
