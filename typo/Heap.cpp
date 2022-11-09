@@ -39,8 +39,10 @@ size_t Heap::count() const { //Returns # of things in the array
     return mCount;
 }
 const Heap::Entry& Heap::lookup(size_t index) const { // Finds a value
-    index++;
-    return mData[0];
+    if(index >= mCount) {
+        throw std::out_of_range("Out of range on lookup");
+    }
+    return mData[index];
 }
 Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inserting a high-scoring word into a full heap as well. Needs percolation
     return mData[0];
