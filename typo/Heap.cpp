@@ -71,5 +71,8 @@ void Heap::push(const std::string& value, float score) { //Needs percolation, pu
     mCount++;
 }
 const Heap::Entry& Heap::top() const { // Returns the entry with the lowest score.
+    if(mCount == 0) {
+        throw std::underflow_error("Heap is empty");
+    }
     return mData[0];
 }
