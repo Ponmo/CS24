@@ -54,7 +54,7 @@ Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inser
     if(mCount >= 2) {
         Heap::Entry entryIterator = mData[0];
         size_t currentPosition = 0;
-        while(((currentPosition * 2) + 1) < mCount && (entryIterator.score > mData[(currentPosition * 2) + 1].score) || entryIterator.score > mData[(currentPosition * 2) + 2].score) { //Loop until no child has bigger score
+        while((((currentPosition * 2) + 1) < mCount) && (entryIterator.score > mData[(currentPosition * 2) + 1].score) || entryIterator.score > mData[(currentPosition * 2) + 2].score) { //Loop until no child has bigger score
             if(((currentPosition * 2) + 2) < mCount && mData[(currentPosition * 2) + 1].score > mData[(currentPosition * 2) + 2].score) { //Swap right child
                 mData[currentPosition] =  mData[(currentPosition * 2) + 2];
                 currentPosition = currentPosition * 2 + 2;
