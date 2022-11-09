@@ -17,7 +17,7 @@ Heap::Heap(const Heap& other) { //Copy
     mData = new Heap::Entry[other.mCapacity];
     mCapacity = other.mCapacity;
     mCount = other.mCount;
-    for(size_t i; i<other.mCount; i++) {  // Loop through all entries in the other data, and put it into our own.
+    for(size_t i = 0; i<other.mCount; i++) {  // Loop through all entries in the other data, and put it into our own.
         mData[i] = other.mData[i];
     }
 }
