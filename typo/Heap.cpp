@@ -29,6 +29,9 @@ Heap::Heap(Heap&& other) { //Move
         delete[] other.mData;
         other.mData = nullptr;
     }
+    else {
+        mData = nullptr;
+    }
 }
 Heap::~Heap() { //Destructor
     delete[] mData;
