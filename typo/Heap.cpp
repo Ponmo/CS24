@@ -24,13 +24,10 @@ Heap::Heap(const Heap& other) { //Copy
 Heap::Heap(Heap&& other) { //Move
     mCapacity = other.mCapacity;
     mCount = other.mCount;
+    mData = other.mData;
     if(other.mData != nullptr) {
-        mData = other.mData;
         delete[] other.mData;
         other.mData = nullptr;
-    }
-    else {
-        mData = nullptr;
     }
 }
 Heap::~Heap() { //Destructor
