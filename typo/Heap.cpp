@@ -25,10 +25,7 @@ Heap::Heap(Heap&& other) { //Move
     mCapacity = other.mCapacity;
     mCount = other.mCount;
     mData = other.mData;
-    if(other.mData != nullptr) {
-        delete[] other.mData;
-        other.mData = nullptr;
-    }
+    other.mData = nullptr;
 }
 Heap::~Heap() { //Destructor
     delete[] mData;
