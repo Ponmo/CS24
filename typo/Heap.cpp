@@ -46,6 +46,7 @@ Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inser
 Heap::Entry Heap::pushpop(const std::string& value, float score) { //Needs percolation
     std::string hello = value;
     float hell = score;
+    hell++;
     return mData[0];
 }
 void Heap::push(const std::string& value, float score) { //Needs percolation, pushes into the next possible space.
