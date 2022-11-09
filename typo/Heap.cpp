@@ -65,7 +65,7 @@ void Heap::push(const std::string& value, float score) { //Needs percolation, pu
 
     //start percolating/swapping until it is in the right place with its parent.
     size_t currentPosition = mCount;
-    while(currentPosition != 0 && score > mData[(currentPosition - 1) / 2].score) {
+    while(currentPosition != 0 && score < mData[(currentPosition - 1) / 2].score) {
         mData[currentPosition] = mData[(currentPosition - 1) / 2];
         currentPosition = (currentPosition - 1) / 2;
         mData[currentPosition] = newEntry;
