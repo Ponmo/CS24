@@ -45,7 +45,30 @@ const Heap::Entry& Heap::lookup(size_t index) const { // Finds a value
     return mData[index];
 }
 Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inserting a high-scoring word into a full heap as well. Needs percolation
-    return mData[0];
+    if (mCount == 0) {
+        throw std::underflow_error("Heap is empty on pop");
+    }
+    Heap::Entry lowestEntry = mData[0];
+    mData[0] = mData[mCount-1];
+    //Get the right child value put it at top. Check left child, if its bigger, than swap them. Continue to do so all the way down the left side of the tree.
+    if(mCount >= 2) {
+        Heap::Entry entryIterator = mData[0];
+        size_t currentPosition = 0;
+        while(((currentPosition * 2) + 1) < mCount && (entryIterator.score > mData[(currentPosition * 2) + 1].score) || entryIterator.score > mData[(currentPosition * 2) + 2].score) { //Loop until no child has bigger score
+            if(((currentPosition * 2) + 2) < mCount && mData[(currentPosition * 2) + 1].score > mData[(currentPosition * 2) + 2].score) { //Swap right child
+                mData[currentPosition] =  mData[(currentPosition * 2) + 2];
+                currentPosition = currentPosition * 2 + 2;
+                mData[currentPosition] = entryIterator;
+            }
+            else { //Swap Left Child
+                mData[currentPosition] =  mData[(currentPosition * 2) + 1];
+                currentPosition = currentPosition * 2 + 1;
+                mData[currentPosition] = entryIterator;
+            }
+        }
+    }
+    mCount--;
+    return lowestEntry;
 }
 Heap::Entry Heap::pushpop(const std::string& value, float score) { //Needs percolation
     std::string hello = value;
