@@ -73,11 +73,36 @@ Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inser
     mCount--;
     return lowestEntry;
 }
-Heap::Entry Heap::pushpop(const std::string& value, float score) { //Needs percolation
-    std::string hello = value;
-    float hell = score;
-    hell++;
-    return mData[0];
+Heap::Entry Heap::pushpop(const std::string& value, float score) { //First it pushes the value, then it pops the value. Needs percolation
+    if(mCount == 0) {
+        throw std::underflow_error("Heap is empty on pushpop");
+    }
+    // Removes top value, inserts "value" then percolates down. Pop() then Push()
+    Heap::Entry lowestEntry = mData[0];
+    Heap::Entry newEntry = {value, score};
+    mData[0] = newEntry;
+    //Get the right child value put it at top. Check left child, if its bigger, than swap them. Continue to do so all the way down the left side of the tree.
+    if(mCount >= 2) {
+        // Heap::Entry entryIterator = mData[0];
+        size_t currentPosition = 0;
+        while(((currentPosition * 2) + 1) < mCount) { //Loop until it reaches the end or finds it (break;)
+            if(((currentPosition * 2) + 2) < mCount && score > mData[(currentPosition * 2) + 2].score && mData[(currentPosition * 2) + 1].score > mData[(currentPosition * 2) + 2].score) { //Swap right child
+                mData[currentPosition] =  mData[(currentPosition * 2) + 2];
+                currentPosition = currentPosition * 2 + 2;
+                mData[currentPosition] = newEntry;
+            }
+            else if (((currentPosition * 2) + 2) < mCount && score > mData[(currentPosition * 2) + 1].score && mData[(currentPosition * 2) + 1].score < mData[(currentPosition * 2) + 2].score) { //Swap Left Child
+                mData[currentPosition] =  mData[(currentPosition * 2) + 1];
+                currentPosition = currentPosition * 2 + 1;
+                mData[currentPosition] = newEntry;
+            }
+            else {
+                break;
+            }
+        }
+    }
+    mCount--;
+    return lowestEntry;
 }
 void Heap::push(const std::string& value, float score) { //Needs percolation, pushes into the next possible space.
     //check if heap is already full...
