@@ -1,5 +1,6 @@
 #include "Heap.h"
-
+#include <iostream>
+#include <stdexcept>
 //An binary heap array that stores entries by score of each entry. Each entry is one word with its score. 
 
 // Its parent is at index `(i - 1) / 2`.
