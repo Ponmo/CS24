@@ -22,9 +22,11 @@ Heap::Heap(const Heap& other) { //Copy
     }
 }
 Heap::Heap(Heap&& other) { //Move
-    mData = other.mData;
-    delete[] other.mData;
-    other.mData = nullptr;
+    if(other.mData) {
+        mData = other.mData;
+        delete[] other.mData;
+        other.mData = nullptr;
+    }
 }
 Heap::~Heap() { //Destructor
     delete[] mData;
