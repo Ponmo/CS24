@@ -50,7 +50,6 @@ Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inser
     }
     Heap::Entry lowestEntry = mData[0];
     mData[0] = mData[mCount-1];
-    //Get the right child value put it at top. Check left child, if its bigger, than swap them. Continue to do so all the way down the left side of the tree.
     if(mCount >= 2) {
         Heap::Entry entryIterator = mData[0];
         size_t currentPosition = 0;
@@ -73,7 +72,7 @@ Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inser
     mCount--;
     return lowestEntry;
 }
-Heap::Entry Heap::pushpop(const std::string& value, float score) { //First it pushes the value, then it pops the value. Needs percolation
+Heap::Entry Heap::pushpop(const std::string& value, float score) { //First it pops the value, then it pushes the value. Needs percolation
     if(mCount == 0) {
         throw std::underflow_error("Heap is empty on pushpop");
     }
@@ -81,7 +80,6 @@ Heap::Entry Heap::pushpop(const std::string& value, float score) { //First it pu
     Heap::Entry lowestEntry = mData[0];
     Heap::Entry newEntry = {value, score};
     mData[0] = newEntry;
-    //Get the right child value put it at top. Check left child, if its bigger, than swap them. Continue to do so all the way down the left side of the tree.
     if(mCount >= 2) {
         // Heap::Entry entryIterator = mData[0];
         size_t currentPosition = 0;
@@ -101,7 +99,6 @@ Heap::Entry Heap::pushpop(const std::string& value, float score) { //First it pu
             }
         }
     }
-    mCount--;
     return lowestEntry;
 }
 void Heap::push(const std::string& value, float score) { //Needs percolation, pushes into the next possible space.
