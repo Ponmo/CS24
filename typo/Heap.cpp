@@ -22,7 +22,7 @@ Heap::Heap(const Heap& other) { //Copy
     }
 }
 Heap::Heap(Heap&& other) { //Move
-    if(other.mData) {
+    if(other.mData != nullptr) {
         mData = other.mData;
         delete[] other.mData;
         other.mData = nullptr;
