@@ -7,7 +7,7 @@
 // - Its right child is at index `i * 2 + 2`.
 
 Heap::Heap(size_t capacity) { //Constructor
-    mData[capacity];
+    mData = new Heap::Entry[capacity];
     mCapacity = capacity;
     mCount = 0;
 }
@@ -25,7 +25,7 @@ Heap::Heap(Heap&& other) { //Move
     other.mData = nullptr;
 }
 Heap::~Heap() { //Destructor
-
+    delete mData;
 }
 
 size_t Heap::capacity() const { //Returns capacity
