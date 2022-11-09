@@ -59,7 +59,7 @@ Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inser
                 currentPosition = currentPosition * 2 + 2;
                 mData[currentPosition] = entryIterator;
             }
-            else if (((currentPosition * 2) + 1) < mCount && entryIterator.score > mData[(currentPosition * 2) + 1].score && mData[(currentPosition * 2) + 1].score < mData[(currentPosition * 2) + 2].score) { //Swap Left Child
+            else if (((currentPosition * 2) + 1) < mCount && entryIterator.score > mData[(currentPosition * 2) + 1].score) { //Swap Left Child  && mData[(currentPosition * 2) + 1].score < mData[(currentPosition * 2) + 2].score
                 mData[currentPosition] =  mData[(currentPosition * 2) + 1];
                 currentPosition = currentPosition * 2 + 1;
                 mData[currentPosition] = entryIterator;
@@ -89,7 +89,7 @@ Heap::Entry Heap::pushpop(const std::string& value, float score) { //First it po
                 currentPosition = currentPosition * 2 + 2;
                 mData[currentPosition] = newEntry;
             }
-            else if (((currentPosition * 2) + 1) < mCount && score > mData[(currentPosition * 2) + 1].score && mData[(currentPosition * 2) + 1].score < mData[(currentPosition * 2) + 2].score) { //Swap Left Child
+            else if (((currentPosition * 2) + 1) < mCount && score > mData[(currentPosition * 2) + 1].score) { //Swap Left Child && mData[(currentPosition * 2) + 1].score < mData[(currentPosition * 2) + 2].score
                 mData[currentPosition] =  mData[(currentPosition * 2) + 1];
                 currentPosition = currentPosition * 2 + 1;
                 mData[currentPosition] = newEntry;
