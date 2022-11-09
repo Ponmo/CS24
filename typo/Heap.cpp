@@ -16,7 +16,7 @@ Heap::Heap(const Heap& other) { //Copy
     mData = new Heap::Entry[other.mCapacity];
     mCapacity = other.mCapacity;
     mCount = other.mCount;
-    for(int i; i<other.mCount; i++) {  // Loop through all entries in the other data, and put it into our own.
+    for(size_t i; i<other.mCount; i++) {  // Loop through all entries in the other data, and put it into our own.
         mData[i] = other.mData[i];
     }
 }
@@ -35,13 +35,14 @@ size_t Heap::count() const { //Returns # of things in the array
     return mCount;
 }
 const Heap::Entry& Heap::lookup(size_t index) const { // Finds a value
-    
+    index++;
+    return mData[0];
 }
 Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inserting a high-scoring word into a full heap as well. Needs percolation
-
+    return mData[0];
 }
 Heap::Entry Heap::pushpop(const std::string& value, float score) { //Needs percolation
-
+    return mData[0];
 }
 void Heap::push(const std::string& value, float score) { //Needs percolation, pushes into the next possible space.
     //check if heap is already full...
