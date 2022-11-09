@@ -6,8 +6,11 @@
 
 int main() {
     Heap heap(8);
-
-    std::cout << "This program doesn't do anything interesting yet...\n";
+    heap.push("Hello", 4);
+    heap.push("ByeBye", 1);
+    heap.push("SeeYa", 3);
+    heap.push("OK", 2);
+    heap.pop();
 
     return 0;
 }

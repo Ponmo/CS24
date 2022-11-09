@@ -54,19 +54,23 @@ Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inser
     if(mCount >= 2) {
         Heap::Entry entryIterator = mData[0];
         size_t currentPosition = 0;
-        while(((currentPosition * 2) + 1) < mCount) { //Loop until no child has bigger score
-            if(((currentPosition * 2) + 2) < mCount && mData[(currentPosition * 2) + 1].score > mData[(currentPosition * 2) + 2].score) { //Swap right child
+        while(((currentPosition * 2) + 1) < mCount) { //Loop until it reaches the end or finds it (break;)
+            std::cout << "Got here";
+            if(((currentPosition * 2) + 2) < mCount && entryIterator.score > mData[(currentPosition * 2) + 2].score && mData[(currentPosition * 2) + 1].score > mData[(currentPosition * 2) + 2].score) { //Swap right child
                 mData[currentPosition] =  mData[(currentPosition * 2) + 2];
                 currentPosition = currentPosition * 2 + 2;
                 mData[currentPosition] = entryIterator;
+                std::cout << "Yay";
             }
-            else if (((currentPosition * 2) + 2) < mCount && mData[(currentPosition * 2) + 1].score > mData[(currentPosition * 2) + 2].score) { //Swap Left Child
+            else if (((currentPosition * 2) + 2) < mCount && entryIterator.score > mData[(currentPosition * 2) + 1].score && mData[(currentPosition * 2) + 1].score < mData[(currentPosition * 2) + 2].score) { //Swap Left Child
                 mData[currentPosition] =  mData[(currentPosition * 2) + 1];
                 currentPosition = currentPosition * 2 + 1;
                 mData[currentPosition] = entryIterator;
+                std::cout << "Yay";
             }
             else {
                 break;
+                std::cout << "Broke";
             }
         }
     }
