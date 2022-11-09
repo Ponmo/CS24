@@ -23,11 +23,11 @@ Heap::Heap(const Heap& other) { //Copy
 }
 Heap::Heap(Heap&& other) { //Move
     mData = other.mData;
-    delete other.mData;
+    delete[] other.mData;
     other.mData = nullptr;
 }
 Heap::~Heap() { //Destructor
-    delete mData;
+    delete[] mData;
 }
 
 size_t Heap::capacity() const { //Returns capacity
@@ -44,6 +44,8 @@ Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inser
     return mData[0];
 }
 Heap::Entry Heap::pushpop(const std::string& value, float score) { //Needs percolation
+    std::string hello = value;
+    float hell = score;
     return mData[0];
 }
 void Heap::push(const std::string& value, float score) { //Needs percolation, pushes into the next possible space.
