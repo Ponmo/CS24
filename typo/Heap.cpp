@@ -13,7 +13,7 @@ Heap::Heap(size_t capacity) { //Constructor
 }
 
 Heap::Heap(const Heap& other) { //Copy
-    mData[other.mCapacity];
+    mData = new Heap::Entry[other.mCapacity];
     mCapacity = other.mCapacity;
     mCount = other.mCount;
     for(int i; i<other.mCount; i++) {  // Loop through all entries in the other data, and put it into our own.
