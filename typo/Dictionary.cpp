@@ -16,7 +16,7 @@ Dictionary::Dictionary(std::istream& stream) { //Ignore if line starts with # PA
     std::string line;
     // std::cout << "Constructor";
     while (std::getline(stream, line)) {
-        if(line == "" || line[0] == '#') {  //Lines that are not entirely lowercase ASCII are ignored
+        if(line == "" || line[0] == '#' || line[0] == 'I') {  //Lines that are not entirely lowercase ASCII are ignored
             continue;
         }
         else {
@@ -38,16 +38,16 @@ Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, floa
             for(char a : word) { //loop through each character of the word, and compute its distance from the points
                 //Find x and y of a through point.cpp
                 size_t ascii = a - 97; //Finds the corresponding QWERTY point
-                if(a == 'I') {
-                    // ascii = 8;
-                    break;
-                }
+                // if(a == 'I') {
+                //     // ascii = 8;
+                //     break;
+                // }
                 // std::cout << word + "\n";
                 // std::cout << QWERTY[ascii].x;
                 //  std::cout << " ascii value x\n";
                 //  std::cout << QWERTY[ascii].y;
                 //  std::cout << " ascii value y\n";
-                float distance = sqrt(pow(abs(QWERTY[ascii].x - points[count].x), 2) + pow(abs(QWERTY[ascii].y - points[count].y), 2));
+                float distance = sqrt(pow(QWERTY[ascii].x - points[count].x, 2) + pow(QWERTY[ascii].y - points[count].y, 2));
                 // std::cout << distance;
                 // std::cout << "\n";
                 //Calculate abs(hypotenuse distance) between a and point[count]
