@@ -66,17 +66,20 @@ Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, floa
             // std::cout << score;
             // std::cout << "\n";
             if(score >= cutoff) {
-                if (typoCorrections.count() == maxcount && typoCorrections.top().score > score) { //This score is not greater than tops score
-                    continue;
+                if (typoCorrections.count() == maxcount && typoCorrections.top().score < score) { //This score is not greater than tops score
+                    typoCorrections.pushpop(word, score);
                 }
-                else {
-                    if(typoCorrections.count() == typoCorrections.capacity())  {
-                        typoCorrections.pushpop(word, score);
-                    }
-                    else {
-                        typoCorrections.push(word, score);
-                    }
+                else if (typoCorrections.count() < maxcount) {
+                    typoCorrections.push(word, score);
                 }
+                // else {
+                //     if(typoCorrections.count() == typoCorrections.capacity())  {
+                //         typoCorrections.pushpop(word, score);
+                //     }
+                //     else {
+                //         typoCorrections.push(word, score);
+                //     }
+                // }
             }
         }
     }
