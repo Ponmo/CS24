@@ -39,7 +39,8 @@ Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, floa
                 //Find x and y of a through point.cpp
                 size_t ascii = a - 97; //Finds the corresponding QWERTY point
                 if(a == 'I') {
-                    ascii = 8;
+                    // ascii = 8;
+                    break;
                 }
                 // std::cout << word + "\n";
                 // std::cout << QWERTY[ascii].x;
