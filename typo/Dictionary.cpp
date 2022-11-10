@@ -27,8 +27,6 @@ Dictionary::Dictionary(std::istream& stream) { //Ignore if line starts with # PA
 
 Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, float cutoff) const { // Return a Heap array of probable words that are similar to what the user has typed in through points arranged by highest score to lowest score.
     // std::cout << "Correct Function Starts \n";
-    std::cout << std::setprecision(3);
-    std::cout << std::fixed;
     Heap typoCorrections(maxcount);
     size_t wordLength = points.size();
     for(std::string word : mWords) { //loop through each word in our mWords
