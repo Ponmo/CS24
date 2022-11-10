@@ -22,13 +22,13 @@ Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, floa
     Heap typoCorrections(maxcount);
     size_t wordLength = points.size();
     for(std::string word : mWords) { //loop through each word in our mWords
-        size_t count = 0;
         //Find all words with the correct length
         if (word.length() == wordLength) {
+            size_t count = 0;
             float meanScore = 0;
             for(char a : word) { //loop through each character of the word, and compute its distance from the points
                 //Find x and y of a through point.cpp
-                size_t ascii = 147 - a; //Finds the corresponding QWERTY point
+                size_t ascii = a - 97; //Finds the corresponding QWERTY point
                 float distance = sqrt(pow(abs(QWERTY[ascii].x - points[count].x), 2) + pow(abs(QWERTY[ascii].y - points[count].y), 2));
                 //Calculate abs(hypotenuse distance) between a and point[count]
                 //Then calculate s with that distance
