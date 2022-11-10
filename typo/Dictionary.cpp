@@ -23,7 +23,6 @@ Heap correct(const std::vector<Point>& points, size_t maxcount, float cutoff) { 
     cutoff++;
     std::vector<Point> john;
     john.push_back(points[0]);
-    Heap typoCorrections(maxcount);
     return typoCorrections;
 
 }
