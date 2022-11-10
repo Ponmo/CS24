@@ -38,7 +38,7 @@ Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, floa
                 count++;
             }
             //If the score total/number of characters is lower than the cutoff, don't do anything. Else append to the heap through push or pushpop UNLESS its score is not higher than the top()
-            float score = meanScore/count; //count + 1??
+            float score = meanScore/float(count); //count + 1?? FLOAT COnversion?
             if(score >= cutoff) {
                 if (typoCorrections.count() > 0 && typoCorrections.top().score > score) { //This score is not greater than tops score
                     continue;
