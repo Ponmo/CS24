@@ -2,12 +2,14 @@
 #include "Dictionary.h"
 #include "Heap.h"
 #include <cmath>
+#include <iostream>
 //Your dictionary is declared for you in `Dictionary.h`.  It's a simple class with
 // two important jobs: it holds a list of all valid words, and owns the `correct()`
 // function that translates sequences of points into probable words.
 
 Dictionary::Dictionary(std::istream& stream) { //Ignore if line starts with # PARSING
     std::string line;
+    // std::cout << "Constructor";
     while (std::getline(stream, line)) {
         if(line == "" || line[0] == '#') {  //Lines that are not entirely lowercase ASCII are ignored
             continue;
@@ -19,26 +21,44 @@ Dictionary::Dictionary(std::istream& stream) { //Ignore if line starts with # PA
 }
 
 Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, float cutoff) const { // Return a Heap array of probable words that are similar to what the user has typed in through points arranged by highest score to lowest score.
+    // std::cout << "Correct Function Starts \n";
     Heap typoCorrections(maxcount);
     size_t wordLength = points.size();
     for(std::string word : mWords) { //loop through each word in our mWords
         //Find all words with the correct length
         if (word.length() == wordLength) {
+            // std::cout << word + "\n";
             size_t count = 0;
             float meanScore = 0;
             for(char a : word) { //loop through each character of the word, and compute its distance from the points
                 //Find x and y of a through point.cpp
                 size_t ascii = a - 97; //Finds the corresponding QWERTY point
+                if(a == 'I') {
+                    ascii = 8;
+                }
+                // std::cout << word + "\n";
+                // std::cout << QWERTY[ascii].x;
+                //  std::cout << " ascii value x\n";
+                //  std::cout << QWERTY[ascii].y;
+                //  std::cout << " ascii value y\n";
                 float distance = sqrt(pow(abs(QWERTY[ascii].x - points[count].x), 2) + pow(abs(QWERTY[ascii].y - points[count].y), 2));
+                // std::cout << distance;
+                // std::cout << "\n";
                 //Calculate abs(hypotenuse distance) between a and point[count]
                 //Then calculate s with that distance
                 float s = 1 / (10*pow(distance,2)+1);
+                // std::cout << s;
+                // std::cout << "\n";
                 //Add it to the score total
                 meanScore += s;
+                // std::cout << meanScore;
+                // std::cout << "\n";
                 count++;
             }
             //If the score total/number of characters is lower than the cutoff, don't do anything. Else append to the heap through push or pushpop UNLESS its score is not higher than the top()
-            float score = meanScore/float(count); //count + 1?? FLOAT COnversion?
+            float score = meanScore/count; //count + 1?? FLOAT COnversion?
+            // std::cout << score;
+            // std::cout << "\n";
             if(score >= cutoff) {
                 if (typoCorrections.count() > 0 && typoCorrections.top().score > score) { //This score is not greater than tops score
                     continue;
