@@ -3,6 +3,11 @@
 #include "Heap.h"
 #include <cmath>
 #include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+
 //Your dictionary is declared for you in `Dictionary.h`.  It's a simple class with
 // two important jobs: it holds a list of all valid words, and owns the `correct()`
 // function that translates sequences of points into probable words.
@@ -22,6 +27,8 @@ Dictionary::Dictionary(std::istream& stream) { //Ignore if line starts with # PA
 
 Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, float cutoff) const { // Return a Heap array of probable words that are similar to what the user has typed in through points arranged by highest score to lowest score.
     // std::cout << "Correct Function Starts \n";
+    std::cout << std::setprecision(3);
+    std::cout << std::fixed;
     Heap typoCorrections(maxcount);
     size_t wordLength = points.size();
     for(std::string word : mWords) { //loop through each word in our mWords
@@ -60,7 +67,7 @@ Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, floa
             // std::cout << score;
             // std::cout << "\n";
             if(score >= cutoff) {
-                if (typoCorrections.count() > 0 && typoCorrections.top().score > score) { //This score is not greater than tops score
+                if (typoCorrections.count() == maxcount && typoCorrections.top().score > score) { //This score is not greater than tops score
                     continue;
                 }
                 else {
@@ -75,7 +82,6 @@ Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, floa
         }
     }
     return typoCorrections;
-
 }
 
 // - The `correct()` function  is where the important stuff happens.  It takes in a
