@@ -54,9 +54,6 @@ Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, floa
             }
         }
     }
-    cutoff++;
-    std::vector<Point> john;
-    john.push_back(points[0]);
     return typoCorrections;
 
 }
