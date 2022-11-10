@@ -61,7 +61,7 @@ Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, floa
             // std::cout << "\n";
             if(score >= cutoff) {
                 if (typoCorrections.count() > 0 && typoCorrections.top().score > score) { //This score is not greater than tops score
-                    break;
+                    continue;
                 }
                 else {
                     if(typoCorrections.count() == typoCorrections.capacity())  {
