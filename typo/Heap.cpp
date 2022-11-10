@@ -49,7 +49,7 @@ Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inser
     }
     Heap::Entry lowestEntry = mData[0];
     mData[0] = mData[mCount-1];
-    if(mCount >= 2) {
+    // if(mCount >= 2) {
         Heap::Entry entryIterator = mData[0];
         size_t currentPosition = 0;
         while(((currentPosition * 2) + 1) < mCount) { //Loop until it reaches the end or finds it (break;)
@@ -67,7 +67,7 @@ Heap::Entry Heap::pop() { //Remove word with the lowest score. Use this if inser
                 break;
             }
         }
-    }
+    // }
     mCount--;
     return lowestEntry;
 }
@@ -81,7 +81,7 @@ Heap::Entry Heap::pushpop(const std::string& value, float score) { //First it po
     mData[0] = newEntry;
     // Heap::Entry entryIterator = mData[0];
     size_t currentPosition = 0;
-    if(mCount >= 2) {
+    // if(mCount >= 2) {
         while(((currentPosition * 2) + 1) < mCount) { //Loop until it reaches the end or finds it (break;)
             if(((currentPosition * 2) + 2) < mCount && score > mData[(currentPosition * 2) + 2].score && mData[(currentPosition * 2) + 1].score > mData[(currentPosition * 2) + 2].score) { //Swap right child
                 mData[currentPosition] =  mData[(currentPosition * 2) + 2];
@@ -97,7 +97,7 @@ Heap::Entry Heap::pushpop(const std::string& value, float score) { //First it po
                 break;
             }
         }
-    }
+    // }
     return lowestEntry;
 }
 void Heap::push(const std::string& value, float score) { //Needs percolation, pushes into the next possible space.
