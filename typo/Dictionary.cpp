@@ -19,5 +19,11 @@ Dictionary::Dictionary(std::istream& stream) { //Ignore if line starts with # PA
 }
 
 Heap correct(const std::vector<Point>& points, size_t maxcount, float cutoff) { // Return a Heap array of probable words that are similar to what the user has typed in through points arranged by highest score to lowest score.
+    Heap typoCorrections(maxcount);
+    cutoff++;
+    std::vector<Point> john;
+    john.push_back(points[0]);
+    Heap typoCorrections(maxcount);
+    return typoCorrections;
 
 }
