@@ -16,7 +16,7 @@ Dictionary::Dictionary(std::istream& stream) { //Ignore if line starts with # PA
     std::string line;
     // std::cout << "Constructor";
     while (std::getline(stream, line)) {
-        if(line == "" || line[0] == '#' || line[0] == 'I') {  //Lines that are not entirely lowercase ASCII are ignored
+        if(line == "" || line[0] == '#' || line[0] == 'I') {  //Lines that are not entirely lowercase ASCII are ignored (didn't do it this way because uh I thought I was suppose to be included; also I'm a professional commentator)
             continue;
         }
         else {

@@ -13,6 +13,7 @@ public:
 
 private:
     // Member Variables
+    std::vector<Star> *data;
 
 public:
     // Constructor & Destructor
