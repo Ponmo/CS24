@@ -9,6 +9,18 @@
 #include <fstream>
 #include <algorithm>
 
+void printRecursion(Node* curr) { 
+    if (curr -> greater) {
+        printRecursion(curr -> greater);
+    }
+    if (curr -> lesser) {
+        printRecursion(curr -> lesser);
+    }
+    std::cout << curr->star.id;
+    std::cout << " ";
+    return;
+};
+
 //Build a KD tree in place in a vector kevin says, most optimized way so far
 // std::vector<Star>& theFinishedVector as next parameter
 
@@ -32,9 +44,11 @@ Node* StarMap::recurse(std::vector<Star> list, unsigned long depth = 0) {
     std::sort(list.begin(), list.end(), &comparatory);
   }
   else {
-    std::sort(list.begin(), list.end(), &comparatorz);
+    std::sort(list.begin(), list.end(), &comparatorz); // [0, 1]
   }
-  size_t half_size = list.size() / 2;
+  size_t half_size = (list.size()-1) / 2;
+  // std::cout << half_size;
+  // std::cout << "\n";
   Star median = list[half_size];
   Node* med = new Node;
   med->star = median;
@@ -47,7 +61,7 @@ Node* StarMap::recurse(std::vector<Star> list, unsigned long depth = 0) {
     med->lesser = recurse(lesser, depth + 1);
   }
   else if (list.size() == 2) {
-    Node* great = new Node;
+    Node* great = new Node; //noah can u see me
     great->star = list[1];
     med -> greater = great;
   }
@@ -75,7 +89,6 @@ StarMap::StarMap(std::istream& stream) {
         star.y = std::stof(token);
       }
       if (count == 2) {
-        // std::cout << '3';
         star.z = std::stof(token);
       }
       count++;
@@ -84,11 +97,12 @@ StarMap::StarMap(std::istream& stream) {
     id++;
   }
   root = recurse(list, 0);
+ // printRecursion(root);
 }
 
 void StarMap::find_recurse(size_t n, float x, float y, float z, Node* curr, Node* parent, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth) {
   //First, just push everything it goes through onto the PQ
-  float distance = (curr->star.x - x)*(curr->star.x - x) + (curr->star.z - z)*(curr->star.z - z) + (curr->star.y - y)*(curr->star.y - y); //Distance to spaceship
+  float distance = (curr->star.x - x)*(curr->star.x - x) + (curr->star.y - y)*(curr->star.y - y) + (curr->star.z - z)*(curr->star.z - z); //Distance to spaceship
   if(pq->size() >= n && pq->top().distance > distance) {
     pq->pop();
     starDistance obj = {distance, curr};
@@ -101,7 +115,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, Node* curr, Node
   //Loops recursively through the KD tree until it finds the closest star. 
   if (depth == 0 || depth % 3 == 0) { //curr -> star.x >= x
     if(curr -> star.x >= x && curr -> greater != nullptr) {
-      find_recurse(n ,x, y, z, curr->greater, curr, pq, depth + 1);
+      find_recurse(n ,x, y, z, curr->greater, curr, pq, depth + 1); //GOT RID OF >= FOR ALL OF THEMWIOHFIOWEFHIOEWHFIOWEHIFOEHWIFHIOEWFHWEIOFHIOEWHFIOEWHFIOHEIO
     }
     else if (curr -> lesser != nullptr) {
       find_recurse(n ,x, y, z, curr->lesser, curr, pq, depth + 1);
@@ -126,42 +140,44 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, Node* curr, Node
   //So now, we have a pq of the closest stars that we ran through, we want to check the other dimenseion
 
   if(parent != nullptr) { //We are not at the root
-    float tDistance = pq->top().distance;
     //float pDistance = (parent->star.x - x)*(parent->star.x - x) + (parent->star.z - z)*(parent->star.z - z) + (parent->star.y - y)*(parent->star.y - y);
-    if(depth % 3 == 0) {
-      if (tDistance > (parent->star.x - x)) {
-        if(curr == parent -> lesser) {
-          find_recurse(n ,x, y, z, parent->greater, curr, pq, depth);
+    if((depth - 1) % 3 == 0) {
+      float tDistance = sqrt(pq->top().distance);
+      if (tDistance > std::abs(parent->star.x - x)) {
+        if(curr == parent -> lesser && parent -> greater != nullptr) {
+          find_recurse(n ,x, y, z, parent->greater, nullptr, pq, depth); //I changed curr to nullptr for each of these
         }
-        else if(curr == parent -> greater) {
-          find_recurse(n ,x, y, z, parent->lesser, curr, pq, depth);
+        else if(curr == parent -> greater && parent -> lesser != nullptr) {
+          find_recurse(n ,x, y, z, parent->lesser, nullptr, pq, depth);
         }
       }
     }
-    else if (depth % 3 == 1) {
-      if (tDistance > (parent->star.y - y)) {
-        if(curr == parent -> lesser) {
-          find_recurse(n ,x, y, z, parent->greater, curr, pq, depth);
+    
+    else if ((depth - 1) % 3 == 1) {
+      float tDistance = sqrt(pq->top().distance);
+      if (tDistance > std::abs(parent->star.y - y)) {
+        if(curr == parent -> lesser && parent -> greater != nullptr) {
+          find_recurse(n ,x, y, z, parent->greater, nullptr, pq, depth);
         }
-        else if(curr == parent -> greater) {
-          find_recurse(n ,x, y, z, parent->lesser, curr, pq, depth);
+        else if(curr == parent -> greater && parent -> lesser != nullptr) {
+          find_recurse(n ,x, y, z, parent->lesser, nullptr, pq, depth);
         }
       }
     }
     else {
-      if (tDistance > (parent->star.z - z)) {
-        if(curr == parent -> lesser) {
-          find_recurse(n ,x, y, z, parent->greater, curr, pq, depth);
+      float tDistance = sqrt(pq->top().distance);
+      if (tDistance > std::abs(parent->star.z - z)) {
+        if(curr == parent -> lesser && parent -> greater != nullptr) {
+          find_recurse(n ,x, y, z, parent->greater, nullptr, pq, depth);
         }
-        else if(curr == parent -> greater) {
-          find_recurse(n ,x, y, z, parent->lesser, curr, pq, depth);
+        else if(curr == parent -> greater && parent -> lesser != nullptr) {
+          find_recurse(n ,x, y, z, parent->lesser, nullptr, pq, depth);
         }
       }
     }
   }
-  else { //We are at the root
-
-  }
+  // std::cout << sqrt(pq->top().distance);
+  // std:: cout << "\n";
 }
 
 
@@ -169,8 +185,11 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, Node* curr, Node
 std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
   std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq = new std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>;
   find_recurse(n, x, y, z, root, nullptr, pq, 0);
+  // std::cout << root->star.z;
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
+    // std::cout << pq->top().distance;
+    // std::cout << "\n";
     nearest.insert(nearest.begin(), pq->top().star->star);
     pq->pop();
   }
