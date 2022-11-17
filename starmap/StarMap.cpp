@@ -25,13 +25,13 @@ bool comparatorz(const Star& lhs, const Star& rhs) {
 
 Node* StarMap::recurse(std::vector<Star> list, unsigned long depth = 0) {
   if (depth == 0 || depth % 3 == 0) {
-    sort(list.begin(), list.end(), &comparatorx);
+    std::sort(list.begin(), list.end(), &comparatorx);
   }
   else if (depth % 3 == 1) { 
-    sort(list.begin(), list.end(), &comparatory);
+    std::sort(list.begin(), list.end(), &comparatory);
   }
   else {
-    sort(list.begin(), list.end(), &comparatorz);
+    std::sort(list.begin(), list.end(), &comparatorz);
   }
   size_t half_size = list.size() / 2;
   Star median = list[half_size];
@@ -114,7 +114,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, Node* curr, Node
       find_recurse(n ,x, y, z, curr->lesser, curr, pq, depth + 1);
     }
   }
-  else {//
+  else { //z
     if(curr -> star.z >= z && curr -> greater != nullptr) {
       find_recurse(n ,x, y, z, curr->greater, curr, pq, depth + 1);
     }
@@ -126,7 +126,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, Node* curr, Node
 
   if(parent != nullptr) { //We are not at the root
     float tDistance = pq->top().distance;
-    float pDistance = (parent->star.x - x)*(parent->star.x - x) + (parent->star.z - z)*(parent->star.z - z) + (parent->star.y - y)*(parent->star.y - y);
+    //float pDistance = (parent->star.x - x)*(parent->star.x - x) + (parent->star.z - z)*(parent->star.z - z) + (parent->star.y - y)*(parent->star.y - y);
     if(depth % 3 == 0) {
       if (tDistance > (parent->star.x - x)) {
         if(curr == parent -> lesser) {
