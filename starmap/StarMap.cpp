@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iterator>
 #include <fstream>
+#include <algorithm>
 
 //Build a KD tree in place in a vector kevin says, most optimized way so far
 // std::vector<Star>& theFinishedVector as next parameter
