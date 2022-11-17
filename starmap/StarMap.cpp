@@ -62,7 +62,7 @@ StarMap* StarMap::create(std::istream& stream) {
 
 struct CompareAge {
     bool operator()(starDistance const & p1, starDistance const & p2) {
-        return p1.distance > p2.distance;
+        return p1.distance < p2.distance;
     }
 };
 
@@ -72,6 +72,7 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find fu
     float distance = pow(star.x - x, 2) + pow(star.y - y, 2) + pow(star.z - z, 2);
     starDistance curr = {distance, star.id};
     if(pq.size() >= n && pq.top().distance > distance) {
+      std::cout << pq.top().id;
       pq.pop();
       pq.push(curr);
     }
@@ -80,12 +81,10 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find fu
     }
   }
   std::vector<Star> nearest;
-  for(size_t i = 0; i < n; i++) {
+  for(size_t i = 0; i < n; i++) { //print backwards
     // std::cout << pq.top().id;
     // std::cout << " ";
-    // std::cout << pq.top().distance;
-    // std::cout << "\n";
-    nearest.push_back(data->at(pq.top().id - 1));
+    nearest.insert(nearest.begin(), data->at(pq.top().id - 1));
     // nearest.push_back(data->at(pq.top().id - 1));
     pq.pop();
   }
