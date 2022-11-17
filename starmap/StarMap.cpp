@@ -168,8 +168,6 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, Node* curr, Node
 std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
   std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq = new std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>;
   find_recurse(n, x, y, z, root, nullptr, pq, 0);
-  std::cout << "Reached the end";
-
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
     nearest.insert(nearest.begin(), pq->top().star->star);
