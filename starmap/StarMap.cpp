@@ -122,33 +122,33 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find fu
 //Internal Nodes Split the Data into perfect halves
 //External Nodes are the stars
 
-StarMap::StarMap(std::istream& stream) {
-  data = new std::vector<Star>; 
-  std::string line;
-  int id = 1;
-  while (std::getline(stream, line)) {
-    std::stringstream nLine(line);
-    std::string token;
-    Star star;
-    star.id = id;
-    int count = 0;
-    while(std::getline(nLine, token, '\t')) {
-      // std::cout << token;
-      if (count == 0) {
-        // std::cout << '1';
-        star.x = std::stof(token);
-      }
-      if (count == 1) {
-        // std::cout << '2';
-        star.y = std::stof(token);
-      }
-      if (count == 2) {
-        // std::cout << '3';
-        star.z = std::stof(token);
-      }
-      count++;
-    }
-    data->push_back(star);
-    id++;
-  }
-}
+// StarMap::StarMap(std::istream& stream) {
+//   data = new std::vector<Star>; 
+//   std::string line;
+//   int id = 1;
+//   while (std::getline(stream, line)) {
+//     std::stringstream nLine(line);
+//     std::string token;
+//     Star star;
+//     star.id = id;
+//     int count = 0;
+//     while(std::getline(nLine, token, '\t')) {
+//       // std::cout << token;
+//       if (count == 0) {
+//         // std::cout << '1';
+//         star.x = std::stof(token);
+//       }
+//       if (count == 1) {
+//         // std::cout << '2';
+//         star.y = std::stof(token);
+//       }
+//       if (count == 2) {
+//         // std::cout << '3';
+//         star.z = std::stof(token);
+//       }
+//       count++;
+//     }
+//     data->push_back(star);
+//     id++;
+//   }
+// }
