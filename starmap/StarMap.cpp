@@ -72,11 +72,11 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find fu
     float distance = pow(star.x - x, 2) + pow(star.y - y, 2) + pow(star.z - z, 2);
     starDistance curr = {distance, star.id};
     if(pq.size() >= n && pq.top().distance > distance) {
-      std::cout << pq.top().id;
+      // std::cout << pq.top().id;
       pq.pop();
       pq.push(curr);
     }
-    else {
+    else if (pq.size() < n) {
       pq.push(curr);
     }
   }

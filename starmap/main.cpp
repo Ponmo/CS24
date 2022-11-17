@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
     }
 
     // Edit this bit!
-    size_t count = 8;
+    size_t count = 5;
     StarMap* map;
 
     try {
