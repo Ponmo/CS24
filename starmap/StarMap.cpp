@@ -14,6 +14,8 @@ struct starDistance {
     int id;
 };
 
+
+
 //Find if it is a disk or whatever
 StarMap::StarMap(std::istream& stream) {
   data = new std::vector<Star>; 
@@ -28,15 +30,15 @@ StarMap::StarMap(std::istream& stream) {
     while(std::getline(nLine, token, '\t')) {
       // std::cout << token;
       if (count == 0) {
-        std::cout << '1';
+        // std::cout << '1';
         star.x = std::stof(token);
       }
       if (count == 1) {
-        std::cout << '2';
+        // std::cout << '2';
         star.y = std::stof(token);
       }
       if (count == 2) {
-        std::cout << '3';
+        // std::cout << '3';
         star.z = std::stof(token);
       }
       count++;
@@ -79,8 +81,8 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find fu
   }
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
-    std::cout << pq.top().id;
-    std::cout << " ";
+    // std::cout << pq.top().id;
+    // std::cout << " ";
     nearest.insert(nearest.begin(), data->at(pq.top().id - 1));
     // nearest.push_back(data->at(pq.top().id - 1));
     pq.pop();
@@ -112,3 +114,41 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find fu
 //   }
 //   return stars;
 // };
+
+
+
+
+
+//Internal Nodes Split the Data into perfect halves
+//External Nodes are the stars
+
+StarMap::StarMap(std::istream& stream) {
+  data = new std::vector<Star>; 
+  std::string line;
+  int id = 1;
+  while (std::getline(stream, line)) {
+    std::stringstream nLine(line);
+    std::string token;
+    Star star;
+    star.id = id;
+    int count = 0;
+    while(std::getline(nLine, token, '\t')) {
+      // std::cout << token;
+      if (count == 0) {
+        // std::cout << '1';
+        star.x = std::stof(token);
+      }
+      if (count == 1) {
+        // std::cout << '2';
+        star.y = std::stof(token);
+      }
+      if (count == 2) {
+        // std::cout << '3';
+        star.z = std::stof(token);
+      }
+      count++;
+    }
+    data->push_back(star);
+    id++;
+  }
+}
