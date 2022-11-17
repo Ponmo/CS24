@@ -69,7 +69,8 @@ struct CompareAge {
 std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find function
   std::priority_queue<starDistance, std::vector<starDistance>, CompareAge> pq;
   for(Star star : *data) {
-    float distance = pow(star.x - x, 2) + pow(star.y - y, 2) + pow(star.z - z, 2);
+    // float distance = pow(star.x - x, 2) + pow(star.y - y, 2) + pow(star.z - z, 2);
+    float distance = (star.x - x)*(star.x - x) + (star.z - z)*(star.z - z) + (star.y - y)*(star.y - y);
     starDistance curr = {distance, star.id};
     if(pq.size() >= n && pq.top().distance > distance) {
       // std::cout << pq.top().id;
