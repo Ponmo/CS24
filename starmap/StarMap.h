@@ -6,6 +6,16 @@
 #include <istream>
 #include <vector>
 
+
+struct Node {
+  //Star, the median node inside the list of nodes.
+  //Depth?
+  //list of nodes on a given side, becomes obsolete once constructed..
+  Star* star;
+  Node* left = nullptr;
+  Node* right = nullptr;
+};
+
 class StarMap {
 public:
     // Required Class Function
@@ -22,8 +32,8 @@ public:
 
     // Required Member Function
     std::vector<Star> find(size_t n, float x, float y, float z);
+    // void recurse(Node* curr, std::vector<Star> list, unsigned long depth);
 
     // Other Member Functions
 };
-
 #endif

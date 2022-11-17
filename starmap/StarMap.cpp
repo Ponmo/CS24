@@ -83,14 +83,14 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find fu
   for(size_t i = 0; i < n; i++) {
     // std::cout << pq.top().id;
     // std::cout << " ";
-    nearest.insert(nearest.begin(), data->at(pq.top().id - 1));
+    // std::cout << pq.top().distance;
+    // std::cout << "\n";
+    nearest.push_back(data->at(pq.top().id - 1));
     // nearest.push_back(data->at(pq.top().id - 1));
     pq.pop();
   }
   return nearest;
 };
-
-
 
 
 // std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find function
@@ -119,10 +119,39 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find fu
 
 
 
-//Internal Nodes Split the Data into perfect halves
-//External Nodes are the stars
+// //Internal Nodes Split the Data into perfect halves
+// //External Nodes are the stars
+
+
+// void StarMap::recurse(Node* curr, std::vector<Star> list, unsigned long depth = 0) {
+//   if (depth == 0 || depth % 3 == 0) {
+//     list.sort()
+//   }
+//   else if (depth % 3 == 1) {
+//     list.sort()
+//   }
+//   else (depth % 3 == 2) {
+//     list.sort()
+//   }
+//   //std::vector<Star> left = list[0:curr]
+  
+//   //find less median child
+//   //leftchildpointer = recurse(child left, left, depth + 1)
+//   //set left pointer
+  
+//   //std::vector<Star> right = list[0:curr]
+//   //find greater median child
+//   //rightchildpointer = recurse(child right, depth + 1)
+//   //set right pointer
+//   //return pointer to node
+// }
 
 // StarMap::StarMap(std::istream& stream) {
+//   //first get "median" point on x-axis to set as root node
+//   //Node* node = new Node
+//   //node->star = data[333]
+//   //recurse(node, data, depth = 0)
+
 //   data = new std::vector<Star>; 
 //   std::string line;
 //   int id = 1;
@@ -152,3 +181,8 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) { //find fu
 //     id++;
 //   }
 // }
+
+
+//https://yasenh.github.io/post/kd-tree/
+
+//For step 2, another way to choose the cutting dimension is to calculate the variance of all values in each dimension and the largest one will be chosen as the cutting dimension. The larger variance means data is more scatter on the axis, so that we can split data better in this way.
