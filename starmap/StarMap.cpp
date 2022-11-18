@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 
 void printRecursion(Node* curr) { 
     if (curr -> greater) {
