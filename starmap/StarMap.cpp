@@ -1,7 +1,6 @@
 #include "StarMap.h"
 #include <sstream>
 #include <iostream>
-#include <map>
 #include <cmath>
 
 void printRecursion(Node* curr) { 
