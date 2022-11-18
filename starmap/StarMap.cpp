@@ -21,7 +21,7 @@ void printRecursion(Node* curr) {
     return;
 };
 
-//Build a KD tree in place in a vector kevin says, most optimized way so far
+//Build a KD tree in place in a vector professor kevin says, most optimized way so far
 // std::vector<Star>& theFinishedVector as next parameter
 
 bool comparatorx(const Star& lhs, const Star& rhs) {
@@ -114,27 +114,27 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, Node* curr, Node
   }  
   //Loops recursively through the KD tree until it finds the closest star. 
   if (depth == 0 || depth % 3 == 0) { //curr -> star.x >= x
-    if(curr -> star.x >= x && curr -> greater != nullptr) {
-      find_recurse(n ,x, y, z, curr->greater, curr, pq, depth + 1); //GOT RID OF >= FOR ALL OF THEMWIOHFIOWEFHIOEWHFIOWEHIFOEHWIFHIOEWFHWEIOFHIOEWHFIOEWHFIOHEIO
+    if(curr -> star.x >= x && curr -> lesser != nullptr) {
+      find_recurse(n ,x, y, z, curr->lesser, curr, pq, depth + 1); //GOT RID OF >= FOR ALL OF THEMWIOHFIOWEFHIOEWHFIOWEHIFOEHWIFHIOEWFHWEIOFHIOEWHFIOEWHFIOHEIO
     }
-    else if (curr -> lesser != nullptr) {
-      find_recurse(n ,x, y, z, curr->lesser, curr, pq, depth + 1);
+    else if (curr -> greater != nullptr) {
+      find_recurse(n ,x, y, z, curr->greater, curr, pq, depth + 1);
     }
   }
   else if (depth % 3 == 1) {//y
-    if(curr -> star.y >= y && curr -> greater != nullptr) {
-      find_recurse(n ,x, y, z, curr->greater, curr, pq, depth + 1);
-    }
-    else if (curr -> lesser != nullptr) {
+    if(curr -> star.y >= y && curr -> lesser != nullptr) {
       find_recurse(n ,x, y, z, curr->lesser, curr, pq, depth + 1);
+    }
+    else if (curr -> greater != nullptr) {
+      find_recurse(n ,x, y, z, curr->greater, curr, pq, depth + 1);
     }
   }
   else { //z
-    if(curr -> star.z >= z && curr -> greater != nullptr) {
-      find_recurse(n ,x, y, z, curr->greater, curr, pq, depth + 1);
-    }
-    else if (curr -> lesser != nullptr) {
+    if(curr -> star.z >= z && curr -> lesser != nullptr) {
       find_recurse(n ,x, y, z, curr->lesser, curr, pq, depth + 1);
+    }
+    else if (curr -> greater != nullptr) {
+      find_recurse(n ,x, y, z, curr->greater, curr, pq, depth + 1);
     }
   }
   //So now, we have a pq of the closest stars that we ran through, we want to check the other dimenseion
