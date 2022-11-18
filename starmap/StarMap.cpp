@@ -2,12 +2,7 @@
 #include <sstream>
 #include <iostream>
 #include <map>
-#include <set>
-#include <stack>
 #include <cmath>
-#include <iterator>
-#include <fstream>
-#include <algorithm>
 
 void printRecursion(Node* curr) { 
     if (curr -> greater) {
@@ -320,67 +315,75 @@ StarMap* StarMap::create(std::istream& stream) {
 // // }
 // // // unsigned long depth, size_t index, size_t start, size_t end
 // // //Data Unsorted, Depth = 0, Index = 0, Start = 0, end = size of vector
-// // void StarMap::recurse(std::vector<Star>* data) {
+
+
+// void StarMap::recurse(std::vector<Star>* data) {
   
-// //   std::vector<size_t> indexes;
-// //   while(index < data->size()) {
-// //     auto medianValue = //Get median index starting from its index in indexes to the next index in indexes
+//   size_t index = 0;
+//   std::vector<size_t> indexes;
+//   while(index < data->size()) {
+//     size_t begin = 0;
+//     size_t ending = 0;
+//     auto medianValue = data->begin() + (data->size() - 1)/2; //Get median index starting from its index in indexes to the next index in indexes
 
-// //     // [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20]
-// //     // [0 1 1 2 2 2 2 0 0 0 0  0  0  0  0  1  1  1  1  1  1
-// //     // [1, 2, 4, 8, 16]
-// //     if (index == 0 || depth % 3 == 0) { //Calculate Depth Based on Index see chart above
-// //       std::nth_element(data->begin() + start, m, end, &comparatorx); //Sort from start of its index in indexes to the next index in indexes and get m 
-// //     }
-// //     else if (depth % 3 == 1) { //Calculate Depth Based on Index see chart above
-// //       std::nth_element(data->begin() + start, m, end, &comparatory);
-// //     }
-// //     else {
-// //       std::nth_element(data->begin() + start, m, end, &comparatorz);
-// //     } 
+//     // [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20]
+//     // [0 1 1 2 2 2 2 0 0 0 0  0  0  0  0  1  1  1  1  1  1
+//     // [1, 2, 4, 8, 16]
+//     if (index == 0 || index % 3 == 0) { //Calculate Depth Based on Index see chart above
+//       std::nth_element(data->begin() + start, m, end, &comparatorx); //Sort from start of its index in indexes to the next index in indexes and get m 
+//     }
+//     else if (index % 3 == 1) { //Calculate Depth Based on Index see chart above
+//       std::nth_element(data->begin() + start, m, end, &comparatory);
+//     }
+//     else {
+//       std::nth_element(data->begin() + start, m, end, &comparatorz);
+//     } 
 
-// //     index++;  //swap the next index now with m in a specified range
-// //   }
-// //   //Sort by x, y or z, from given start to given end
-// //   auto m = data->begin() + (data->size() - 1)/2;
-// //   if (depth == 0 || depth % 3 == 0) {
-// //     std::nth_element(data->begin() + start, m, end, &comparatorx);
-// //   }
-// //   else if (depth % 3 == 1) { 
-// //     std::nth_element(data->begin() + start, m, end, &comparatory);
-// //   }
-// //   else {
-// //     std::nth_element(data->begin() + start, m, end, &comparatorz);
-// //   } 
-// //   //Swap index with 
-// //   //call recurse with index++
-// //   //[A, less X, more X]
-// //   //[A, B, less Y, more Y, more X]
-// //   //[A, B, C, less Y, more Y, less Y, more Y]
-// //   //[A, B, C, D, less Z, more Z, more Y, less Y, more Y]
-// //   //[A, B, C, D, E, less Z, more Z, less Z, more Z, less Y, more Y]
-// //   //[A, B, C, D, E, F, less Z, more Z, less Z,more Z, less Z, more Z, more Y]
-// //   //[A, B, C, D, E, F, G, less Z, more Z, less Z, more Z, less Z, more Z, less Z, more Z]
-// //   //[A, B, C, D, E, F, G, H, less X, more X, more Z, less Z, more Z, less Z, more Z, less Z, more Z]
-// //   //[A, B, C, D, E, F, G, H, I, less X, more X, more Z, less Z, more Z, less Z, more Z, less Z, more Z]
+//     index++;  //swap the next index now with m in a specified range
+//   }
 
 
-// //   recurse(data, depth + 1, index++, data->begin() + index + start, end of half the sorted array);
+
+
+
+//   //Sort by x, y or z, from given start to given end
+//   auto m = data->begin() + (data->size() - 1)/2;
+//   if (depth == 0 || depth % 3 == 0) {
+//     std::nth_element(data->begin() + start, m, end, &comparatorx);
+//   }
+//   else if (depth % 3 == 1) { 
+//     std::nth_element(data->begin() + start, m, end, &comparatory);
+//   }
+//   else {
+//     std::nth_element(data->begin() + start, m, end, &comparatorz);
+//   } 
+//   //Swap index with 
+//   //call recurse with index++
+//   //[Array]
+//   //[A, less X, more X]
+//   //[A, B, less Y, more Y, more X]
+//   //[A, B, C, less Y, more Y, less Y, more Y]
+//   //[A, B, C, D, less Z, more Z, more Y, less Y, more Y]
+//   //[A, B, C, D, E, less Z, more Z, less Z, more Z, less Y, more Y]
+//   //[A, B, C, D, E, F, less Z, more Z, less Z,more Z, less Z, more Z, more Y]
+//   //[A, B, C, D, E, F, G, less Z, more Z, less Z, more Z, less Z, more Z, less Z, more Z]
+//   //[A, B, C, D, E, F, G, H, less X, more X, more Z, less Z, more Z, less Z, more Z, less Z, more Z]
+//   //[A, B, C, D, E, F, G, H, I, less X, more X, more Z, less Z, more Z, less Z, more Z, less Z, more Z]
   
-// //   if (list.size() > 2) {
-// //     std::vector<Star> lesser(list.begin(), m);
-// //     std::vector<Star> greater(m + 1, list.end());
+//   if (list.size() > 2) {
+//     std::vector<Star> lesser(list.begin(), m);
+//     std::vector<Star> greater(m + 1, list.end());
 
-// //     med->greater = recurse(greater, depth + 1);
-// //     med->lesser = recurse(lesser, depth + 1);
-// //   }
-// //   else if (list.size() == 2) {
-// //     Node* great = new Node; 
-// //     great->star = list[1];
-// //     med -> greater = great;
-// //   }
-// //   return med;
-// // }
+//     med->greater = recurse(greater, depth + 1);
+//     med->lesser = recurse(lesser, depth + 1);
+//   }
+//   else if (list.size() == 2) {
+//     Node* great = new Node; 
+//     great->star = list[1];
+//     med -> greater = great;
+//   }
+//   return med;
+// }
 // // StarMap::StarMap(std::istream& stream) {
 // //   data = new std::vector<Star>[5000];
 // //   //this should be data then?
