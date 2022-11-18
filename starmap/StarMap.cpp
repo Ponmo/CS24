@@ -73,7 +73,7 @@ StarMap::StarMap(std::istream& stream) {
 
   std::vector<Star> list; 
   std::string line;
-  unsigned long id = 1;
+  int id = 1;
   while (std::getline(stream, line)) {
     std::stringstream nLine(line);
     float x, y, z;
