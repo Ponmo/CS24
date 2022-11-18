@@ -28,12 +28,27 @@ struct CompareAge {
     }
 };
 
+// class StarMap {
+//     public:
+//         static StarMap* create(std::istream& stream);
+
+//     private:
+//         std::vector<Star> *data;
+
+//     public:
+//         StarMap(std::istream& stream);
+//         ~StarMap();
+
+//         std::vector<Star> find(size_t n, float x, float y, float z);
+//         void recurse(std::vector<Star>* data);
+//         void find_recurse(size_t n, float x, float y, float z, Node* curr, Node* parent, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth);
+//         //std::vector<Star>&) if want to pass by reference
+// };
 class StarMap {
     public:
         static StarMap* create(std::istream& stream);
 
     private:
-        std::vector<Star> *data;
         Node* root;
 
     public:
