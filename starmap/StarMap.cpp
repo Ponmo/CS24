@@ -98,7 +98,7 @@ StarMap::StarMap(std::istream& stream) {
     id++;
   }
   root = recurse(list, 0);
-  printRecursion(root);
+  // printRecursion(root);
 }
 
 void StarMap::find_recurse(size_t n, float x, float y, float z, Node* curr, Node* parent, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth) {
