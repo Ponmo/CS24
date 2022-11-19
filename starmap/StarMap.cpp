@@ -109,7 +109,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
       find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, index, endex);
     }
     else if (rightChild > curr && rightChild <= endex) { //Find greater child
-      //     std::cout << rightChild;
+      // std::cout << rightChild;
       // std::cout << " gz\n";
       find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, rightChild, index, endex);
     }
