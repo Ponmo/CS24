@@ -64,7 +64,7 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
 //-1
 void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth, int curr, int index, int endex, int parex, int leftex, int rightex, int parexEndex, int parexIndex) {
   float distance = (data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z); //Distance to spaceship
-  if(pq->size() >= n && pq->top().distance > distance) { //Push everything we find onto the pq if they are good
+  if(pq->size() >= n && pq->top().distance >= distance) { //Push everything we find onto the pq if they are good
     pq->pop();
     starDistance obj = {distance, data->at(curr)};
     pq->push(obj);
