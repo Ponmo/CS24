@@ -29,6 +29,9 @@ StarMap::StarMap(std::istream& stream) {
     // nLine >> data->back().x >> data->back().y >> data->back().z;
   }
   createKD(data, 0, 0, data->size() - 1);
+  for(int i = 0; i<data->size(); i++) {
+    std::cout << data->at(i).id;
+  }
 }
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) {
   int med = (endex-index)/2 + index; 
@@ -116,7 +119,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
     if((depth - 1) % 3 == 0) {
       float tDistance = sqrt(pq->top().distance);
       if (tDistance > std::abs(data->at(parex).x - x)) {  // curr+1+(endex-curr-1)/2 > curr &&  curr+1+(endex-curr-1)/2 <= endex
-        if(data->at(curr).id == leftChild && parex+1+(parexEndex-parex-1)/2 > parex && parex+1+(parexEndex-parex-1)/2 <= parexEndex) { //Greater Child Exists
+        if(data->at(curr).id == leftChild && parex+1+(parexEndex-parex-1)/2 > parex && parex+1+(parexEndex-parex-1)/2 <= parexEndex) { //Greater Child Exists //REPLACED LEFTCHILD AND RICHTCHILD
           find_recurse(n ,x, y, z, pq, depth, rightChild, parex+1, parexEndex, -1, -1, -1, -1, -1); //What should index and endex be
         }
         else if(data->at(curr).id == rightChild && parexIndex+(parex-1-parexIndex)/2 >= parexIndex && parexIndex+(parex-1-parexIndex)/2 < parex) { //Lesser Child Exists index+(curr-1-index)/2; >= index && index+(curr-1-index)/2; < curr

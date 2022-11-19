@@ -1,5 +1,5 @@
 make:
 	g++ -o program StarMap.cpp main.cpp
-	./program data/uniform1k.tsv
+	./program data/eight.tsv
 clean:
 	$(RM) program
