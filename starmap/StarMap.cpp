@@ -31,7 +31,6 @@ StarMap::StarMap(std::istream& stream) {
   createKD(data, 0, 0, data->size() - 1);
 }
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) {
-  std::cout << "1 ";
   int med = (endex-index)/2 + index; 
   auto m = data->begin() + med;
   if (depth == 0 || depth % 3 == 0) {
