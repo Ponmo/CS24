@@ -14,7 +14,6 @@ bool comparatory(const Star& lhs, const Star& rhs) {
 bool comparatorz(const Star& lhs, const Star& rhs) {
    return lhs.z < rhs.z;
 }
-
 StarMap::StarMap(std::istream& stream) {
   data = new std::vector<Star>;
   std::string line;
@@ -54,13 +53,14 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
   find_recurse(n, x, y, z, pq, 0, (data->size()-1)/2, 0, data->size() - 1, -1, -1, -1, -1, -1);
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
-    nearest.insert(nearest.begin(), pq->top().star); //O and Make vector non-resizable?
+    nearest.insert(nearest.begin(), pq->top().star); //O 
     pq->pop();
   }
   delete pq;
   return nearest;
 }
 void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth, int curr, int index, int endex, int parex, int leftex, int rightex, int parexEndex, int parexIndex) {
+  std::cout << "1 ";
   float distance = (data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z); //Distance to spaceship
   if(pq->size() >= n && pq->top().distance > distance) {
     pq->pop();
@@ -71,30 +71,32 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
     starDistance obj = {distance, data->at(curr)};
     pq->push(obj);
   }  
-  int leftChild = index+(curr-1-index)/2;
-  int rightChild = curr+1+(endex-curr-1)/2;
+  // int leftChild = index+(curr-1-index)/2;
+  // int rightChild = curr+1+(endex-curr-1)/2;
+
+  
   if (depth == 0 || depth % 3 == 0) {
-    if(data->at(curr).x >= x && leftChild >= index && leftChild < curr) {
-      find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, endex, index);
+    if(data->at(curr).x >= x && index+(curr-1-index)/2 >= index && index+(curr-1-index)/2 < curr) {
+      find_recurse(n ,x, y, z, pq, depth + 1, index+(curr-1-index)/2, index, curr - 1, curr, index+(curr-1-index)/2, curr+1+(endex-curr-1)/2, endex, index);
     }
-    else if (rightChild > curr && rightChild <= endex) {
-      find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, rightChild, endex, index);
+    else if (curr+1+(endex-curr-1)/2 > curr && curr+1+(endex-curr-1)/2 <= endex) {
+      find_recurse(n ,x, y, z, pq, depth + 1, curr+1+(endex-curr-1)/2, curr + 1, endex, curr, index+(curr-1-index)/2, curr+1+(endex-curr-1)/2, endex, index);
     }
   }
   else if (depth % 3 == 1) {
-    if(data->at(curr).y >= y && leftChild >= index && leftChild < curr) {
-      find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, endex, index);
+    if(data->at(curr).y >= y && index+(curr-1-index)/2 >= index && index+(curr-1-index)/2 < curr) {
+      find_recurse(n ,x, y, z, pq, depth + 1, index+(curr-1-index)/2, index, curr - 1, curr, index+(curr-1-index)/2, curr+1+(endex-curr-1)/2, endex, index);
     }
-    else if (rightChild > curr && rightChild <= endex) {
-      find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, rightChild, endex, index);
+    else if (curr+1+(endex-curr-1)/2 > curr && curr+1+(endex-curr-1)/2 <= endex) {
+      find_recurse(n ,x, y, z, pq, depth + 1, curr+1+(endex-curr-1)/2, curr + 1, endex, curr, index+(curr-1-index)/2, curr+1+(endex-curr-1)/2, endex, index);
     }
   }
   else {
-    if(data->at(curr).z >= z && leftChild >= index && leftChild < curr) {
-      find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, endex, index);
+    if(data->at(curr).z >= z && index+(curr-1-index)/2 >= index && index+(curr-1-index)/2 < curr) {
+      find_recurse(n ,x, y, z, pq, depth + 1, index+(curr-1-index)/2, index, curr - 1, curr, index+(curr-1-index)/2, curr+1+(endex-curr-1)/2, endex, index);
     }
-    else if (rightChild > curr && rightChild <= endex) {
-      find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, rightChild, endex, index);
+    else if (curr+1+(endex-curr-1)/2 > curr && curr+1+(endex-curr-1)/2 <= endex) {
+      find_recurse(n ,x, y, z, pq, depth + 1, curr+1+(endex-curr-1)/2, curr + 1, endex, curr, index+(curr-1-index)/2, curr+1+(endex-curr-1)/2, endex, index);
     }
   }
 
@@ -133,7 +135,6 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
       }
     }
   }
-  
 }
 
 StarMap::~StarMap() {
