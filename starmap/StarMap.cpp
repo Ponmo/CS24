@@ -44,11 +44,10 @@ void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, 
   }
   if(med-1-index >= 1) { //If there are two things left to sort on the left side or more, then sort
     createKD(data, depth + 1, index, med-1);  //Finding lesser child
+  }
   if(endex-med-1 >= 1) { //If there are two thing left to sort on the right side or more, then sort
     createKD(data, depth + 1, med + 1, endex); //Finding greater Child
   }
-  }
-
 }
 std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
   std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq = new std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>;
@@ -77,7 +76,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
   int leftChild = index+(curr-1-index)/2;
   int rightChild = curr+1+(endex-curr-1)/2;
   if (depth == 0 || depth % 3 == 0) { //x
-    if(data->at(curr).x > x && leftChild >= index && leftChild < curr) { //Find lesser child 
+    if(data->at(curr).x >= x && leftChild >= index && leftChild < curr) { //Find lesser child 
       // std::cout << leftChild; //replace curr with endex
       // std::cout << " lx\n";
       find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, index, endex);
@@ -89,7 +88,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
     }
   }
   else if (depth % 3 == 1) { //y
-    if(data->at(curr).y > y && leftChild >= index && leftChild < curr) { //Find lesser child 
+    if(data->at(curr).y >= y && leftChild >= index && leftChild < curr) { //Find lesser child 
       // std::cout << leftChild;
       // std::cout << " ly\n";
       find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, index, endex);
@@ -101,7 +100,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
     }
   }
   else { //z
-    if(data->at(curr).z > z && leftChild >= index && leftChild < curr) { //Find lesser child 
+    if(data->at(curr).z >= z && leftChild >= index && leftChild < curr) { //Find lesser child 
       // std::cout << leftChild;
       // std::cout << " lz\n";
       find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, index, endex);
