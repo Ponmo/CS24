@@ -74,6 +74,8 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
   int leftChild = index+(curr-1-index)/2;
   int rightChild = curr+1+(endex-curr-1)/2;
   int d = depth % 3;
+  int c = depth * 100/12*100/12*100/12*100/12*100/12*100/12*100/12*100/12;
+  c++;
   
   if (depth == 0 || d == 0) {
     if(data->at(curr).x >= x && leftChild >= index && leftChild < curr) {
