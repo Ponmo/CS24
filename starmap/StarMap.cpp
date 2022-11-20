@@ -53,7 +53,7 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
   find_recurse(n, x, y, z, pq, 0, (data->size()-1)/2, 0, data->size() - 1, -1, -1, -1, -1, -1);
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
-    nearest.insert(nearest.begin() + i, pq->top().star); //Optimize this by inserting backwards
+    nearest.insert(nearest.begin(), pq->top().star); //Optimize this by inserting backwards
     pq->pop();
   }
   delete pq;
