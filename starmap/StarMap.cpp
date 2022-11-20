@@ -134,8 +134,8 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
             find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
           }
         }
-      }
-    }
+      }//Incorrect output but only like a few stars are incorrect output most of them are correct ok can i go read
+    }//Really?? U submitted? yes new best time but incorrefct output whart time 42 OK i think we can patch this up Yeah
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
       if(parex != -1) { 
@@ -238,8 +238,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
   //       }
   //     }
   //   }
-  //} did u take into account parent depth or smth?? ok
-  // i did.
+  //} ///SUBMIT THIS
 }
 
 StarMap::~StarMap() {
