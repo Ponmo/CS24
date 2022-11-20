@@ -75,13 +75,10 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, Node* curr, Node
     starDistance obj = {(curr->star.x - x)*(curr->star.x - x) + (curr->star.y - y)*(curr->star.y - y) + (curr->star.z - z)*(curr->star.z - z), curr};
     pq->push(obj);
   }  
-  else { 
-    float distance = (curr->star.x - x)*(curr->star.x - x) + (curr->star.y - y)*(curr->star.y - y) + (curr->star.z - z)*(curr->star.z - z);
-    if (pq->top().distance > distance) {
+  else if (pq->top().distance > (curr->star.x - x)*(curr->star.x - x) + (curr->star.y - y)*(curr->star.y - y) + (curr->star.z - z)*(curr->star.z - z)) {
       pq->pop();
-      starDistance obj = {distance, curr};
+      starDistance obj = {(curr->star.x - x)*(curr->star.x - x) + (curr->star.y - y)*(curr->star.y - y) + (curr->star.z - z)*(curr->star.z - z), curr};
       pq->push(obj);
-    }
   }
   //Loops recursively through the KD tree until it finds the closest star. 
   if (depth % 3 == 0) { //curr -> star.x >= x
