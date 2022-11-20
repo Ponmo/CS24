@@ -47,12 +47,19 @@ StarMap::StarMap(std::istream& stream) {
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { 
   int med = (endex-index)/2 + index; 
 
-  Star A = data->at(index);
-  Star B = data->at(endex);
-  Star C = data->at((index + endex - 1)/2);
-  Star D = data->at((index + endex + 1)/2);
-  Star E = data->at((index + endex)/2);
-  int xAvg = (A.x+B.x+C.x+D.x+E.x)/5;
+  Star A = data->at(index+(std::rand()%(endex-index+1)));
+  Star B = data->at(index+(std::rand()%(endex-index+1)));
+  Star C = data->at(index+(std::rand()%(endex-index+1)));
+  Star D = data->at(index+(std::rand()%(endex-index+1)));
+  Star E = data->at(index+(std::rand()%(endex-index+1)));
+  Star F = data->at(index+(std::rand()%(endex-index+1)));
+  Star G = data->at(index+(std::rand()%(endex-index+1)));
+  Star H = data->at(index+(std::rand()%(endex-index+1)));
+  Star I = data->at(index+(std::rand()%(endex-index+1)));
+  Star J = data->at(index+(std::rand()%(endex-index+1)));
+  Star K = data->at(index+(std::rand()%(endex-index+1)));
+  Star L = data->at(index+(std::rand()%(endex-index+1)));
+  int xAvg = (A.x+B.x+C.x+D.x+E.x+F.x+G.x+F.x+G.x+H.x+I.x+J.x+K.x+L.x)/5;
   int yAvg = (A.y+B.y+C.y+D.y+E.y)/5;
   int zAvg = (A.z+B.z+C.z+D.z+E.z)/5;
   int xAvgSq = (A.x*A.x+B.x*B.x+C.x*C.x+D.x*D.x+E.x*E.x)/5;
@@ -70,7 +77,7 @@ void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, 
   else { //z is largest 
   //   std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatorz);
   }
-  if (depth % 3 == 2) {
+  if (depth % 3 == 0) {
     std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatorx);
   }
   else if (depth % 3 == 1) { 
