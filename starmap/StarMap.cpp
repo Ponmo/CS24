@@ -103,30 +103,30 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
   if(parex != -1) { 
     if((depth - 1) % 3 == 0) {
       if (sqrt(pq->top().distance) > std::abs(data->at(parex).x - x)) {
-        if(curr <= parex && oppex > parex && oppex <= parexEndex) {
+        if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
         }
-        else if(curr >= parex && oppex >= parexIndex && oppex < parex) { 
+        else if(oppex >= parexIndex && oppex < parex) {  //curr >= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
     }
     else if ((depth - 1) % 3 == 1) {
       if (sqrt(pq->top().distance) > std::abs(data->at(parex).y - y)) {
-        if(curr <= parex && oppex > parex && oppex <= parexEndex) { 
+        if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
         }
-        else if(curr >= parex  && oppex >= parexIndex && oppex < parex) {
+        else if(oppex >= parexIndex && oppex < parex) { //curr >= parex  && o
           find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
     }
     else {
       if (sqrt(pq->top().distance) > std::abs(data->at(parex).z - z)) {
-        if(curr <= parex && oppex > parex && oppex <= parexEndex) {
+        if(oppex > parex && oppex <= parexEndex) {//curr <= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
         }
-        else if(curr >= parex && oppex >= parexIndex && oppex < parex) { 
+        else if(oppex >= parexIndex && oppex < parex) { //curr >= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
