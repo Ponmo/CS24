@@ -42,37 +42,37 @@ StarMap::StarMap(std::istream& stream) {
     id++;
   } //Approx Variance with randomly selected stars, setting beginning depth to that, 
   //Actually, we can cheat gradescope by printing out all the variances of each data file... wait no the disks dont print out stuff damn u
-  Star A = data->at(std::rand()%(data->size()));
-  Star B = data->at(std::rand()%(data->size()));
-  Star C = data->at(std::rand()%(data->size()));
-  Star D = data->at(std::rand()%(data->size()));
-  Star E = data->at(std::rand()%(data->size()));
-  Star F = data->at(std::rand()%(data->size()));
-  Star G = data->at(std::rand()%(data->size()));
-  Star H = data->at(std::rand()%(data->size()));
-  Star I = data->at(std::rand()%(data->size()));
-  Star J = data->at(std::rand()%(data->size()));
-  Star K = data->at(std::rand()%(data->size()));
-  Star L = data->at(std::rand()%(data->size()));
-  int xAvg = (A.x+B.x+C.x+D.x+E.x+F.x+G.x+H.x+I.x+J.x+K.x+L.x)/5;
-  int yAvg = (A.y+B.y+C.y+D.y+E.y+F.y+G.y+H.y+I.y+J.y+K.y+L.y)/5;
-  int zAvg = (A.z+B.z+C.z+D.z+E.z+F.z+G.z+H.z+I.z+J.z+K.z+L.z)/5;
-  int xAvgSq = (A.x*A.x+B.x*B.x+C.x*C.x+D.x*D.x+E.x*E.x+F.x*F.x+G.x*G.x+H.x*H.x+I.x*I.x+J.x*J.x+K.x*K.x+L.x*L.x)/5;
-  int yAvgSq = (A.y*A.y+B.y*B.y+C.y*C.y+D.y*D.y+E.y*E.y+F.y*F.y+G.y*G.y+H.y*H.y+I.y*I.y+J.y*J.y+K.y*K.y+L.y*L.y)/5;
-  int zAvgSq = (A.z*A.z+B.z*B.z+C.z*C.z+D.z*D.z+E.z*E.z+F.z*F.z+G.z*G.z+H.z*H.z+I.z*I.z+J.z*J.z+K.z*K.z+L.z*L.z)/5;
-  int xVar = std::abs(xAvgSq - xAvg*xAvg);
-  int yVar = std::abs(yAvgSq - yAvg*yAvg);
-  int zVar = std::abs(zAvgSq - zAvg*zAvg);
-  if(xVar >= yVar && xVar >= zVar) { //X is largest
-    begDepth = 0;
-  }
-  else if (yVar >= xVar && yVar >= zVar) { //Y is largest
-    begDepth = 1;
-  }
-  else { //z is largest 
-    begDepth = 3;
-  }
-  createKD(data, begDepth, 0, data->size() - 1);
+  // Star A = data->at(std::rand()%(data->size()));
+  // Star B = data->at(std::rand()%(data->size()));
+  // Star C = data->at(std::rand()%(data->size()));
+  // Star D = data->at(std::rand()%(data->size()));
+  // Star E = data->at(std::rand()%(data->size()));
+  // Star F = data->at(std::rand()%(data->size()));
+  // Star G = data->at(std::rand()%(data->size()));
+  // Star H = data->at(std::rand()%(data->size()));
+  // Star I = data->at(std::rand()%(data->size()));
+  // Star J = data->at(std::rand()%(data->size()));
+  // Star K = data->at(std::rand()%(data->size()));
+  // Star L = data->at(std::rand()%(data->size()));
+  // int xAvg = (A.x+B.x+C.x+D.x+E.x+F.x+G.x+H.x+I.x+J.x+K.x+L.x)/5;
+  // int yAvg = (A.y+B.y+C.y+D.y+E.y+F.y+G.y+H.y+I.y+J.y+K.y+L.y)/5;
+  // int zAvg = (A.z+B.z+C.z+D.z+E.z+F.z+G.z+H.z+I.z+J.z+K.z+L.z)/5;
+  // int xAvgSq = (A.x*A.x+B.x*B.x+C.x*C.x+D.x*D.x+E.x*E.x+F.x*F.x+G.x*G.x+H.x*H.x+I.x*I.x+J.x*J.x+K.x*K.x+L.x*L.x)/5;
+  // int yAvgSq = (A.y*A.y+B.y*B.y+C.y*C.y+D.y*D.y+E.y*E.y+F.y*F.y+G.y*G.y+H.y*H.y+I.y*I.y+J.y*J.y+K.y*K.y+L.y*L.y)/5;
+  // int zAvgSq = (A.z*A.z+B.z*B.z+C.z*C.z+D.z*D.z+E.z*E.z+F.z*F.z+G.z*G.z+H.z*H.z+I.z*I.z+J.z*J.z+K.z*K.z+L.z*L.z)/5;
+  // int xVar = std::abs(xAvgSq - xAvg*xAvg);
+  // int yVar = std::abs(yAvgSq - yAvg*yAvg);
+  // int zVar = std::abs(zAvgSq - zAvg*zAvg);
+  // if(xVar >= yVar && xVar >= zVar) { //X is largest
+  //   begDepth = 0;
+  // }
+  // else if (yVar >= xVar && yVar >= zVar) { //Y is largest
+  //   begDepth = 1;
+  // }
+  // else { //z is largest 
+  //   begDepth = 3;
+  // }
+  createKD(data, 0, 0, data->size() - 1);
 }
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { 
   int med = (endex-index)/2 + index;
@@ -98,7 +98,7 @@ void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, 
 }
 std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
   std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq = new std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>;
-  find_recurse(n, x, y, z, pq, begDepth, (data->size()-1)/2, 0, data->size() - 1, -1, -1, -1, -1);
+  find_recurse(n, x, y, z, pq, 0, (data->size()-1)/2, 0, data->size() - 1, -1, -1, -1, -1);
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
     nearest.insert(nearest.begin(), pq->top().star); //Optimize this by inserting backwards
