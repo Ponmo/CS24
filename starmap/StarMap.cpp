@@ -65,7 +65,7 @@ void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, 
   int yVar = std::abs(yAvgSq - yAvg*yAvg);
   int zVar = std::abs(zAvgSq - zAvg*zAvg);
   if(xVar >= yVar && xVar >= yVar) { //X is largest
-    
+
   }
   else if (yVar >= xVar && yVar >= zVar) { //Y is largest
 
@@ -104,6 +104,7 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
   delete pq;
   return nearest;
 }
+//Store current best squared distance at top
 void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
   // std::cout << "1 ";
   if (pq->size() < n) {
