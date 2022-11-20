@@ -53,14 +53,14 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
   find_recurse(n, x, y, z, pq, 0, (data->size()-1)/2, 0, data->size() - 1, -1, -1, -1, -1, -1);
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
-    nearest.insert(nearest.begin(), pq->top().star); //O 
+    nearest.insert(nearest.begin(), pq->top().star); //Optimize this by inserting backwards
     pq->pop();
   }
   delete pq;
   return nearest;
 }
 void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth, int curr, int index, int endex, int parex, int leftex, int rightex, int parexEndex, int parexIndex) {
-  // std::cout << "1 ";
+  std::cout << "1 ";
   float distance = (data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z); //Distance to spaceship
   if(pq->size() >= n && pq->top().distance > distance) {
     pq->pop();
@@ -73,9 +73,9 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
   }  
   int leftChild = index+(curr-1-index)/2;
   int rightChild = curr+1+(endex-curr-1)/2;
-
+  int d = depth % 3;
   
-  if (depth == 0 || depth % 3 == 0) {
+  if (depth == 0 || d == 0) {
     if(data->at(curr).x >= x && leftChild >= index && leftChild < curr) {
       find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, endex, index);
     }
@@ -83,7 +83,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
       find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, rightChild, endex, index);
     }
   }
-  else if (depth % 3 == 1) {
+  else if (d == 1) {
     if(data->at(curr).y >= y && leftChild >= index && leftChild < curr) {
       find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, endex, index);
     }
@@ -102,8 +102,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
 
   if(parex != -1) { 
     if((depth - 1) % 3 == 0) {
-      float tDistance = sqrt(pq->top().distance);
-      if (tDistance > std::abs(data->at(parex).x - x)) {
+      if (sqrt(pq->top().distance) > std::abs(data->at(parex).x - x)) {
         if(curr == leftex && rightex > parex && rightex <= parexEndex) {
           find_recurse(n ,x, y, z, pq, depth, rightex, parex+1, parexEndex, -1, -1, -1, -1, -1);
         }
@@ -113,8 +112,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
       }
     }
     else if ((depth - 1) % 3 == 1) {
-      float tDistance = sqrt(pq->top().distance);
-      if (tDistance > std::abs(data->at(parex).y - y)) {
+      if (sqrt(pq->top().distance) > std::abs(data->at(parex).y - y)) {
         if(curr == leftex && rightex > parex && rightex <= parexEndex) { 
           find_recurse(n ,x, y, z, pq, depth, rightex, parex+1, parexEndex, -1, -1, -1, -1, -1);
         }
@@ -124,8 +122,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
       }
     }
     else {
-      float tDistance = sqrt(pq->top().distance);
-      if (tDistance > std::abs(data->at(parex).z - z)) {
+      if (sqrt(pq->top().distance) > std::abs(data->at(parex).z - z)) {
         if(curr == leftex && rightex > parex && rightex <= parexEndex) {
           find_recurse(n ,x, y, z, pq, depth, rightex, parex+1, parexEndex, -1, -1, -1, -1, -1);
         }
