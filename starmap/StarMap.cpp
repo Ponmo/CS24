@@ -4,6 +4,8 @@
 #include <cmath>
 #include <fstream>
 #include <algorithm>
+#include <cstdlib>
+
 
 bool comparatorx(const Star& lhs, const Star& rhs) {
    return lhs.x < rhs.x;
@@ -44,6 +46,7 @@ StarMap::StarMap(std::istream& stream) {
 }
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { 
   int med = (endex-index)/2 + index; 
+
   Star A = data->at(index);
   Star B = data->at(endex);
   Star C = data->at((index + endex - 1)/2);
@@ -58,15 +61,15 @@ void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, 
   int xVar = std::abs(xAvgSq - xAvg*xAvg);
   int yVar = std::abs(yAvgSq - yAvg*yAvg);
   int zVar = std::abs(zAvgSq - zAvg*zAvg);
-  // if(xVar >= yVar && xVar >= yVar) { //X is largest
+  if(xVar >= yVar && xVar >= yVar) { //X is largest
   //   std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatorx);
-  // }
-  // else if (yVar >= xVar && yVar >= zVar) { //Y is largest
+  }
+  else if (yVar >= xVar && yVar >= zVar) { //Y is largest
   //   std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatory);
-  // }
-  // else { //z is largest 
+  }
+  else { //z is largest 
   //   std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatorz);
-  // }
+  }
   if (depth % 3 == 2) {
     std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatorx);
   }
