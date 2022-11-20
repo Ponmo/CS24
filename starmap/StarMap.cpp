@@ -16,7 +16,6 @@ bool comparatorz(const Star& lhs, const Star& rhs) {
    return lhs.z < rhs.z;
 }
 StarMap::StarMap(std::istream& stream) {
-  data = new std::vector<Star>;
   std::string line;
   int id = 1;
   while (std::getline(stream, line)) {
@@ -37,22 +36,22 @@ StarMap::StarMap(std::istream& stream) {
       }
       count++;
     }
-    data->push_back(star);
+    data.push_back(star);
     id++;
   } //Approx Variance with randomly selected stars, setting beginning depth to that, 
   std::srand(time(0));
-  Star A = data->at(std::rand()%(data->size()));
-  Star B = data->at(std::rand()%(data->size()));
-  Star C = data->at(std::rand()%(data->size()));
-  Star D = data->at(std::rand()%(data->size()));
-  Star E = data->at(std::rand()%(data->size()));
-  Star F = data->at(std::rand()%(data->size()));
-  Star G = data->at(std::rand()%(data->size()));
-  Star H = data->at(std::rand()%(data->size()));
-  Star I = data->at(std::rand()%(data->size()));
-  Star J = data->at(std::rand()%(data->size()));
-  Star K = data->at(std::rand()%(data->size()));
-  Star L = data->at(std::rand()%(data->size()));
+  Star A = data.at(std::rand()%(data.size()));
+  Star B = data.at(std::rand()%(data.size()));
+  Star C = data.at(std::rand()%(data.size()));
+  Star D = data.at(std::rand()%(data.size()));
+  Star E = data.at(std::rand()%(data.size()));
+  Star F = data.at(std::rand()%(data.size()));
+  Star G = data.at(std::rand()%(data.size()));
+  Star H = data.at(std::rand()%(data.size()));
+  Star I = data.at(std::rand()%(data.size()));
+  Star J = data.at(std::rand()%(data.size()));
+  Star K = data.at(std::rand()%(data.size()));
+  Star L = data.at(std::rand()%(data.size()));
   float xAvg = (A.x+B.x+C.x+D.x+E.x+F.x+G.x+H.x+I.x+J.x+K.x+L.x)/12;
   float yAvg = (A.y+B.y+C.y+D.y+E.y+F.y+G.y+H.y+I.y+J.y+K.y+L.y)/12;
   float zAvg = (A.z+B.z+C.z+D.z+E.z+F.z+G.z+H.z+I.z+J.z+K.z+L.z)/12;
@@ -72,24 +71,24 @@ StarMap::StarMap(std::istream& stream) {
   else { //z is largest 
     begDepth = 2;
   }
-  createKD(data, begDepth, 0, data->size() - 1);
+  createKD(begDepth, 0, data.size() - 1);
 }
-void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { 
+void StarMap::createKD(unsigned long depth, int index, int endex) { 
   int med = (endex-index)/2 + index; 
   if (depth % 3 == 0) {
-    std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatorx);
+    std::nth_element(data.begin() + index, data.begin() + med, data.begin() + endex + 1, &comparatorx);
   }
   else if (depth % 3 == 1) { 
-    std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatory);
+    std::nth_element(data.begin() + index, data.begin() + med, data.begin() + endex + 1, &comparatory);
   }
   else {
-    std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatorz);
+    std::nth_element(data.begin() + index, data.begin() + med, data.begin() + endex + 1, &comparatorz);
   }
   if(med-1-index >= 1) { 
-    createKD(data, depth + 1, index, med-1); 
+    createKD(depth + 1, index, med-1); 
   }
   if(endex-med-1 >= 1) {
-    createKD(data, depth + 1, med + 1, endex);
+    createKD(depth + 1, med + 1, endex);
   }
 }
 std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
@@ -100,7 +99,7 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
   z = vz;
   count = 0;
   pq = std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>();
-  find_recurse(begDepth, (data->size()-1)/2, 0, data->size() - 1, -1, -1, -1, -1);
+  find_recurse(begDepth, (data.size()-1)/2, 0, data.size() - 1, -1, -1, -1, -1);
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
     nearest.insert(nearest.begin(), pq.top().star); //Optimize this by inserting backwards
@@ -131,14 +130,14 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
 void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
   // std::cout << "1 ";
   if (pq.size() < n) {
-    starDistance obj = {(data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z), data->at(curr)};
+    starDistance obj = {(data.at(curr).x - x)*(data.at(curr).x - x) + (data.at(curr).y - y)*(data.at(curr).y - y) + (data.at(curr).z - z)*(data.at(curr).z - z), data.at(curr)};
     pq.push(obj);
   }
   else {
-    float distance = (data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z);
+    float distance = (data.at(curr).x - x)*(data.at(curr).x - x) + (data.at(curr).y - y)*(data.at(curr).y - y) + (data.at(curr).z - z)*(data.at(curr).z - z);
     if(pq.top().distance > distance) {
       pq.pop();
-      starDistance obj = {distance, data->at(curr)};
+      starDistance obj = {distance, data.at(curr)};
       pq.push(obj);
     }
   }
@@ -146,14 +145,14 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
   int rightChild = curr+1+(endex-curr-1)/2;
   
   if (depth % 3 == 0) {
-    if(data->at(curr).x >= x && leftChild >= index && leftChild < curr) {
+    if(data.at(curr).x >= x && leftChild >= index && leftChild < curr) {
       find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
     }
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
     if(parex != -1 && count < 1000) {
-      if (sqrt(pq.top().distance) > std::abs(data->at(parex).z - z)) {
+      if (sqrt(pq.top().distance) > std::abs(data.at(parex).z - z)) {
         if(oppex > parex && oppex <= parexEndex) {//curr <= parex &&
           count++;
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
@@ -166,14 +165,14 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
     }
   }
   else if (depth % 3 == 1) {
-    if(data->at(curr).y >= y && leftChild >= index && leftChild < curr) {
+    if(data.at(curr).y >= y && leftChild >= index && leftChild < curr) {
       find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
     }
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
     if(parex != -1 && count < 1000) { 
-      if (sqrt(pq.top().distance) > std::abs(data->at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
+      if (sqrt(pq.top().distance) > std::abs(data.at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           count++;
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
@@ -186,14 +185,14 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
     }
   }
   else {
-    if(data->at(curr).z >= z && leftChild >= index && leftChild < curr) {
+    if(data.at(curr).z >= z && leftChild >= index && leftChild < curr) {
       find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
     }
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
     if(parex != -1 && count < 1000) {
-      if (sqrt(pq.top().distance) > std::abs(data->at(parex).y - y)) {
+      if (sqrt(pq.top().distance) > std::abs(data.at(parex).y - y)) {
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           count++;
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
@@ -241,7 +240,6 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
 }
 
 StarMap::~StarMap() {
-  delete data;
 }
 
 StarMap* StarMap::create(std::istream& stream) {

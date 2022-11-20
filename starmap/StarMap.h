@@ -37,7 +37,7 @@ class StarMap {
         static StarMap* create(std::istream& stream);
 
     private:
-        std::vector<Star> *data;
+        std::vector<Star> data;
         int begDepth;
         size_t n;
         float x;
@@ -51,7 +51,7 @@ class StarMap {
         ~StarMap();
 
         std::vector<Star> find(size_t vn, float vx, float vy, float vz);
-        void createKD(std::vector<Star>* data, unsigned long depth, int index, int endex);
+        void createKD(unsigned long depth, int index, int endex);
         void find_recurse(unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex);
         std::vector<Star> find_recurse_iter(size_t n, float x, float y, float z);
 };
