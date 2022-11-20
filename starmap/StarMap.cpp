@@ -92,31 +92,53 @@ void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, 
     createKD(data, depth + 1, med + 1, endex);
   }
 }
-std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
-  std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq = new std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>;
-  find_recurse(n, x, y, z, pq, begDepth, (data->size()-1)/2, 0, data->size() - 1, -1, -1, -1, -1);
+std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
+  // std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq = new std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>;
+  n = vn;
+  x = vx;
+  y = vy;
+  z = vz;
+  pq = std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>();
+  find_recurse(begDepth, (data->size()-1)/2, 0, data->size() - 1, -1, -1, -1, -1);
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
-    nearest.insert(nearest.begin(), pq->top().star); //Optimize this by inserting backwards
-    pq->pop();
+    nearest.insert(nearest.begin(), pq.top().star); //Optimize this by inserting backwards
+    pq.pop();
   }
-  delete pq;
   return nearest;
 }
+
+// std::vector<Star> StarMap::find_recurse_iter(size_t n, float x, float y, float z) {
+
+
+//   std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq;
+//   std::stack<Frame> frames;
+//   Frame frame = {};
+//   frames.push(frame);
+
+//   std::vector<Star> nearest;
+//   for(size_t i = 0; i < n; i++) {
+//     nearest.insert(nearest.begin(), pq->top().star); //Optimize this by inserting backwards
+//     pq->pop();
+//   }
+//   delete pq;
+//   return nearest;
+// }
+
 //Store current best squared distance at top
 //Approximation a++ inside insert into algorithm. With knowledge that there are 3 stars it needs to find and the max layers from 4 million points data->size().
-void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
+void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
   // std::cout << "1 ";
-  if (pq->size() < n) {
+  if (pq.size() < n) {
     starDistance obj = {(data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z), data->at(curr)};
-    pq->push(obj);
+    pq.push(obj);
   }
   else {
     float distance = (data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z);
-    if(pq->top().distance > distance) {
-      pq->pop();
+    if(pq.top().distance > distance) {
+      pq.pop();
       starDistance obj = {distance, data->at(curr)};
-      pq->push(obj);
+      pq.push(obj);
     }
   }
   int leftChild = index+(curr-1-index)/2;
@@ -124,54 +146,54 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
   
   if (depth % 3 == 0) {
     if(data->at(curr).x >= x && leftChild >= index && leftChild < curr) {
-      find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
+      find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
     }
     else if (rightChild > curr && rightChild <= endex) {
-      find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
+      find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
     if(parex != -1) { 
-      if (sqrt(pq->top().distance) > std::abs(data->at(parex).z - z)) {
+      if (sqrt(pq.top().distance) > std::abs(data->at(parex).z - z)) {
         if(oppex > parex && oppex <= parexEndex) {//curr <= parex && 
-          find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
+          find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
         }
         else if(oppex >= parexIndex && oppex < parex) { //curr >= parex && 
-          find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
+          find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
     }
   }
   else if (depth % 3 == 1) {
     if(data->at(curr).y >= y && leftChild >= index && leftChild < curr) {
-      find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
+      find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
     }
     else if (rightChild > curr && rightChild <= endex) {
-      find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
+      find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
     if(parex != -1) { 
-      if (sqrt(pq->top().distance) > std::abs(data->at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
+      if (sqrt(pq.top().distance) > std::abs(data->at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
-          find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
+          find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
         }
         else if(oppex >= parexIndex && oppex < parex) {  //curr >= parex
-          find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
+          find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
     }
   }
   else {
     if(data->at(curr).z >= z && leftChild >= index && leftChild < curr) {
-      find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
+      find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
     }
     else if (rightChild > curr && rightChild <= endex) {
-      find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
+      find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
     if(parex != -1) { 
-      if (sqrt(pq->top().distance) > std::abs(data->at(parex).y - y)) {
+      if (sqrt(pq.top().distance) > std::abs(data->at(parex).y - y)) {
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
-          find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
+          find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
         }
         else if(oppex >= parexIndex && oppex < parex) {
-          find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
+          find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
     }
