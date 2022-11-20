@@ -4,7 +4,7 @@
 #include <cmath>
 #include <fstream>
 #include <algorithm>
-
+#include <time.h>
 
 bool comparatorx(const Star& lhs, const Star& rhs) {
    return lhs.x < rhs.x;
@@ -40,6 +40,7 @@ StarMap::StarMap(std::istream& stream) {
     data->push_back(star);
     id++;
   } //Approx Variance with randomly selected stars, setting beginning depth to that, 
+  std::srand(time(0));
   Star A = data->at(std::rand()%(data->size()));
   Star B = data->at(std::rand()%(data->size()));
   Star C = data->at(std::rand()%(data->size()));
@@ -52,42 +53,6 @@ StarMap::StarMap(std::istream& stream) {
   Star J = data->at(std::rand()%(data->size()));
   Star K = data->at(std::rand()%(data->size()));
   Star L = data->at(std::rand()%(data->size()));
-  Star A2 = data->at(std::rand()%(data->size()));
-  Star B2 = data->at(std::rand()%(data->size()));
-  Star C2 = data->at(std::rand()%(data->size()));
-  Star D2 = data->at(std::rand()%(data->size()));
-  Star E22 = data->at(std::rand()%(data->size()));
-  Star F2 = data->at(std::rand()%(data->size()));
-  Star G2 = data->at(std::rand()%(data->size()));
-  Star H2 = data->at(std::rand()%(data->size()));
-  Star I2 = data->at(std::rand()%(data->size()));
-  Star J2 = data->at(std::rand()%(data->size()));
-  Star K2 = data->at(std::rand()%(data->size()));
-  Star L2 = data->at(std::rand()%(data->size()));
-  Star Av = data->at(std::rand()%(data->size()));
-  Star Bv = data->at(std::rand()%(data->size()));
-  Star Cv = data->at(std::rand()%(data->size()));
-  Star vD = data->at(std::rand()%(data->size()));
-  Star vE = data->at(std::rand()%(data->size()));
-  Star Fv = data->at(std::rand()%(data->size()));
-  Star Gv = data->at(std::rand()%(data->size()));
-  Star Hv = data->at(std::rand()%(data->size()));
-  Star Iv = data->at(std::rand()%(data->size()));
-  Star Jv = data->at(std::rand()%(data->size()));
-  Star Kv = data->at(std::rand()%(data->size()));
-  Star Lv = data->at(std::rand()%(data->size()));
-  Star Az = data->at(std::rand()%(data->size()));
-  Star Bz = data->at(std::rand()%(data->size()));
-  Star Cz = data->at(std::rand()%(data->size()));
-  Star Dz = data->at(std::rand()%(data->size()));
-  Star Ez = data->at(std::rand()%(data->size()));
-  Star Fz = data->at(std::rand()%(data->size()));
-  Star Gz = data->at(std::rand()%(data->size()));
-  Star Hz = data->at(std::rand()%(data->size()));
-  Star Iz = data->at(std::rand()%(data->size()));
-  Star Jq = data->at(std::rand()%(data->size()));
-  Star Kw = data->at(std::rand()%(data->size()));
-  Star La = data->at(std::rand()%(data->size()));
   float xAvg = (A.x+B.x+C.x+D.x+E.x+F.x+G.x+H.x+I.x+J.x+K.x+L.x)/12;
   float yAvg = (A.y+B.y+C.y+D.y+E.y+F.y+G.y+H.y+I.y+J.y+K.y+L.y)/12;
   float zAvg = (A.z+B.z+C.z+D.z+E.z+F.z+G.z+H.z+I.z+J.z+K.z+L.z)/12;
