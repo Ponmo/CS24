@@ -32,7 +32,7 @@ StarMap::StarMap(std::istream& stream) {
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) {
   int med = (endex-index)/2 + index; 
   auto m = data->begin() + med;
-  if (depth == 0 || depth % 3 == 0) {
+  if (depth % 3 == 0) {
     std::nth_element(data->begin() + index, m, data->begin() + endex + 1, &comparatorx);
   }
   else if (depth % 3 == 1) { 
@@ -71,13 +71,14 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
     starDistance obj = {distance, data->at(curr)};
     pq->push(obj);
   }
+
   int leftChild = index+(curr-1-index)/2;
   int rightChild = curr+1+(endex-curr-1)/2;
   int d = depth % 3;
   
-  if (d == 0) {
+  if (depth == 0 || d == 0) {
     if(data->at(curr).x >= x && leftChild >= index && leftChild < curr) {
-      find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, endex, index); //Opposite Child
+      find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, leftChild, rightChild, endex, index);
     }
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, rightChild, endex, index);
