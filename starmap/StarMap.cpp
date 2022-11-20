@@ -32,7 +32,7 @@ StarMap::StarMap(std::istream& stream) {
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) {
   int med = (endex-index)/2 + index; 
   auto m = data->begin() + med;
-  if (depth % 3 == 0) {
+  if (depth == 0 || depth % 3 == 0) {
     std::nth_element(data->begin() + index, m, data->begin() + endex + 1, &comparatorx);
   }
   else if (depth % 3 == 1) { 
@@ -62,16 +62,15 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
 void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth, int curr, int index, int endex, int parex, int leftex, int rightex, int parexEndex, int parexIndex) {
   // std::cout << "1 ";
   float distance = (data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z); //Distance to spaceship
-  if(pq->size() < n) {
-    starDistance obj = {distance, data->at(curr)};
-    pq->push(obj);
-  }
-  else if (pq->top().distance > distance) {
+  if(pq->size() >= n && pq->top().distance > distance) {
     pq->pop();
     starDistance obj = {distance, data->at(curr)};
     pq->push(obj);
   }
-
+  else if (pq->size() < n) {
+    starDistance obj = {distance, data->at(curr)};
+    pq->push(obj);
+  }  
   int leftChild = index+(curr-1-index)/2;
   int rightChild = curr+1+(endex-curr-1)/2;
   int d = depth % 3;
