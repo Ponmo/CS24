@@ -47,16 +47,32 @@ StarMap::StarMap(std::istream& stream) {
 // In the same loop, calculate the mean (average) of your numbers squared
 // After the loop, variance is the absolute value of #2, minus #1 squared
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { 
-  // int a = 0;
-  // int d = 0;
-  // int b = 0;
-  // int c = 0;
-  // for(size_t i = 0; i< data->size(); i++) { //If variance
-  //   a+=data->at(i).x;
+  int xAvg = 0;
+  int yAvg = 0;
+  int zAvg = 0;
+  int xAvgSq = 0;
+  int yAvgSq = 0;
+  int zAvgSq = 0;
+  for(size_t i = 0; i< data->size(); i++) { //If variance
+    xAvg+=data->at(i).x;
+    yAvg+=data->at(i).y;
+    zAvg+=data->at(i).z;
+    xAvgSq+=data->at(i).x * data->at(i).x;
+    yAvgSq+=data->at(i).y * data->at(i).y;
+    zAvgSq+=data->at(i).z * data->at(i).z;
+  }
+  int xVar = std::abs(xAvgSq - xAvg*xAvg);
+  int yVar = std::abs(yAvgSq - yAvg*yAvg);
+  int zVar = std::abs(zAvgSq - zAvg*zAvg);
+  if(xVar >= yVar && xVar >= yVar) { //X is largest
+    
+  }
+  else if (yVar >= xVar && yVar >= zVar) { //Y is largest
 
-  //   b+=data->at(i).y;
-  //   c+=data->at(i).z;
-  // }
+  }
+  else { //z is largest
+
+  }
 
 
 
