@@ -105,6 +105,7 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
     nearest.insert(nearest.begin(), pq.top().star); //Optimize this by inserting backwards
     pq.pop();
   }
+  count = 0;
   return nearest;
 }
 
