@@ -24,7 +24,7 @@ class StarMap {
         static StarMap* create(std::istream& stream);
 
     private:
-        std::vector<Star> *data;
+        std::vector<Star> data;
         int begDepth;
 
     public:
