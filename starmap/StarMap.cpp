@@ -164,7 +164,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
     }
     else if ((depth - 1) % 3 == 1) {
       if (sqrt(pq->top().distance) > std::abs(data->at(parex).y - y)) {
-        if(oppex > parex) { 
+        if(oppex > parex) { //curr <= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
         }
         else if(oppex >= parexIndex && oppex < parex) {
