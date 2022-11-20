@@ -153,7 +153,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
-    if(parex != -1 && count < 50) { 
+    if(parex != -1 && count < 10000) { 
       if (sqrt(pq.top().distance) > std::abs(data->at(parex).z - z)) {
         if(oppex > parex && oppex <= parexEndex) {//curr <= parex && 
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
@@ -171,7 +171,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
-    if(parex != -1 && count < 50) { 
+    if(parex != -1 && count < 10000) { 
       if (sqrt(pq.top().distance) > std::abs(data->at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
@@ -189,7 +189,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
-    if(parex != -1 && count < 50) { 
+    if(parex != -1 && count < 10000) { 
       if (sqrt(pq.top().distance) > std::abs(data->at(parex).y - y)) {
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
