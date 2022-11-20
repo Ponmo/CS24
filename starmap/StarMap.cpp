@@ -46,7 +46,6 @@ StarMap::StarMap(std::istream& stream) {
 }
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { 
   int med = (endex-index)/2 + index; 
-
   Star A = data->at(index+(std::rand()%(endex-index+1)));
   Star B = data->at(index+(std::rand()%(endex-index+1)));
   Star C = data->at(index+(std::rand()%(endex-index+1)));
@@ -59,12 +58,12 @@ void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, 
   Star J = data->at(index+(std::rand()%(endex-index+1)));
   Star K = data->at(index+(std::rand()%(endex-index+1)));
   Star L = data->at(index+(std::rand()%(endex-index+1)));
-  int xAvg = (A.x+B.x+C.x+D.x+E.x+F.x+G.x+F.x+G.x+H.x+I.x+J.x+K.x+L.x)/5;
-  int yAvg = (A.y+B.y+C.y+D.y+E.y)/5;
-  int zAvg = (A.z+B.z+C.z+D.z+E.z)/5;
-  int xAvgSq = (A.x*A.x+B.x*B.x+C.x*C.x+D.x*D.x+E.x*E.x)/5;
-  int yAvgSq = (A.y*A.y+B.y*B.y+C.y*C.y+D.y*D.y+E.y*E.y)/5;
-  int zAvgSq = (A.z*A.z+B.z*B.z+C.z*C.z+D.z*D.z+E.z*E.z)/5;
+  int xAvg = (A.x+B.x+C.x+D.x+E.x+F.x+G.x+H.x+I.x+J.x+K.x+L.x)/5;
+  int yAvg = (A.y+B.y+C.y+D.y+E.y+F.y+G.y+H.y+I.y+J.y+K.y+L.y)/5;
+  int zAvg = (A.z+B.z+C.z+D.z+E.z+F.z+G.z+H.z+I.z+J.z+K.z+L.z)/5;
+  int xAvgSq = (A.x*A.x+B.x*B.x+C.x*C.x+D.x*D.x+E.x*E.x+F.x*F.x+G.x*G.x+H.x*H.x+I.x*I.x+J.x*J.x+K.x*K.x+L.x*L.x)/5;
+  int yAvgSq = (A.y*A.y+B.y*B.y+C.y*C.y+D.y*D.y+E.y*E.y+F.y*F.y+G.y*G.y+H.y*H.y+I.y*I.y+J.y*J.y+K.y*K.y+L.y*L.y)/5;
+  int zAvgSq = (A.z*A.z+B.z*B.z+C.z*C.z+D.z*D.z+E.z*E.z+F.z*F.z+G.z*G.z+H.z*H.z+I.z*I.z+J.z*J.z+K.z*K.z+L.z*L.z)/5;
   int xVar = std::abs(xAvgSq - xAvg*xAvg);
   int yVar = std::abs(yAvgSq - yAvg*yAvg);
   int zVar = std::abs(zAvgSq - zAvg*zAvg);
