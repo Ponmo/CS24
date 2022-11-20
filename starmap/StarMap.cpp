@@ -22,7 +22,7 @@ StarMap::StarMap(std::istream& stream) {
     std::stringstream nLine(line);
     std::string token;
     Star star;
-    star.id = id++;
+    star.id = id;
     int count = 0;
     while(std::getline(nLine, token, '\t')) {
       if (count == 0) {
@@ -38,11 +38,16 @@ StarMap::StarMap(std::istream& stream) {
     }
     data->push_back(star);
   }
+  id++;
   createKD(data, 0, 0, data->size() - 1);
 }
-void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { //Sort by Variance Helps with Disks 
+
+// Here is how you calculate variance in one pass:
+// Calculate the mean (average) of your numbers
+// In the same loop, calculate the mean (average) of your numbers squared
+// After the loop, variance is the absolute value of #2, minus #1 squared
+void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { 
   int med = (endex-index)/2 + index; 
-  // auto m = data->begin() + med;
   if (depth % 3 == 2) {
     std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatorx);
   }
@@ -70,7 +75,7 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
   delete pq;
   return nearest;
 }
-void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) {
+void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
   // std::cout << "1 ";
   if (pq->size() < n) {
     starDistance obj = {(data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z), data->at(curr)};
