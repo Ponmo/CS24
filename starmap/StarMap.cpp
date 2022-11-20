@@ -37,8 +37,8 @@ StarMap::StarMap(std::istream& stream) {
       count++;
     }
     data->push_back(star);
+    id++;
   }
-  id++;
   createKD(data, 0, 0, data->size() - 1);
 }
 
@@ -47,6 +47,19 @@ StarMap::StarMap(std::istream& stream) {
 // In the same loop, calculate the mean (average) of your numbers squared
 // After the loop, variance is the absolute value of #2, minus #1 squared
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { 
+  // int a = 0;
+  // int d = 0;
+  // int b = 0;
+  // int c = 0;
+  // for(size_t i = 0; i< data->size(); i++) { //If variance
+  //   a+=data->at(i).x;
+
+  //   b+=data->at(i).y;
+  //   c+=data->at(i).z;
+  // }
+
+
+
   int med = (endex-index)/2 + index; 
   if (depth % 3 == 2) {
     std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatorx);
