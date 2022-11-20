@@ -187,19 +187,19 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
   }
   else {
     if(data->at(curr).z >= z && leftChild >= index && leftChild < curr) {
-      count++;
       find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
     }
     else if (rightChild > curr && rightChild <= endex) {
-      count++;
       find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
     if(parex != -1 && count < 26) {
       if (sqrt(pq.top().distance) > std::abs(data->at(parex).y - y)) {
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
+          count++;
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
         }
         else if(oppex >= parexIndex && oppex < parex) {
+          count++;
           find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
