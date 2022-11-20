@@ -106,7 +106,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
         }
-        else if(oppex >= parexIndex && oppex < parex) {  //curr >= parex && 
+        else {  //curr >= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
@@ -116,7 +116,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
         }
-        else if(oppex >= parexIndex && oppex < parex) { //curr >= parex  && o
+        else { //curr >= parex && oppex >= parexIndex && oppex < parex
           find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
@@ -126,7 +126,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
         if(oppex > parex && oppex <= parexEndex) {//curr <= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
         }
-        else if(oppex >= parexIndex && oppex < parex) { //curr >= parex && 
+        else { //curr >= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
