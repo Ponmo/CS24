@@ -43,7 +43,7 @@ StarMap::StarMap(std::istream& stream) {
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { //Sort by Variance Helps with Disks 
   int med = (endex-index)/2 + index; 
   // auto m = data->begin() + med;
-  if (depth % 3 == 0) {
+  if (depth % 3 == 2) {
     std::nth_element(data->begin() + index, data->begin() + med, data->begin() + endex + 1, &comparatorx);
   }
   else if (depth % 3 == 1) { 
@@ -87,7 +87,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
   int leftChild = index+(curr-1-index)/2;
   int rightChild = curr+1+(endex-curr-1)/2;
   
-  if (depth % 3 == 0) {
+  if (depth % 3 == 2) {
     if(data->at(curr).x >= x && leftChild >= index && leftChild < curr) {
       find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
     }
@@ -113,7 +113,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
   }
 
   if(parex != -1) { 
-    if((depth - 1) % 3 == 0) {
+    if((depth - 1) % 3 == 2) {
       if (sqrt(pq->top().distance) > std::abs(data->at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
