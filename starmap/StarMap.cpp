@@ -15,7 +15,7 @@ bool comparatorz(const Star& lhs, const Star& rhs) {
    return lhs.z < rhs.z;
 }
 StarMap::StarMap(std::istream& stream) {
-  data = new std::vector<Star>[1000000];
+  data = new std::vector<Star>;
   std::string line;
   int id = 1;
   while (std::getline(stream, line)) {
