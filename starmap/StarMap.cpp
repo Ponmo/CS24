@@ -15,7 +15,7 @@ bool comparatorz(const Star& lhs, const Star& rhs) {
    return lhs.z < rhs.z;
 }
 StarMap::StarMap(std::istream& stream) {
-  data = new std::vector<Star>;
+  data = new std::vector<Star>[1000000];
   std::string line;
   int id = 1;
   while (std::getline(stream, line)) {
@@ -74,8 +74,6 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
   int leftChild = index+(curr-1-index)/2;
   int rightChild = curr+1+(endex-curr-1)/2;
   int d = depth % 3;
-  int c = depth * 100/12*100/12*100/12*100/12*100/12*100/12*100/12*100/12;
-  c++;
   
   if (depth == 0 || d == 0) {
     if(data->at(curr).x >= x && leftChild >= index && leftChild < curr) {
