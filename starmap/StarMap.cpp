@@ -52,15 +52,16 @@ StarMap::StarMap(std::istream& stream) {
   Star J = data->at(std::rand()%(data->size()));
   Star K = data->at(std::rand()%(data->size()));
   Star L = data->at(std::rand()%(data->size()));
-  int xAvg = (A.x+B.x+C.x+D.x+E.x+F.x+G.x+H.x+I.x+J.x+K.x+L.x)/5;
-  int yAvg = (A.y+B.y+C.y+D.y+E.y+F.y+G.y+H.y+I.y+J.y+K.y+L.y)/5;
-  int zAvg = (A.z+B.z+C.z+D.z+E.z+F.z+G.z+H.z+I.z+J.z+K.z+L.z)/5;
-  int xAvgSq = (A.x*A.x+B.x*B.x+C.x*C.x+D.x*D.x+E.x*E.x+F.x*F.x+G.x*G.x+H.x*H.x+I.x*I.x+J.x*J.x+K.x*K.x+L.x*L.x)/5;
-  int yAvgSq = (A.y*A.y+B.y*B.y+C.y*C.y+D.y*D.y+E.y*E.y+F.y*F.y+G.y*G.y+H.y*H.y+I.y*I.y+J.y*J.y+K.y*K.y+L.y*L.y)/5;
-  int zAvgSq = (A.z*A.z+B.z*B.z+C.z*C.z+D.z*D.z+E.z*E.z+F.z*F.z+G.z*G.z+H.z*H.z+I.z*I.z+J.z*J.z+K.z*K.z+L.z*L.z)/5;
-  int xVar = std::abs(xAvgSq - xAvg*xAvg);
-  int yVar = std::abs(yAvgSq - yAvg*yAvg);
-  int zVar = std::abs(zAvgSq - zAvg*zAvg);
+  float xAvg = (A.x+B.x+C.x+D.x+E.x+F.x+G.x+H.x+I.x+J.x+K.x+L.x)/5;
+  float yAvg = (A.y+B.y+C.y+D.y+E.y+F.y+G.y+H.y+I.y+J.y+K.y+L.y)/5;
+  float zAvg = (A.z+B.z+C.z+D.z+E.z+F.z+G.z+H.z+I.z+J.z+K.z+L.z)/5;
+  float xAvgSq = (A.x*A.x+B.x*B.x+C.x*C.x+D.x*D.x+E.x*E.x+F.x*F.x+G.x*G.x+H.x*H.x+I.x*I.x+J.x*J.x+K.x*K.x+L.x*L.x)/5;
+  float yAvgSq = (A.y*A.y+B.y*B.y+C.y*C.y+D.y*D.y+E.y*E.y+F.y*F.y+G.y*G.y+H.y*H.y+I.y*I.y+J.y*J.y+K.y*K.y+L.y*L.y)/5;
+  float zAvgSq = (A.z*A.z+B.z*B.z+C.z*C.z+D.z*D.z+E.z*E.z+F.z*F.z+G.z*G.z+H.z*H.z+I.z*I.z+J.z*J.z+K.z*K.z+L.z*L.z)/5;
+  float xVar = std::abs(xAvgSq - xAvg*xAvg);
+  float yVar = std::abs(yAvgSq - yAvg*yAvg);
+  float zVar = std::abs(zAvgSq - zAvg*zAvg);
+  std::cout << xVar << " " << yVar << " " << zVar << "\n";
   if(xVar >= yVar && xVar >= zVar) { //X is largest
     begDepth = 0;
   }
