@@ -25,7 +25,7 @@ class StarMap {
 
     private:
         std::vector<Star> *data;
-        std::vector<int> *split;
+        int begDepth;
 
     public:
         StarMap(std::istream& stream);
