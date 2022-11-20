@@ -105,7 +105,6 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
     nearest.insert(nearest.begin(), pq.top().star); //Optimize this by inserting backwards
     pq.pop();
   }
-  count = 0;
   return nearest;
 }
 
@@ -152,8 +151,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
-    if(parex != -1 && count < 10000) {
-      count++;
+    if(parex != -1) {
       if (sqrt(pq.top().distance) > std::abs(data->at(parex).z - z)) {
         if(oppex > parex && oppex <= parexEndex) {//curr <= parex && 
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
@@ -171,8 +169,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
-    if(parex != -1 && count < 10000) { 
-      count++;
+    if(parex != -1) { 
       if (sqrt(pq.top().distance) > std::abs(data->at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
@@ -190,8 +187,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
-    if(parex != -1 && count < 10000) {
-      count++;
+    if(parex != -1) {
       if (sqrt(pq.top().distance) > std::abs(data->at(parex).y - y)) {
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
