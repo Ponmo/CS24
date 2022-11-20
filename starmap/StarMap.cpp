@@ -20,13 +20,39 @@ StarMap::StarMap(std::istream& stream) {
   int id = 1;
   while (std::getline(stream, line)) {
     std::stringstream nLine(line);
-    float x, y, z;
-    nLine >> x >> y >> z;
-    Star star = {id++, x, y, z};
+    std::string token;
+    Star star;
+    star.id = id;
+    int count = 0;
+    while(std::getline(nLine, token, '\t')) {
+      // std::cout << token;
+      if (count == 0) {
+        // std::cout << '1';
+        star.x = std::stof(token);
+      }
+      if (count == 1) {
+        // std::cout << '2';
+        star.y = std::stof(token);
+      }
+      if (count == 2) {
+        star.z = std::stof(token);
+      }
+      count++;
+    }
     data->push_back(star);
-    // data->push_back(Star());
-    // nLine >> data->back().x >> data->back().y >> data->back().z;
+    id++;
   }
+  // std::string line;
+  // int id = 1;
+  // while (std::getline(stream, line)) {
+  //   std::stringstream nLine(line);
+  //   float x, y, z;
+  //   nLine >> x >> y >> z;
+  //   Star star = {id++, x, y, z};
+  //   data->push_back(star);
+  //   // data->push_back(Star());
+  //   // nLine >> data->back().x >> data->back().y >> data->back().z;
+  // }
   createKD(data, 0, 0, data->size() - 1);
 }
 void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { //Sort by Variance Helps with Disks 
