@@ -131,13 +131,52 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
 void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
   if(depth >= maxDepth) {
     for (int i = index; i <= endex; i++) {
+      // if (pq.size() < n) {
+      //   starDistance obj = {(data.at(curr).x - x)*(data.at(curr).x - x) + (data.at(curr).y - y)*(data.at(curr).y - y) + (data.at(curr).z - z)*(data.at(curr).z - z), data.at(curr)};
+      //   pq.push(obj);
+      // }
+      //else {
       float distance = (data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z);
       if(pq.top().distance > distance) {
         pq.pop();
         starDistance obj = {distance, data.at(i)};
         pq.push(obj);
       }
+      //}
     }
+
+    if(parex != -1) { 
+    if((depth - 1) % 3 == 0) {
+      if (sqrt(pq.top().distance) > std::abs(data.at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
+                if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
+                  find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
+                }
+                else if(oppex >= parexIndex && oppex < parex) {  //curr >= parex
+                  find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
+                }
+              }
+    }
+    else if ((depth - 1) % 3 == 1) {
+      if (sqrt(pq.top().distance) > std::abs(data.at(parex).y - y)) {
+                if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
+                  find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
+                }
+                else if(oppex >= parexIndex && oppex < parex) {
+                  find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
+                }
+              }
+    }
+    else {
+      if (sqrt(pq.top().distance) > std::abs(data.at(parex).z - z)) {
+        if(oppex > parex && oppex <= parexEndex) {//curr <= parex &&
+          find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
+        }
+        else if(oppex >= parexIndex && oppex < parex) { //curr >= parex && 
+          find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
+        }
+      }
+    }
+  }
   }
 
 
