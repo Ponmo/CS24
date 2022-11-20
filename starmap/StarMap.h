@@ -43,6 +43,7 @@ class StarMap {
         float x;
         float y;
         float z;
+        int count;
         std::priority_queue<starDistance, std::vector<starDistance>, CompareAge> pq;
 
     public:
