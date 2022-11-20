@@ -134,7 +134,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
       //       find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
       //     }
       //   }
-      }
+      // }
     }
     else if (rightChild > curr && rightChild <= endex) {
       find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
@@ -148,7 +148,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
       //     }
       //   }
       // }
-    // }
+    }
   }
   else if (depth % 3 == 1) {
     if(data->at(curr).y >= y && leftChild >= index && leftChild < curr) {
@@ -176,7 +176,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
     //       }
     //     }
     //   }
-    // }
+    }
   }
   else {
     if(data->at(curr).z >= z && leftChild >= index && leftChild < curr) {
@@ -204,7 +204,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
       //     }
       //   }
       // }
-    // }
+    }
   }
 
   if(parex != -1) { 
