@@ -29,7 +29,7 @@ StarMap::StarMap(std::istream& stream) {
   }
   createKD(data, 0, 0, data->size() - 1);
 }
-void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) {
+void StarMap::createKD(std::vector<Star>* data, unsigned long depth, int index, int endex) { //Sort by Variance Helps with Disks 
   int med = (endex-index)/2 + index; 
   auto m = data->begin() + med;
   if (depth % 3 == 0) {
@@ -61,21 +61,22 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z) {
 }
 void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) {
   // std::cout << "1 ";
-  float distance = (data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z); //Distance to spaceship
   if (pq->size() < n) {
-    starDistance obj = {distance, data->at(curr)};
+    starDistance obj = {(data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z), data->at(curr)};
     pq->push(obj);
   }
-  else if(pq->top().distance > distance) {
-    pq->pop();
-    starDistance obj = {distance, data->at(curr)};
-    pq->push(obj);
+  else {
+    float distance = (data->at(curr).x - x)*(data->at(curr).x - x) + (data->at(curr).y - y)*(data->at(curr).y - y) + (data->at(curr).z - z)*(data->at(curr).z - z);
+    if(pq->top().distance > distance) {
+      pq->pop();
+      starDistance obj = {distance, data->at(curr)};
+      pq->push(obj);
+    }
   }
   int leftChild = index+(curr-1-index)/2;
   int rightChild = curr+1+(endex-curr-1)/2;
-  int d = depth % 3;
   
-  if (d == 0) {
+  if (depth % 3 == 0) {
     if(data->at(curr).x >= x && leftChild >= index && leftChild < curr) {
       find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
     }
@@ -83,7 +84,7 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
       find_recurse(n ,x, y, z, pq, depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
     }
   }
-  else if (d == 1) {
+  else if (depth % 3 == 1) {
     if(data->at(curr).y >= y && leftChild >= index && leftChild < curr) {
       find_recurse(n ,x, y, z, pq, depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
     }
@@ -102,11 +103,11 @@ void StarMap::find_recurse(size_t n, float x, float y, float z, std::priority_qu
 
   if(parex != -1) { 
     if((depth - 1) % 3 == 0) {
-      if (sqrt(pq->top().distance) > std::abs(data->at(parex).x - x)) {
+      if (sqrt(pq->top().distance) > std::abs(data->at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
           find_recurse(n ,x, y, z, pq, depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
         }
-        else if(oppex >= parexIndex && oppex < parex) {  //curr >= parex && 
+        else if(oppex >= parexIndex && oppex < parex) {  //curr >= parex
           find_recurse(n ,x, y, z, pq, depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
