@@ -34,7 +34,7 @@ class StarMap {
 
     public:
         StarMap(std::istream& stream);
-        ~StarMap() {}
+        ~StarMap();
 
         std::vector<Star> find(size_t vn, float vx, float vy, float vz);
         void createKD(unsigned long depth, int index, int endex);

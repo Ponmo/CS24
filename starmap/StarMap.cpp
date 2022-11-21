@@ -224,6 +224,9 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
   }
 }
 
+StarMap::~StarMap() {
+}
+
 StarMap* StarMap::create(std::istream& stream) {
   return new StarMap(stream);
 }
