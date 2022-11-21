@@ -30,7 +30,7 @@ class StarMap {
         float x;
         float y;
         float z;
-        unsigned long maxDepth;
+        //unsigned long maxDepth;
         std::priority_queue<starDistance, std::vector<starDistance>, CompareAge> pq;
 
     public:
