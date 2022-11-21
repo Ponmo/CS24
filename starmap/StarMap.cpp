@@ -75,7 +75,7 @@ StarMap::StarMap(std::istream& stream) {
   createKD(0, 0, data.size() - 1);
 }
 void StarMap::createKD(unsigned long depth, int index, int endex) { 
-  if (endex - index > 300) {
+  if (endex - index > 400) {
     int med = (endex-index)/2 + index; 
     if (depth % 3 == 0) {
       std::nth_element(data.begin() + index, data.begin() + med, data.begin() + endex + 1, &comparatorx);
@@ -100,24 +100,7 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
   y = vy;
   z = vz;
   pq = std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>();
-  if (data.size() < 1001) {
-    float distance;
-    for (long unsigned int i = 0; i < data.size(); i++) {
-      distance = (data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z);
-      if (pq.size() < n) {
-        starDistance obj = {distance, data.at(i)};
-        pq.push(obj);
-      }
-      else if(pq.top().distance > distance) {
-        pq.pop();
-        starDistance obj = {distance, data.at(i)};
-        pq.push(obj);
-      }
-    }
-  }
-  else {
-    find_recurse(0, (data.size()-1)/2, 0, data.size() - 1, -1, -1, -1, -1);
-  }
+  find_recurse(0, (data.size()-1)/2, 0, data.size() - 1, -1, -1, -1, -1);
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
     nearest.insert(nearest.begin(), pq.top().star); //Optimize this by inserting backwards
@@ -127,11 +110,16 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
 }
 //Store current best squared distance at top
 void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
-  if(endex - index <= 300) {
+  if(endex - index <= 400) {
     float distance;
     for (int i = index; i <= endex; i++) {
       distance = (data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z);
-      if (pq.top().distance > distance) {
+      if (pq.size() < n) {
+        starDistance obj = {distance, data.at(i)};
+        pq.push(obj);
+        best = sqrt(pq.top().distance);
+      }
+      else if(pq.top().distance > distance) {
         pq.pop();
         starDistance obj = {distance, data.at(i)};
         pq.push(obj);
