@@ -13,19 +13,6 @@ struct starDistance {
     Star star;
 };
 
-struct Frame {
-    unsigned long depth;
-    int curr;
-    int index;
-    int endex;
-    int parex;
-    int oppex;
-    int parexEndex;
-    int parexIndex;
-};
-
-//size_t n, float x, float y, float z, std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>* pq, unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex
-
 struct CompareAge {
     bool operator()(starDistance const & p1, starDistance const & p2) {
         return p1.distance < p2.distance;

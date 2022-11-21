@@ -18,12 +18,12 @@ bool comparatorz(const Star& lhs, const Star& rhs) {
 StarMap::StarMap(std::istream& stream) {
   std::string line;
   int id = 1;
+  std::string token;
+  Star star;
+  star.id = id;
+  int count = 0;
   while (std::getline(stream, line)) {
     std::stringstream nLine(line);
-    std::string token;
-    Star star;
-    star.id = id;
-    int count = 0;
     while(std::getline(nLine, token, '\t')) {
       if (count == 0) {
         star.x = std::stof(token);
@@ -109,7 +109,6 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
   return nearest;
 }
 //Store current best squared distance at top
-//Approximation a++ inside insert into algorithm. With knowledge that there are 3 stars it needs to find and the max layers from 4 million points data->size().
 void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
   if(endex - index <= 300) {
     for (int i = index; i <= endex; i++) {
