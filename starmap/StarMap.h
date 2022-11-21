@@ -25,7 +25,7 @@ class StarMap {
 
     private:
         std::vector<Star> data;
-        // int begDepth;
+        int begDepth;
         size_t n;
         float x;
         float y;
