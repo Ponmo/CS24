@@ -62,7 +62,6 @@ StarMap::StarMap(std::istream& stream) {
   float xVar = std::abs(xAvgSq - xAvg*xAvg);
   float yVar = std::abs(yAvgSq - yAvg*yAvg);
   float zVar = std::abs(zAvgSq - zAvg*zAvg);
-  std::cout << xVar << " " << yVar << " " << zVar << "\n";
   if(xVar >= yVar && xVar >= zVar) { //X is largest
     begDepth = 0;
   }
