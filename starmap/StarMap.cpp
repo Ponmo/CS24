@@ -18,34 +18,34 @@ bool comparatorz(const Star& lhs, const Star& rhs) {
 StarMap::StarMap(std::istream& stream) {
   std::string line;
   int id = 1;
-  // std::string token;
+  std::string token;
   Star star;
-  // int count = 0;
+  int count = 0;
   while (std::getline(stream, line)) {
-    star.id = id;
-    std::istringstream iss(line);
-    iss >> star.x >> star.y >> star.z;
-    data.push_back(star);
-    id++;
-
-
-    // std::stringstream nLine(line);
-    // count = 0;
     // star.id = id;
-    // while(std::getline(nLine, token, '\t')) {
-    //   if (count == 0) {
-    //     star.x = std::stof(token);
-    //   }
-    //   else if (count == 1) {
-    //     star.y = std::stof(token);
-    //   }
-    //   else {
-    //     star.z = std::stof(token);
-    //   }
-    //   count++;
-    // }
+    // std::istringstream iss(line);
+    // iss >> star.x >> star.y >> star.z;
     // data.push_back(star);
     // id++;
+
+
+    std::stringstream nLine(line);
+    count = 0;
+    star.id = id;
+    while(std::getline(nLine, token, '\t')) {
+      if (count == 0) {
+        star.x = std::stof(token);
+      }
+      else if (count == 1) {
+        star.y = std::stof(token);
+      }
+      else {
+        star.z = std::stof(token);
+      }
+      count++;
+    }
+    data.push_back(star);
+    id++;
   } //Approx Variance with randomly selected stars, setting beginning depth to that, 
   std::srand(time(0));
   Star A;
