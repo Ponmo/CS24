@@ -151,7 +151,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
         pq.pop();
         starDistance obj = {distance, data.at(curr)};
         pq.push(obj);
-        best = sqrt(pq.top().distance);
+        best = sqrt(distance);
       }
     }
     int leftChild = index+(curr-1-index)/2;
