@@ -20,32 +20,16 @@ StarMap::StarMap(std::istream& stream) {
   int id = 1;
   std::string token;
   Star star;
-  int count = 0;
   while (std::getline(stream, line)) {
-    // star.id = id;
-    // std::istringstream iss(line);
-    // iss >> star.x >> star.y >> star.z;
-    // data.push_back(star);
-    // id++;
-
-
     std::stringstream nLine(line);
-    count = 0;
-    star.id = id;
-    while(std::getline(nLine, token, '\t')) {
-      if (count == 0) {
-        star.x = std::stof(token);
-      }
-      else if (count == 1) {
-        star.y = std::stof(token);
-      }
-      else {
-        star.z = std::stof(token);
-      }
-      count++;
-    }
+    star.id = id++;
+    std::getline(nLine, token, '\t');
+    star.x = std::stof(token);
+    std::getline(nLine, token, '\t');
+    star.y = std::stof(token);
+    std::getline(nLine, token, '\t');
+    star.z = std::stof(token);
     data.push_back(star);
-    id++;
   } //Approx Variance with randomly selected stars, setting beginning depth to that, 
   std::srand(time(0));
   Star A;
