@@ -20,10 +20,11 @@ StarMap::StarMap(std::istream& stream) {
   int id = 1;
   std::string token;
   Star star;
-  star.id = id;
   int count = 0;
   while (std::getline(stream, line)) {
     std::stringstream nLine(line);
+    count = 0;
+    star.id = id;
     while(std::getline(nLine, token, '\t')) {
       if (count == 0) {
         star.x = std::stof(token);
