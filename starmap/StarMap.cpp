@@ -75,7 +75,7 @@ StarMap::StarMap(std::istream& stream) {
   createKD(0, 0, data.size() - 1);
 }
 void StarMap::createKD(unsigned long depth, int index, int endex) { 
-  if (endex - index > 500) {
+  if (endex - index > 800) {
     int med = (endex-index)/2 + index; 
     if (depth % 3 == 0) {
       std::nth_element(data.begin() + index, data.begin() + med, data.begin() + endex + 1, &comparatorx);
