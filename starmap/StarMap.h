@@ -25,12 +25,12 @@ class StarMap {
 
     private:
         std::vector<Star> data;
-        int begDepth;
-        float best;
+        // int begDepth;
         size_t n;
         float x;
         float y;
         float z;
+        unsigned long maxDepth;
         std::priority_queue<starDistance, std::vector<starDistance>, CompareAge> pq;
 
     public:
