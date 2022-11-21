@@ -74,7 +74,7 @@ StarMap::StarMap(std::istream& stream) {
   //   begDepth = 2;
   // }
   //maxDepth = std::log2(data.size()) - 1;
-  createKD(0, 0, data.size() - 1);
+  createKD(2, 0, data.size() - 1);
 }
 void StarMap::createKD(unsigned long depth, int index, int endex) { 
   if (endex - index > 200) {
@@ -102,7 +102,7 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
   y = vy;
   z = vz;
   pq = std::priority_queue<starDistance, std::vector<starDistance>, CompareAge>();
-  find_recurse(0, (data.size()-1)/2, 0, data.size() - 1, -1, -1, -1, -1);
+  find_recurse(2, (data.size()-1)/2, 0, data.size() - 1, -1, -1, -1, -1);
   std::vector<Star> nearest;
   for(size_t i = 0; i < n; i++) {
     nearest.insert(nearest.begin(), pq.top().star); //Optimize this by inserting backwards
