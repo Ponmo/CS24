@@ -113,18 +113,16 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
 void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
   if(endex - index <= 100) {
     for (int i = index; i <= endex; i++) {
-      if (pq.size() < n) {
-        starDistance obj = {(data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z), data.at(i)};
-        pq.push(obj);
-      }
-      else {
+      // if (pq.size() < n) {
+      //   starDistance obj = {(data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z), data.at(i)};
+      //   pq.push(obj);
+      // }
         float distance = (data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z);
         if(pq.top().distance > distance) {
           pq.pop();
           starDistance obj = {distance, data.at(i)};
           pq.push(obj);
         }
-      }
     }
     if(parex != -1) { 
     if((depth - 1) % 3 == 0) {
