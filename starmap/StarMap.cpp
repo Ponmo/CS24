@@ -60,13 +60,13 @@ StarMap::StarMap(std::istream& stream) {
   xAvg = xAvg/500;
   yAvg = yAvg/500;
   zAvg = zAvg/500;
-  xAvgSq = xAvgSq/500;
-  yAvgSq = yAvgSq/500;
+  xAvgSq = xAvgSq/500; //Maybe uniform z is just skewed  ok
+  yAvgSq = yAvgSq/500; //yep i am not messing with this anymore though
   zAvgSq = zAvgSq/500;
   float xVar = std::abs(xAvgSq - xAvg*xAvg);
   float yVar = std::abs(yAvgSq - yAvg*yAvg);
   float zVar = std::abs(zAvgSq - zAvg*zAvg);
-  std::cout << xVar << " " << yVar << " " << " " << zVar << "\n";
+  // std::cout << xVar << " " << yVar << " " << " " << zVar << "\n";
   if(xVar >= yVar && xVar >= zVar) { //X is largest
     begDepth = 0;
   }
