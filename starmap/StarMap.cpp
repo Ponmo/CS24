@@ -76,7 +76,6 @@ StarMap::StarMap(std::istream& stream) {
   else { //z is largest 
     begDepth = 2;
   }
-  begDepth = 0;
   createKD(begDepth, 0, data.size() - 1);
 }
 void StarMap::createKD(unsigned long depth, int index, int endex) { 
