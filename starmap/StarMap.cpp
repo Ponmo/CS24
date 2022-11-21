@@ -61,7 +61,7 @@ StarMap::StarMap(std::istream& stream) {
   yAvg = yAvg/500;
   zAvg = zAvg/500;
   xAvgSq = xAvgSq/500; //Maybe uniform z is just skewed  ok
-  yAvgSq = yAvgSq/500; //yep i am not messing with this anymore though
+  yAvgSq = yAvgSq/500; //yep i am not messing with this anymore though ???
   zAvgSq = zAvgSq/500;
   float xVar = std::abs(xAvgSq - xAvg*xAvg);
   float yVar = std::abs(yAvgSq - yAvg*yAvg);
@@ -79,7 +79,7 @@ StarMap::StarMap(std::istream& stream) {
   createKD(begDepth, 0, data.size() - 1);
 }
 void StarMap::createKD(unsigned long depth, int index, int endex) { 
-  if (endex - index > 200) {
+  if (endex - index > 300) {
     int med = (endex-index)/2 + index; 
     if (depth % 3 == 0) {
       std::nth_element(data.begin() + index, data.begin() + med, data.begin() + endex + 1, &comparatorx);
@@ -114,7 +114,7 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
 }
 //Store current best squared distance at top
 void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
-  if(endex - index <= 200) {
+  if(endex - index <= 300) {
     for (int i = index; i <= endex; i++) {
       if (pq.size() < n) {
         starDistance obj = {(data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z), data.at(i)};
