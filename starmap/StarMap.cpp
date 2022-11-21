@@ -111,7 +111,7 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
 //Store current best squared distance at top
 //Approximation a++ inside insert into algorithm. With knowledge that there are 3 stars it needs to find and the max layers from 4 million points data->size().
 void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
-  if(endex - index <= 50) {
+  if(endex - index <= 100) {
     for (int i = index; i <= endex; i++) {
       float distance = (data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z);
       if(pq.top().distance > distance) {
@@ -120,7 +120,6 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
         pq.push(obj);
       }
     }
-
     if(parex != -1) { 
     if((depth - 1) % 3 == 0) {
       if (sqrt(pq.top().distance) > std::abs(data.at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
