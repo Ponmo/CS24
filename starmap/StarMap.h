@@ -25,17 +25,15 @@ class StarMap {
 
     private:
         std::vector<Star> data;
-        // int begDepth;
+        float best;
         size_t n;
         float x;
         float y;
         float z;
-        unsigned long maxDepth;
         std::priority_queue<starDistance, std::vector<starDistance>, CompareAge> pq;
 
     public:
         StarMap(std::istream& stream);
-        ~StarMap();
 
         std::vector<Star> find(size_t vn, float vx, float vy, float vz);
         void createKD(unsigned long depth, int index, int endex);
