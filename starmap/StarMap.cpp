@@ -135,83 +135,10 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
         pq.pop();
         starDistance obj = {distance, data.at(i)};
         pq.push(obj);
-        best = sqrt(pq.top().distance);
-      }
-    }
-  }
-  else {
-    if (pq.size() < n) {
-      starDistance obj = {(data.at(curr).x - x)*(data.at(curr).x - x) + (data.at(curr).y - y)*(data.at(curr).y - y) + (data.at(curr).z - z)*(data.at(curr).z - z), data.at(curr)};
-      pq.push(obj);
-      best = sqrt(pq.top().distance);
-    }
-    else {
-      float distance = (data.at(curr).x - x)*(data.at(curr).x - x) + (data.at(curr).y - y)*(data.at(curr).y - y) + (data.at(curr).z - z)*(data.at(curr).z - z);
-      if(pq.top().distance > distance) {
-        pq.pop();
-        starDistance obj = {distance, data.at(curr)};
-        pq.push(obj);
         best = sqrt(distance);
       }
     }
-    int leftChild = index+(curr-1-index)/2;
-    int rightChild = curr+1+(endex-curr-1)/2;
-    if (depth % 3 == 0) {
-      if(data.at(curr).x >= x && leftChild >= index && leftChild < curr) {
-        find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
-      }
-      else if (rightChild > curr && rightChild <= endex) {
-        find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
-      }
-      // if(parex != -1) {
-      //   if (best > std::abs(data.at(parex).z - z)) {
-      //     if(oppex > parex && oppex <= parexEndex) {//curr <= parex &&
-      //       find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
-      //     }
-      //     else if(oppex >= parexIndex && oppex < parex) { //curr >= parex && 
-      //       find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
-      //     }
-      //   }
-      // }
-    }
-    else if (depth % 3 == 1) {
-      if(data.at(curr).y >= y && leftChild >= index && leftChild < curr) {
-        find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
-      }
-      else if (rightChild > curr && rightChild <= endex) {
-        find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
-      }
-      // if(parex != -1) { 
-      //   if (best > std::abs(data.at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
-      //     if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
-      //       find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
-      //     }
-      //     else if(oppex >= parexIndex && oppex < parex) {  //curr >= parex
-      //       find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
-      //     }
-      //   }
-      // }
-    }
-    else {
-      if(data.at(curr).z >= z && leftChild >= index && leftChild < curr) {
-        find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
-      }
-      else if (rightChild > curr && rightChild <= endex) {
-        find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
-      }
-      // if(parex != -1) {
-      //   if (best > std::abs(data.at(parex).y - y)) {
-      //     if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
-      //       find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
-      //     }
-      //     else if(oppex >= parexIndex && oppex < parex) {
-      //       find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
-      //     }
-      //   }
-      // }
-    }
-  }
-  if(parex != -1) { 
+    if(parex != -1) { 
     if((depth - 1) % 3 == 0) {
       if (best > std::abs(data.at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
         if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
@@ -239,6 +166,79 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
         }
         else if(oppex >= parexIndex && oppex < parex) { //curr >= parex && 
           find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
+        }
+      }
+    }
+  }
+  }
+  else {
+    if (pq.size() < n) {
+      starDistance obj = {(data.at(curr).x - x)*(data.at(curr).x - x) + (data.at(curr).y - y)*(data.at(curr).y - y) + (data.at(curr).z - z)*(data.at(curr).z - z), data.at(curr)};
+      pq.push(obj);
+      best = sqrt(pq.top().distance);
+    }
+    else {
+      float distance = (data.at(curr).x - x)*(data.at(curr).x - x) + (data.at(curr).y - y)*(data.at(curr).y - y) + (data.at(curr).z - z)*(data.at(curr).z - z);
+      if(pq.top().distance > distance) {
+        pq.pop();
+        starDistance obj = {distance, data.at(curr)};
+        pq.push(obj);
+        best = sqrt(pq.top().distance);
+      }
+    }
+    int leftChild = index+(curr-1-index)/2;
+    int rightChild = curr+1+(endex-curr-1)/2;
+    if (depth % 3 == 0) {
+      if(data.at(curr).x >= x && leftChild >= index && leftChild < curr) {
+        find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
+      }
+      else if (rightChild > curr && rightChild <= endex) {
+        find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
+      }
+      if(parex != -1) {
+        if (best > std::abs(data.at(parex).z - z)) {
+          if(oppex > parex && oppex <= parexEndex) {//curr <= parex &&
+            find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
+          }
+          else if(oppex >= parexIndex && oppex < parex) { //curr >= parex && 
+            find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
+          }
+        }
+      }
+    }
+    else if (depth % 3 == 1) {
+      if(data.at(curr).y >= y && leftChild >= index && leftChild < curr) {
+        find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
+      }
+      else if (rightChild > curr && rightChild <= endex) {
+        find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
+      }
+      if(parex != -1) { 
+        if (best > std::abs(data.at(parex).x - x)) { //WHEN TWO THINGS LEFT, RIGHT CHILD ONLY NEEDS TO CHECK LEFT CHILD
+          if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
+            find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
+          }
+          else if(oppex >= parexIndex && oppex < parex) {  //curr >= parex
+            find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
+          }
+        }
+      }
+    }
+    else {
+      if(data.at(curr).z >= z && leftChild >= index && leftChild < curr) {
+        find_recurse(depth + 1, leftChild, index, curr - 1, curr, rightChild, endex, index);
+      }
+      else if (rightChild > curr && rightChild <= endex) {
+        find_recurse(depth + 1, rightChild, curr + 1, endex, curr, leftChild, endex, index);
+      }
+      if(parex != -1) {
+        if (best > std::abs(data.at(parex).y - y)) {
+          if(oppex > parex && oppex <= parexEndex) { //curr <= parex && 
+            find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
+          }
+          else if(oppex >= parexIndex && oppex < parex) {
+            find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
+          }
         }
       }
     }
