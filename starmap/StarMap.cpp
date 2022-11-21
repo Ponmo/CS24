@@ -114,8 +114,8 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
   if(endex - index <= 300) {
     for (int i = index; i <= endex; i++) {
       if (pq.size() < n) {
-            starDistance obj = {(data.at(curr).x - x)*(data.at(curr).x - x) + (data.at(curr).y - y)*(data.at(curr).y - y) + (data.at(curr).z - z)*(data.at(curr).z - z), data.at(curr)};
-            pq.push(obj);
+        starDistance obj = {(data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z), data.at(i)};
+        pq.push(obj);
       }
       else {
         float distance = (data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z);
