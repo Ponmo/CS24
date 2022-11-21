@@ -40,42 +40,42 @@ StarMap::StarMap(std::istream& stream) {
     data.push_back(star);
     id++;
   } //Approx Variance with randomly selected stars, setting beginning depth to that, 
-  //std::srand(time(0));
-  // Star A;
-  // float xAvg = 0;
-  // float yAvg = 0;
-  // float zAvg = 0;
-  // float xAvgSq = 0;
-  // float yAvgSq = 0;
-  // float zAvgSq = 0;
-  // for (int i = 0; i < 100; i++) {
-  //   A = data.at(std::rand()%(data.size()));
-  //   xAvg += A.x;
-  //   yAvg += A.y;
-  //   zAvg += A.z;
-  //   xAvgSq += A.x*A.x;
-  //   yAvgSq += A.y*A.y;
-  //   zAvgSq += A.z*A.y;
-  // }
-  // xAvg = xAvg/100;
-  // yAvg = yAvg/100;
-  // zAvg = zAvg/100;
-  // xAvgSq = xAvgSq/100; //Maybe uniform z is just skewed  ok
-  // yAvgSq = yAvgSq/100; //yep i am not messing with this anymore though ???
-  // zAvgSq = zAvgSq/100;
-  // float xVar = std::abs(xAvgSq - xAvg*xAvg);
-  // float yVar = std::abs(yAvgSq - yAvg*yAvg);
-  // float zVar = std::abs(zAvgSq - zAvg*zAvg);
-  // // std::cout << xVar << " " << yVar << " " << " " << zVar << "\n";
-  // if(xVar >= yVar && xVar >= zVar) { //X is largest
-  //   begDepth = 0;
-  // }
-  // else if (yVar >= xVar && yVar >= zVar) { //Y is largest
-  //   begDepth = 1;
-  // }
-  // else { //z is largest 
-  //   begDepth = 2;
-  // }
+  std::srand(time(0));
+  Star A;
+  float xAvg = 0;
+  float yAvg = 0;
+  float zAvg = 0;
+  float xAvgSq = 0;
+  float yAvgSq = 0;
+  float zAvgSq = 0;
+  for (int i = 0; i < 100; i++) {
+    A = data.at(std::rand()%(data.size()));
+    xAvg += A.x;
+    yAvg += A.y;
+    zAvg += A.z;
+    xAvgSq += A.x*A.x;
+    yAvgSq += A.y*A.y;
+    zAvgSq += A.z*A.y;
+  }
+  xAvg = xAvg/100;
+  yAvg = yAvg/100;
+  zAvg = zAvg/100;
+  xAvgSq = xAvgSq/100; //Maybe uniform z is just skewed  ok
+  yAvgSq = yAvgSq/100; //yep i am not messing with this anymore though ???
+  zAvgSq = zAvgSq/100;
+  float xVar = std::abs(xAvgSq - xAvg*xAvg);
+  float yVar = std::abs(yAvgSq - yAvg*yAvg);
+  float zVar = std::abs(zAvgSq - zAvg*zAvg);
+  // std::cout << xVar << " " << yVar << " " << " " << zVar << "\n";
+  if(xVar >= yVar && xVar >= zVar) { //X is largest
+    begDepth = 0;
+  }
+  else if (yVar >= xVar && yVar >= zVar) { //Y is largest
+    begDepth = 1;
+  }
+  else { //z is largest 
+    begDepth = 2;
+  }
   begDepth = 0;
   createKD(begDepth, 0, data.size() - 1);
 }
