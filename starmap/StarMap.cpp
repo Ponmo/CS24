@@ -111,19 +111,20 @@ std::vector<Star> StarMap::find(size_t vn, float vx, float vy, float vz) {
 //Store current best squared distance at top
 void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, int parex, int oppex, int parexEndex, int parexIndex) { //Remove extraneous parameters?
   if(endex - index <= 400) {
+    std::cout << endex - index << " ";
     float distance;
     for (int i = index; i <= endex; i++) {
       distance = (data.at(i).x - x)*(data.at(i).x - x) + (data.at(i).y - y)*(data.at(i).y - y) + (data.at(i).z - z)*(data.at(i).z - z);
       if (pq.size() < n) {
         starDistance obj = {distance, data.at(i)};
         pq.push(obj);
-        best = sqrt(pq.top().distance);
+        best = sqrt(distance);
       }
       else if(pq.top().distance > distance) {
         pq.pop();
         starDistance obj = {distance, data.at(i)};
         pq.push(obj);
-        best = sqrt(pq.top().distance);
+        best = sqrt(distance);
       }
     }
     if(parex != -1) { 
