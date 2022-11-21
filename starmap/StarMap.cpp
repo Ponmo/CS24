@@ -24,7 +24,6 @@ StarMap::StarMap(std::istream& stream) {
   while (std::getline(stream, line)) {
     star.id = id;
     std::istringstream iss(line);
-    float x, y, z;
     iss >> star.x >> star.y >> star.z;
     data.push_back(star);
     id++;
