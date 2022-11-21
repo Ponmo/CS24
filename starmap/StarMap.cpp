@@ -135,7 +135,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
                 if(oppex > parex) { //curr <= parex && 
                   find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
                 }
-                else if(oppex >= parexIndex && oppex < parex) {  //curr >= parex
+                else if(oppex < parex) {  //curr >= parex
                   find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
                 }
               }
@@ -145,7 +145,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
                 if(oppex > parex) { //curr <= parex && 
                   find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
                 }
-                else if(oppex >= parexIndex && oppex < parex) {
+                else if(oppex < parex) {
                   find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
                 }
               }
@@ -155,17 +155,14 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
         if(oppex > parex) {//curr <= parex &&
           find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
         }
-        else if(oppex >= parexIndex && oppex < parex) { //curr >= parex && 
+        else if(oppex < parex) { //curr >= parex && 
           find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
         }
       }
     }
   }
   }
-
-
   else {
-
           if (pq.size() < n) {
             starDistance obj = {(data.at(curr).x - x)*(data.at(curr).x - x) + (data.at(curr).y - y)*(data.at(curr).y - y) + (data.at(curr).z - z)*(data.at(curr).z - z), data.at(curr)};
             pq.push(obj);
@@ -192,7 +189,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
                 if(oppex > parex) {//curr <= parex &&
                   find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
                 }
-                else if(oppex >= parexIndex && oppex < parex) { //curr >= parex && 
+                else if(oppex < parex) { //curr >= parex && 
                   find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
                 }
               }
@@ -210,7 +207,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
                 if(oppex > parex) { //curr <= parex && 
                   find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1,-1);
                 }
-                else if(oppex >= parexIndex && oppex < parex) {  //curr >= parex
+                else if(oppex < parex) {  //curr >= parex
                   find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
                 }
               }
@@ -228,7 +225,7 @@ void StarMap::find_recurse(unsigned long depth, int curr, int index, int endex, 
                 if(oppex > parex) { //curr <= parex && 
                   find_recurse(depth, oppex, parex+1, parexEndex, -1, -1, -1, -1);
                 }
-                else if(oppex >= parexIndex && oppex < parex) {
+                else if(oppex < parex) {
                   find_recurse(depth, oppex, parexIndex, parex-1, -1, -1, -1, -1);
                 }
               }
